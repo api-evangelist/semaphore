@@ -1,0 +1,57 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "semaphore": "https://semaphore.io/vocab#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "hydra": "http://www.w3.org/ns/hydra/core#",
+
+    "Workflow": "semaphore:Workflow",
+    "Pipeline": "semaphore:Pipeline",
+    "Job": "semaphore:Job",
+    "Promotion": "semaphore:Promotion",
+    "Task": "semaphore:Task",
+    "Secret": "semaphore:Secret",
+    "ProjectSecret": "semaphore:ProjectSecret",
+    "DeploymentTarget": "semaphore:DeploymentTarget",
+    "SelfHostedAgentType": "semaphore:SelfHostedAgentType",
+    "SelfHostedAgent": "semaphore:SelfHostedAgent",
+    "Dashboard": "semaphore:Dashboard",
+    "Notification": "semaphore:Notification",
+    "Artifact": "semaphore:Artifact",
+    "TestResult": "semaphore:TestResult",
+    "Project": "semaphore:Project",
+
+    "workflow_id": {"@id": "semaphore:workflowId", "@type": "@id"},
+    "pipeline_id": {"@id": "semaphore:pipelineId", "@type": "@id"},
+    "project_id": {"@id": "semaphore:projectId", "@type": "@id"},
+    "org_id": {"@id": "semaphore:orgId", "@type": "@id"},
+    "agent_name": {"@id": "semaphore:agentName"},
+    "agent_type_name": {"@id": "semaphore:agentTypeName"},
+
+    "state": {"@id": "semaphore:state"},
+    "result": {"@id": "semaphore:result"},
+    "created_at": {"@id": "schema:dateCreated", "@type": "xsd:dateTime"},
+    "updated_at": {"@id": "schema:dateModified", "@type": "xsd:dateTime"},
+    "terminated_at": {"@id": "semaphore:terminatedAt", "@type": "xsd:dateTime"},
+
+    "apiVersion": {"@id": "semaphore:apiVersion"},
+    "kind": {"@id": "semaphore:kind"},
+    "metadata": {"@id": "semaphore:metadata"},
+    "spec": {"@id": "semaphore:spec"},
+    "status": {"@id": "semaphore:status"},
+
+    "name": "schema:name",
+    "description": "schema:description",
+    "url": {"@id": "schema:url", "@type": "@id"},
+
+    "id": "@id",
+
+    "baseURL": "https://{org_name}.semaphoreci.com/api/v2",
+    "documentation": "https://docs.semaphore.io/reference/api",
+    "provider": {
+      "@type": "Organization",
+      "name": "Semaphore",
+      "url": "https://semaphore.io"
+    }
+  }
+}

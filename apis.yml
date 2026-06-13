@@ -52,7 +52,11 @@ apis:
       - type: Documentation
         url: https://docs.semaphore.io/reference/api
       - type: OpenAPI
-        url: https://github.com/semaphoreci/api
+        url: https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/openapi/semaphore-semaphore-api-openapi.yml
+      - type: Vocabulary
+        url: https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/vocabulary/semaphore-vocabulary.yml
+      - type: JSONLDContext
+        url: https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/json-ld/semaphore-context.jsonld
     contact:
       - FN: Semaphore Support
         url: https://semaphore.io/contact

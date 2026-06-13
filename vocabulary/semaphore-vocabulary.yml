@@ -1,0 +1,79 @@
+vocabulary:
+  - term: workflow
+    definition: >-
+      A top-level orchestration unit in Semaphore that groups one or more pipelines
+      triggered by a single git event or API call.
+  - term: pipeline
+    definition: >-
+      A sequence of blocks and jobs that execute as part of a workflow. Pipelines
+      can be promoted to trigger downstream pipelines.
+  - term: job
+    definition: >-
+      The smallest unit of work in Semaphore. Jobs run commands inside an isolated
+      virtual machine or container and report pass/fail status.
+  - term: promotion
+    definition: >-
+      A mechanism to trigger a downstream pipeline from a parent pipeline, enabling
+      multi-stage delivery workflows such as staging then production deployments.
+  - term: task
+    definition: >-
+      A scheduled or on-demand pipeline execution, analogous to a cron job, that
+      runs independently of git events.
+  - term: secret
+    definition: >-
+      An encrypted key-value pair stored at the organization or project level and
+      injected into jobs at runtime as environment variables or files.
+  - term: project_secret
+    definition: >-
+      A secret scoped to a specific project rather than the entire organization,
+      limiting its exposure to pipelines within that project.
+  - term: deployment_target
+    definition: >-
+      A named environment (e.g., production, staging) to which promotions deploy.
+      Targets can be cordoned (deactivated) to block unintended deployments.
+  - term: self_hosted_agent_type
+    definition: >-
+      A configuration class for self-hosted agents, defining the machine type,
+      OS image, and connection settings for agents that run jobs on customer
+      infrastructure.
+  - term: self_hosted_agent
+    definition: >-
+      An individual agent process running on customer infrastructure that is
+      registered with Semaphore to execute jobs outside of Semaphore-managed
+      cloud runners.
+  - term: dashboard
+    definition: >-
+      A configurable view in the Semaphore UI composed of widgets that display
+      CI/CD metrics and statuses for one or more projects.
+  - term: notification
+    definition: >-
+      A rule that sends alerts (e.g., Slack, email, webhook) when pipelines
+      reach specified states such as passed, failed, or stopped.
+  - term: artifact
+    definition: >-
+      A file or directory produced by a job and stored by the Semaphore artifact
+      service. Artifacts can be downloaded or shared between jobs and pipelines.
+  - term: test_result
+    definition: >-
+      Parsed JUnit XML or similar test output uploaded to Semaphore, enabling
+      flakiness analysis and per-test historical tracking.
+  - term: bearer_token
+    definition: >-
+      An API authentication credential obtained from Semaphore account settings
+      and passed in the Authorization HTTP header as "Bearer <token>".
+  - term: organization
+    definition: >-
+      The top-level account entity in Semaphore. All projects, secrets, and agents
+      belong to an organization identified by its slug (org_name) used in API URLs.
+  - term: pipeline_yaml
+    definition: >-
+      The YAML configuration file (usually .semaphore/semaphore.yml) that defines
+      a pipeline's agents, blocks, jobs, and promotion rules.
+  - term: partial_rebuild
+    definition: >-
+      Re-running only the failed or selected blocks of a completed pipeline without
+      re-executing the entire pipeline from scratch.
+  - term: cordon
+    definition: >-
+      The act of deactivating (cordoning) a deployment target to prevent new
+      promotions from deploying to it until it is uncordoned.
