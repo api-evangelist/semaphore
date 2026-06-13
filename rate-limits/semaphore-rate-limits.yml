@@ -1,0 +1,78 @@
+name: Semaphore Rate Limits
+description: >-
+  Semaphore enforces platform-level concurrency and queue limits on pipeline
+  execution and job scheduling. The REST API uses token-based authentication
+  and HTTPS for all requests. Specific HTTP rate limiting thresholds for the
+  API are not publicly documented; pipeline queue limits and concurrent job
+  caps are the primary operational constraints.
+specificationVersion: "0.1"
+url: https://docs.semaphore.io/reference/api
+limits:
+  - name: Pipeline Queue Limit
+    description: >-
+      Each project pipeline queue has a maximum of 30 pending pipelines. This
+      limit is not configurable.
+    scope: project
+    limit: 30
+    unit: pipelines
+    type: queue
+  - name: Default Concurrent Jobs
+    description: >-
+      By default, organizations can run up to 20 concurrent jobs simultaneously
+      across all pipelines.
+    scope: organization
+    limit: 20
+    unit: jobs
+    type: concurrency
+  - name: API Pagination Default
+    description: >-
+      API list responses return up to 30 items per page by default. Pagination
+      is provided via Link headers with rel values of next, prev, and first.
+    scope: api
+    limit: 30
+    unit: items
+    type: pagination
+  - name: Artifact Egress (Free Tier)
+    description: >-
+      Free tier includes 20 GB of artifact egress per month. Overages are
+      billed at $0.35 per GB.
+    scope: organization
+    limit: 20
+    unit: GB
+    period: monthly
+    type: data-transfer
+    overage_rate: 0.35
+    overage_currency: USD
+    overage_unit: GB
+  - name: Artifact Storage (Free Tier)
+    description: >-
+      Free tier includes 100 GB of artifact storage per month. Overages are
+      billed at $0.07 per GB.
+    scope: organization
+    limit: 100
+    unit: GB
+    period: monthly
+    type: storage
+    overage_rate: 0.07
+    overage_currency: USD
+    overage_unit: GB
+  - name: Cache Storage Per Project
+    description: >-
+      Each project is allocated 9.6 GB of cache storage by default.
+    scope: project
+    limit: 9.6
+    unit: GB
+    type: storage
+authentication:
+  type: API Token
+  description: >-
+    All API requests require a Bearer token sent as an HTTP Authorization
+    header. Tokens are generated from account settings. The User-Agent header
+    must be set to "SemaphoreCI v2.0 Client".
+  header: Authorization
+  format: "Token {api_token}"
+  user_agent: "SemaphoreCI v2.0 Client"
+transport:
+  protocol: HTTPS
+  format: JSON
+  base_url: https://{organization}.semaphoreci.com/api/v1alpha

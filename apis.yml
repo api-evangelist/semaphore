@@ -1,0 +1,84 @@
+aid: semaphore
+name: Semaphore
+description: >-
+  Semaphore is a cloud-based CI/CD platform designed for high-performance
+  engineering teams, providing fast and reliable continuous integration and
+  continuous delivery pipelines. The platform offers a comprehensive REST API
+  that enables programmatic management of pipelines, workflows, jobs, secrets,
+  projects, and deployment targets for software delivery automation. Semaphore
+  supports OAS 3.0-compliant API definitions with Swagger documentation,
+  covering resources such as artifacts, test results, self-hosted agents, and
+  build insights. Teams can use the API to integrate with external tools, build
+  custom interfaces, trigger promotions, and automate their entire software
+  delivery lifecycle.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/apis.yml
+created: "2026-06-12"
+modified: "2026-06-12"
+specificationVersion: "0.19"
+tags:
+  - CI/CD
+  - Continuous Integration
+  - Continuous Delivery
+  - Pipelines
+  - Workflows
+  - DevOps
+  - Build Automation
+  - Software Delivery
+  - Deployment
+  - Artifacts
+apis:
+  - aid: semaphore:semaphore-api
+    name: Semaphore API
+    description: >-
+      The Semaphore REST API provides programmatic access to all platform
+      resources including workflows, pipelines, jobs, promotions, deployment
+      targets, self-hosted agents, artifacts, and test results. The API follows
+      RESTful principles with OAS 3.0 compliance, uses token-based
+      authentication, and returns JSON responses. It supports operations for
+      managing CI/CD pipelines and build artifacts at the organization level.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://semaphore.io/product/api
+    baseURL: https://{organization}.semaphoreci.com/api/v1alpha
+    tags:
+      - CI/CD
+      - Pipelines
+      - Workflows
+      - Jobs
+      - Deployment
+      - Artifacts
+    properties:
+      - type: Documentation
+        url: https://docs.semaphore.io/reference/api
+      - type: OpenAPI
+        url: https://github.com/semaphoreci/api
+    contact:
+      - FN: Semaphore Support
+        url: https://semaphore.io/contact
+common:
+  - type: Website
+    url: https://semaphore.io
+  - type: Documentation
+    url: https://docs.semaphore.io
+  - type: GitHubOrg
+    url: https://github.com/semaphoreci
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/semaphore-software
+  - type: Blog
+    url: https://semaphore.io/blog
+  - type: Pricing
+    url: https://semaphore.io/pricing
+  - type: StatusPage
+    url: https://status.semaphore.io
+  - type: X
+    url: https://twitter.com/semaphoreci
+  - type: Plans
+    url: plans/semaphore-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/semaphore-rate-limits.yml
+  - type: FinOps
+    url: finops/semaphore-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

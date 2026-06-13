@@ -1,0 +1,129 @@
+name: Semaphore FinOps
+description: >-
+  FinOps Framework 1.0 FOCUS-aligned cost management profile for Semaphore
+  CI/CD platform. Semaphore uses a consumption-based billing model where costs
+  are driven primarily by compute machine-minutes consumed during pipeline
+  execution, with additional costs for artifact storage, egress, and optional
+  support or add-on services.
+specificationVersion: "1.0"
+url: https://semaphore.io/pricing
+framework: FinOps Framework 1.0
+alignment: FOCUS 1.0
+provider: Semaphore
+currency: USD
+billing_model: consumption
+billing_period: monthly
+cost_categories:
+  - name: Compute
+    description: >-
+      Primary cost driver. Billed per minute of machine runtime during pipeline
+      job execution. Costs vary by machine type (architecture, vCPU count, and
+      OS).
+    type: variable
+    unit: machine-minute
+    resources:
+      - sku: ubuntu-arm-2vcpu
+        display_name: Ubuntu ARM 2vCPU
+        unit_price: 0.003
+        unit: minute
+        currency: USD
+      - sku: ubuntu-arm-4vcpu
+        display_name: Ubuntu ARM 4vCPU
+        unit_price: 0.006
+        unit: minute
+        currency: USD
+      - sku: ubuntu-arm-8vcpu
+        display_name: Ubuntu ARM 8vCPU
+        unit_price: 0.012
+        unit: minute
+        currency: USD
+      - sku: ubuntu-x64-2vcpu
+        display_name: Ubuntu x64 2vCPU
+        unit_price: 0.0075
+        unit: minute
+        currency: USD
+      - sku: ubuntu-x64-4vcpu
+        display_name: Ubuntu x64 4vCPU
+        unit_price: 0.015
+        unit: minute
+        currency: USD
+      - sku: macos-4vcpu
+        display_name: macOS 4vCPU
+        unit_price: 0.09
+        unit: minute
+        currency: USD
+      - sku: self-hosted-agent
+        display_name: Self-Hosted Agent
+        unit_price: 0.0025
+        unit: minute
+        currency: USD
+  - name: Storage
+    description: >-
+      Artifact and cache storage costs. Free tier includes 100 GB/month artifact
+      storage and 9.6 GB cache per project. Overages billed at $0.07/GB.
+    type: variable
+    unit: GB
+    included_free: 100
+    overage_price: 0.07
+    currency: USD
+  - name: Egress
+    description: >-
+      Artifact download and data transfer costs. Free tier includes 20 GB/month.
+      Overages billed at $0.35/GB.
+    type: variable
+    unit: GB
+    included_free: 20
+    overage_price: 0.35
+    currency: USD
+  - name: Support
+    description: >-
+      Optional paid support plans ranging from basic email support to SLA-backed
+      premium support with 24/7 coverage.
+    type: fixed
+    plans:
+      - name: Basic
+        price: 50.00
+        billing: monthly
+      - name: Priority Response
+        price: 250.00
+        billing: monthly
+      - name: SLA Standard
+        price: 500.00
+        billing: monthly
+      - name: SLA Premium
+        price: 750.00
+        billing: monthly
+  - name: Add-Ons
+    description: >-
+      Optional infrastructure add-ons for dedicated caching and private container
+      registry services.
+    type: fixed
+    plans:
+      - name: Dedicated Cache Server
+        price: 400.00
+        billing: monthly
+        description: 10 Gbps bandwidth, 400 GB storage
+      - name: Private Docker Registry
+        price: 400.00
+        billing: monthly
+        description: 10 Gbps bandwidth, 400 GB storage
+credits:
+  - name: Monthly Free Credits
+    amount: 15.00
+    currency: USD
+    period: monthly
+    description: >-
+      All accounts receive $15 in monthly free credits, equivalent to
+      approximately 2,000 minutes of Ubuntu x64 2-vCPU compute time.
+cost_optimization:
+  recommendations:
+    - Use ARM-based machines where possible — Ubuntu ARM 2vCPU at $0.003/min
+      is 60% cheaper than Ubuntu x64 2vCPU at $0.0075/min
+    - Leverage the self-hosted agent option at $0.0025/min for high-volume
+      workloads on owned infrastructure
+    - Monitor artifact storage and egress against free tier thresholds to
+      avoid overage charges
+    - Use pipeline caching effectively within the 9.6 GB per-project cache
+      allocation to reduce compute time
+    - Review pipeline queue utilization — queue caps at 30 pipelines may
+      indicate over-provisioning opportunities

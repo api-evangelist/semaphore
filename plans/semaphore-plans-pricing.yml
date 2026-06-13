@@ -1,0 +1,121 @@
+name: Semaphore Plans and Pricing
+description: >-
+  Semaphore uses a pay-as-you-go compute pricing model where users are billed
+  per minute of machine usage. All accounts receive $15 in monthly free credits
+  (approximately 2,000 Ubuntu x64 2-vCPU minutes). The platform offers optional
+  support plans, success plans, and engineering access packages as add-ons.
+specificationVersion: "0.1"
+url: https://semaphore.io/pricing
+plans:
+  - name: Free
+    description: >-
+      Pay-as-you-go access with $15 monthly free credits included. Suitable for
+      individuals and small teams exploring the platform.
+    url: https://semaphore.io/pricing
+    price: 0.00
+    currency: USD
+    billing: monthly
+    features:
+      - $15 monthly free credits (~2,000 Ubuntu x64 2-vCPU minutes)
+      - 20 concurrent jobs by default
+      - 20 GB/month egress included
+      - 100 GB/month artifact storage included
+      - 9.6 GB cache storage per project
+      - Basic support during business hours
+  - name: Startup
+    description: >-
+      Paid plan for startup teams requiring more capacity and support, billed
+      per user per month.
+    url: https://semaphore.io/pricing
+    price: 9.00
+    currency: USD
+    billing: monthly
+    unit: user
+    features:
+      - Per-user billing
+      - Hybrid cloud support
+      - Increased concurrency
+      - All free tier features
+  - name: Scaleup
+    description: >-
+      Paid plan for scaling engineering teams with higher usage and priority
+      support options.
+    url: https://semaphore.io/pricing
+    price: 20.00
+    currency: USD
+    billing: monthly
+    unit: user
+    features:
+      - Per-user billing
+      - Higher concurrency limits
+      - Enhanced support options
+      - All Startup features
+  - name: Enterprise
+    description: >-
+      Custom enterprise plan for large organizations requiring dedicated
+      infrastructure, SLAs, and tailored support.
+    url: https://semaphore.io/contact
+    price: custom
+    currency: USD
+    billing: custom
+    features:
+      - Custom concurrency limits
+      - Dedicated infrastructure options
+      - SLA-based support
+      - Custom contract terms
+compute:
+  description: Pay-as-you-go compute pricing billed per minute
+  machines:
+    - type: Ubuntu ARM 2vCPU
+      price_per_minute: 0.003
+      currency: USD
+    - type: Ubuntu ARM 4vCPU
+      price_per_minute: 0.006
+      currency: USD
+    - type: Ubuntu ARM 8vCPU
+      price_per_minute: 0.012
+      currency: USD
+    - type: Ubuntu x64 2vCPU
+      price_per_minute: 0.0075
+      currency: USD
+    - type: Ubuntu x64 4vCPU
+      price_per_minute: 0.015
+      currency: USD
+    - type: macOS 4vCPU
+      price_per_minute: 0.09
+      currency: USD
+    - type: Self-Hosted Agent
+      price_per_minute: 0.0025
+      currency: USD
+addons:
+  - name: Dedicated Cache Server
+    price: 400.00
+    currency: USD
+    billing: monthly
+    description: 10 Gbps bandwidth, 400 GB storage
+  - name: Private Docker Registry
+    price: 400.00
+    currency: USD
+    billing: monthly
+    description: 10 Gbps bandwidth, 400 GB storage
+support_plans:
+  - name: Basic
+    price: 50.00
+    currency: USD
+    billing: monthly
+    description: Email support during business hours
+  - name: Priority Response
+    price: 250.00
+    currency: USD
+    billing: monthly
+    description: Email and Slack support, 24/5 availability
+  - name: SLA Standard
+    price: 500.00
+    currency: USD
+    billing: monthly
+    description: 24/5 support with guaranteed response times
+  - name: SLA Premium
+    price: 750.00
+    currency: USD
+    billing: monthly
+    description: Priority queue 24/5, optional 24/7 coverage
