@@ -12,7 +12,7 @@ description: >-
   custom interfaces, trigger promotions, and automate their entire software
   delivery lifecycle.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/apis.yml
 created: "2026-06-12"
 modified: "2026-06-12"
@@ -38,7 +38,7 @@ apis:
       RESTful principles with OAS 3.0 compliance, uses token-based
       authentication, and returns JSON responses. It supports operations for
       managing CI/CD pipelines and build artifacts at the organization level.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://semaphore.io/product/api
     baseURL: https://{organization}.semaphoreci.com/api/v1alpha
     tags:
