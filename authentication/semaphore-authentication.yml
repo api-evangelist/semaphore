@@ -1,0 +1,13 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/semaphore-semaphore-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: authorization
+  type: http
+  scheme: bearer
+  description: Token that you get from semaphore [account settings](https://me.semaphoreci.com/account).
+  sources:
+  - openapi/semaphore-semaphore-api-openapi.yml

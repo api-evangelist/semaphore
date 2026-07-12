@@ -61,6 +61,14 @@ apis:
       - FN: Semaphore Support
         url: https://semaphore.io/contact
 common:
+  - type: TrustCenter
+    url: security/semaphore-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/semaphore-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/semaphore-domain-security.yml
+  - type: Authentication
+    url: authentication/semaphore-authentication.yml
   - type: Website
     url: https://semaphore.io
   - type: Documentation
