@@ -1,0 +1,1767 @@
+openapi: 3.0.3
+info:
+  title: Semaphore Public Dashboards Projects API
+  description: 'The Semaphore Public API is a RESTful API that allows you to interact with Semaphore CI/CD.
+
+    ## Authorization
+
+    Authorization is done via bearer token. You can obtain a token by visiting your [account settings](https://me.semaphoreci.com/account).
+
+
+    ## Pagination with link headers
+
+    Each list request supports pagination. List responses include a [link header](https://datatracker.ietf.org/doc/html/rfc5988#section-5) with the pagination URLs.
+
+    Link headers contain next, previous, first relative URLs.
+
+    '
+  version: v2
+  contact:
+    url: https://semaphore.io/contact
+    email: support@semaphoreci.com
+  termsOfService: https://semaphore.io/terms
+  license:
+    name: Proprietary
+    url: https://semaphore.io/terms
+servers:
+- url: https://{org_name}.semaphoreci.com/api/v2
+  variables:
+    org_name:
+      default: me
+      description: Organization name
+security:
+- authorization: []
+tags:
+- name: Projects
+  description: Project management
+paths:
+  /projects:
+    post:
+      operationId: Projects.Create
+      description: Create a project. When creating a project description is ignored.
+      tags:
+      - Projects
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                apiVersion:
+                  default: v2
+                  description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                  example: v2
+                  readOnly: true
+                  title: ApiVersion
+                  type: string
+                kind:
+                  default: Project
+                  description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                  example: Project
+                  readOnly: true
+                  title: Kind
+                  type: string
+                metadata:
+                  description: Metadata of the project, all fields are read only
+                  properties:
+                    connected:
+                      description: Connection status between Semaphore and repository.
+                      type: boolean
+                    created_at:
+                      description: Timestamp in ISO 8601 format
+                      format: date-time
+                      title: Timestamp
+                      type: string
+                    created_by:
+                      properties:
+                        id:
+                          description: ID of a User
+                          example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                          format: uuid
+                          title: User.ID
+                          type: string
+                      title: User
+                      type: object
+                    description:
+                      description: Description of the project
+                      type: string
+                    id:
+                      description: ID of a Project
+                      example: ed12ab59-9224-45c8-82d6-79bf158aaae6
+                      format: uuid
+                      title: Project.ID
+                      type: string
+                    name:
+                      description: Secret name must match the regex
+                      example: my-secret
+                      minLength: 1
+                      pattern: '^[@: -._a-zA-Z0-9]+$'
+                      title: Secret.Name
+                      type: string
+                    org_id:
+                      description: ID of a Organization
+                      example: ff19729a-a8d5-4a62-8c5c-9bdbabf6607e
+                      format: uuid
+                      title: Organization.ID
+                      type: string
+                  readOnly: true
+                  required:
+                  - id
+                  - name
+                  type: object
+                spec:
+                  description: Specification of the project
+                  properties:
+                    description:
+                      description: Description of the project
+                      type: string
+                    name:
+                      description: Project name must match the regex
+                      example: my-project
+                      minLength: 1
+                      pattern: \A[\w\-\.]+\z
+                      title: Project.Name
+                      type: string
+                    repository:
+                      description: Repository settings for the project
+                      properties:
+                        forked_pull_requests:
+                          description: Whether to include forked pull requests in the project, read more [here](https://docs.semaphoreci.com/essentials/project-workflow-trigger-options/#exposing-secrets-in-forked-pull-requests).
+                          properties:
+                            allowed_contributors:
+                              description: List of contributors that can create workflows from forked PRs. Empty list means that everyone can.
+                              example: []
+                              items:
+                                description: Contributor handle
+                                title: Contributor
+                                type: string
+                              type: array
+                            allowed_secrets:
+                              description: The allowed_secrets property specifies the array of secrets names that are allowed to be exported into jobs triggered by forked-pull-requests. If the array is empty, no secrets will be exported.
+                              items:
+                                description: Secret name must match the regex
+                                example: my-secret
+                                minLength: 1
+                                pattern: '^[@: -._a-zA-Z0-9]+$'
+                                title: Secret.Name
+                                type: string
+                              type: array
+                          type: object
+                        integration_type:
+                          description: Provider of the repository and authentication method
+                          enum:
+                          - GITHUB_APP
+                          - GITHUB_OAUTH_TOKEN
+                          - BITBUCKET
+                          type: string
+                        pipeline_file:
+                          default: .semaphore/semaphore.yml
+                          description: Path to the pipeline file to run the projec pipelines with
+                          type: string
+                        run_on:
+                          description: Which event will trigger the pipelines for this project. In most cases it is useful set to ["BRANCHES"]
+                          items:
+                            enum:
+                            - BRANCHES
+                            - TAGS
+                            - PULL_REQUESTS
+                            - FORKED_PULL_REQUESTS
+                            title: Projects.RunType
+                            type: string
+                          type: array
+                        status:
+                          description: "The status property is used to specify which Semaphore pipeline(s) will submit a status check on GitHub pull requests.\n                A pipeline can create a single status check as a result of a whole pipeline. Or each block in a pipeline can create its own status check.\n                For most of the projects `path: \".semaphore/semaphore.yml\", level: \"PIPELINE\"` will be suitable. **If left empty default value assumed.** "
+                          properties:
+                            pipeline_files:
+                              default:
+                              - level: PIPELINE
+                                path: .semaphore/semaphore.yml
+                              items:
+                                description: List of pipeline files that will submit a status check on GitHub pull requests
+                                properties:
+                                  level:
+                                    description: Level of the status check
+                                    enum:
+                                    - BLOCK
+                                    - PIPELINE
+                                    type: string
+                                  path:
+                                    default: .semaphore/semaphore.yml
+                                    description: Path to the pipeline file
+                                    type: string
+                                required:
+                                - path
+                                - level
+                                type: object
+                              type: array
+                          type: object
+                        url:
+                          description: URL of the repository
+                          example: git@github.com:semaphoreci/toolbox.git
+                          type: string
+                        whitelist:
+                          description: Whitelist of branches and tags that can be built using this project
+                          properties:
+                            branches:
+                              description: List of branches that can be build. Regular expressions allowed. Empty list means that all branches can. Used only when RunType BRANCHES is included.
+                              items:
+                                type: string
+                              type: array
+                            tags:
+                              description: List of tags that can be build. Regular expressions allowed. Empty list means that all tags can. Used only when RunType TAGS is included.
+                              items:
+                                type: string
+                              type: array
+                          type: object
+                      required:
+                      - url
+                      - integration_type
+                      - run_on
+                      type: object
+                    visibility:
+                      description: Visibility of the project
+                      enum:
+                      - PUBLIC
+                      - PRIVATE
+                      type: string
+                  required:
+                  - repository
+                  - name
+                  type: object
+              required:
+              - apiVersion
+              - kind
+              - metadata
+              - spec
+              title: Projects.Project
+              type: object
+        description: Project to be created
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  apiVersion:
+                    default: v2
+                    description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                    example: v2
+                    readOnly: true
+                    title: ApiVersion
+                    type: string
+                  kind:
+                    default: Project
+                    description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                    example: Project
+                    readOnly: true
+                    title: Kind
+                    type: string
+                  metadata:
+                    description: Metadata of the project, all fields are read only
+                    properties:
+                      connected:
+                        description: Connection status between Semaphore and repository.
+                        type: boolean
+                      created_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      created_by:
+                        properties:
+                          id:
+                            description: ID of a User
+                            example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                            format: uuid
+                            title: User.ID
+                            type: string
+                        title: User
+                        type: object
+                      description:
+                        description: Description of the project
+                        type: string
+                      id:
+                        description: ID of a Project
+                        example: ed12ab59-9224-45c8-82d6-79bf158aaae6
+                        format: uuid
+                        title: Project.ID
+                        type: string
+                      name:
+                        description: Secret name must match the regex
+                        example: my-secret
+                        minLength: 1
+                        pattern: '^[@: -._a-zA-Z0-9]+$'
+                        title: Secret.Name
+                        type: string
+                      org_id:
+                        description: ID of a Organization
+                        example: ff19729a-a8d5-4a62-8c5c-9bdbabf6607e
+                        format: uuid
+                        title: Organization.ID
+                        type: string
+                    readOnly: true
+                    required:
+                    - id
+                    - name
+                    type: object
+                  spec:
+                    description: Specification of the project
+                    properties:
+                      description:
+                        description: Description of the project
+                        type: string
+                      name:
+                        description: Project name must match the regex
+                        example: my-project
+                        minLength: 1
+                        pattern: \A[\w\-\.]+\z
+                        title: Project.Name
+                        type: string
+                      repository:
+                        description: Repository settings for the project
+                        properties:
+                          forked_pull_requests:
+                            description: Whether to include forked pull requests in the project, read more [here](https://docs.semaphoreci.com/essentials/project-workflow-trigger-options/#exposing-secrets-in-forked-pull-requests).
+                            properties:
+                              allowed_contributors:
+                                description: List of contributors that can create workflows from forked PRs. Empty list means that everyone can.
+                                example: []
+                                items:
+                                  description: Contributor handle
+                                  title: Contributor
+                                  type: string
+                                type: array
+                              allowed_secrets:
+                                description: The allowed_secrets property specifies the array of secrets names that are allowed to be exported into jobs triggered by forked-pull-requests. If the array is empty, no secrets will be exported.
+                                items:
+                                  description: Secret name must match the regex
+                                  example: my-secret
+                                  minLength: 1
+                                  pattern: '^[@: -._a-zA-Z0-9]+$'
+                                  title: Secret.Name
+                                  type: string
+                                type: array
+                            type: object
+                          integration_type:
+                            description: Provider of the repository and authentication method
+                            enum:
+                            - GITHUB_APP
+                            - GITHUB_OAUTH_TOKEN
+                            - BITBUCKET
+                            type: string
+                          pipeline_file:
+                            default: .semaphore/semaphore.yml
+                            description: Path to the pipeline file to run the projec pipelines with
+                            type: string
+                          run_on:
+                            description: Which event will trigger the pipelines for this project. In most cases it is useful set to ["BRANCHES"]
+                            items:
+                              enum:
+                              - BRANCHES
+                              - TAGS
+                              - PULL_REQUESTS
+                              - FORKED_PULL_REQUESTS
+                              title: Projects.RunType
+                              type: string
+                            type: array
+                          status:
+                            description: "The status property is used to specify which Semaphore pipeline(s) will submit a status check on GitHub pull requests.\n                A pipeline can create a single status check as a result of a whole pipeline. Or each block in a pipeline can create its own status check.\n                For most of the projects `path: \".semaphore/semaphore.yml\", level: \"PIPELINE\"` will be suitable. **If left empty default value assumed.** "
+                            properties:
+                              pipeline_files:
+                                default:
+                                - level: PIPELINE
+                                  path: .semaphore/semaphore.yml
+                                items:
+                                  description: List of pipeline files that will submit a status check on GitHub pull requests
+                                  properties:
+                                    level:
+                                      description: Level of the status check
+                                      enum:
+                                      - BLOCK
+                                      - PIPELINE
+                                      type: string
+                                    path:
+                                      default: .semaphore/semaphore.yml
+                                      description: Path to the pipeline file
+                                      type: string
+                                  required:
+                                  - path
+                                  - level
+                                  type: object
+                                type: array
+                            type: object
+                          url:
+                            description: URL of the repository
+                            example: git@github.com:semaphoreci/toolbox.git
+                            type: string
+                          whitelist:
+                            description: Whitelist of branches and tags that can be built using this project
+                            properties:
+                              branches:
+                                description: List of branches that can be build. Regular expressions allowed. Empty list means that all branches can. Used only when RunType BRANCHES is included.
+                                items:
+                                  type: string
+                                type: array
+                              tags:
+                                description: List of tags that can be build. Regular expressions allowed. Empty list means that all tags can. Used only when RunType TAGS is included.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                        required:
+                        - url
+                        - integration_type
+                        - run_on
+                        type: object
+                      visibility:
+                        description: Visibility of the project
+                        enum:
+                        - PUBLIC
+                        - PRIVATE
+                        type: string
+                    required:
+                    - repository
+                    - name
+                    type: object
+                required:
+                - apiVersion
+                - kind
+                - metadata
+                - spec
+                title: Projects.Project
+                type: object
+          description: Created project
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+    get:
+      operationId: Projects.List
+      description: List projects in organization.
+      tags:
+      - Projects
+      parameters:
+      - description: UUID of the project owner
+        example: 7d36df70-6eab-4768-83d8-090f44f47235
+        in: query
+        name: owner_uuid
+        required: false
+        schema:
+          format: uuid
+          type: string
+      - description: URL of the repository the project is associated with
+        example: git@github.com:semaphoreci/toolbox.git
+        in: query
+        name: repo_url
+        required: false
+        schema:
+          type: string
+      - description: "Direction of the pagination.\n            `NEXT` will fetch projects after the provided token, `PREVIOUS` will fetch projects before the provided token"
+        in: query
+        name: direction
+        required: false
+        schema:
+          default: NEXT
+          enum:
+          - NEXT
+          - PREVIOUS
+          type: string
+      - description: Starting point for listing, if you are fetching first page leave it empty
+        in: query
+        name: page_token
+        required: false
+        schema:
+          default: ''
+          type: string
+      - description: Page size
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 20
+          maximum: 100
+          minimum: 1
+          title: PageSize
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    apiVersion:
+                      default: v2
+                      description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                      example: v2
+                      readOnly: true
+                      title: ApiVersion
+                      type: string
+                    kind:
+                      default: Project
+                      description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                      example: Project
+                      readOnly: true
+                      title: Kind
+                      type: string
+                    metadata:
+                      description: Metadata of the project, all fields are read only
+                      properties:
+                        connected:
+                          description: Connection status between Semaphore and repository.
+                          type: boolean
+                        created_at:
+                          description: Timestamp in ISO 8601 format
+                          format: date-time
+                          title: Timestamp
+                          type: string
+                        created_by:
+                          properties:
+                            id:
+                              description: ID of a User
+                              example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                              format: uuid
+                              title: User.ID
+                              type: string
+                          title: User
+                          type: object
+                        description:
+                          description: Description of the project
+                          type: string
+                        id:
+                          description: ID of a Project
+                          example: ed12ab59-9224-45c8-82d6-79bf158aaae6
+                          format: uuid
+                          title: Project.ID
+                          type: string
+                        name:
+                          description: Secret name must match the regex
+                          example: my-secret
+                          minLength: 1
+                          pattern: '^[@: -._a-zA-Z0-9]+$'
+                          title: Secret.Name
+                          type: string
+                        org_id:
+                          description: ID of a Organization
+                          example: ff19729a-a8d5-4a62-8c5c-9bdbabf6607e
+                          format: uuid
+                          title: Organization.ID
+                          type: string
+                      readOnly: true
+                      required:
+                      - id
+                      - name
+                      type: object
+                    spec:
+                      description: Specification of the project
+                      properties:
+                        description:
+                          description: Description of the project
+                          type: string
+                        name:
+                          description: Project name must match the regex
+                          example: my-project
+                          minLength: 1
+                          pattern: \A[\w\-\.]+\z
+                          title: Project.Name
+                          type: string
+                        repository:
+                          description: Repository settings for the project
+                          properties:
+                            forked_pull_requests:
+                              description: Whether to include forked pull requests in the project, read more [here](https://docs.semaphoreci.com/essentials/project-workflow-trigger-options/#exposing-secrets-in-forked-pull-requests).
+                              properties:
+                                allowed_contributors:
+                                  description: List of contributors that can create workflows from forked PRs. Empty list means that everyone can.
+                                  example: []
+                                  items:
+                                    description: Contributor handle
+                                    title: Contributor
+                                    type: string
+                                  type: array
+                                allowed_secrets:
+                                  description: The allowed_secrets property specifies the array of secrets names that are allowed to be exported into jobs triggered by forked-pull-requests. If the array is empty, no secrets will be exported.
+                                  items:
+                                    description: Secret name must match the regex
+                                    example: my-secret
+                                    minLength: 1
+                                    pattern: '^[@: -._a-zA-Z0-9]+$'
+                                    title: Secret.Name
+                                    type: string
+                                  type: array
+                              type: object
+                            integration_type:
+                              description: Provider of the repository and authentication method
+                              enum:
+                              - GITHUB_APP
+                              - GITHUB_OAUTH_TOKEN
+                              - BITBUCKET
+                              type: string
+                            pipeline_file:
+                              default: .semaphore/semaphore.yml
+                              description: Path to the pipeline file to run the projec pipelines with
+                              type: string
+                            run_on:
+                              description: Which event will trigger the pipelines for this project. In most cases it is useful set to ["BRANCHES"]
+                              items:
+                                enum:
+                                - BRANCHES
+                                - TAGS
+                                - PULL_REQUESTS
+                                - FORKED_PULL_REQUESTS
+                                title: Projects.RunType
+                                type: string
+                              type: array
+                            status:
+                              description: "The status property is used to specify which Semaphore pipeline(s) will submit a status check on GitHub pull requests.\n                A pipeline can create a single status check as a result of a whole pipeline. Or each block in a pipeline can create its own status check.\n                For most of the projects `path: \".semaphore/semaphore.yml\", level: \"PIPELINE\"` will be suitable. **If left empty default value assumed.** "
+                              properties:
+                                pipeline_files:
+                                  default:
+                                  - level: PIPELINE
+                                    path: .semaphore/semaphore.yml
+                                  items:
+                                    description: List of pipeline files that will submit a status check on GitHub pull requests
+                                    properties:
+                                      level:
+                                        description: Level of the status check
+                                        enum:
+                                        - BLOCK
+                                        - PIPELINE
+                                        type: string
+                                      path:
+                                        default: .semaphore/semaphore.yml
+                                        description: Path to the pipeline file
+                                        type: string
+                                    required:
+                                    - path
+                                    - level
+                                    type: object
+                                  type: array
+                              type: object
+                            url:
+                              description: URL of the repository
+                              example: git@github.com:semaphoreci/toolbox.git
+                              type: string
+                            whitelist:
+                              description: Whitelist of branches and tags that can be built using this project
+                              properties:
+                                branches:
+                                  description: List of branches that can be build. Regular expressions allowed. Empty list means that all branches can. Used only when RunType BRANCHES is included.
+                                  items:
+                                    type: string
+                                  type: array
+                                tags:
+                                  description: List of tags that can be build. Regular expressions allowed. Empty list means that all tags can. Used only when RunType TAGS is included.
+                                  items:
+                                    type: string
+                                  type: array
+                              type: object
+                          required:
+                          - url
+                          - integration_type
+                          - run_on
+                          type: object
+                        visibility:
+                          description: Visibility of the project
+                          enum:
+                          - PUBLIC
+                          - PRIVATE
+                          type: string
+                      required:
+                      - repository
+                      - name
+                      type: object
+                  required:
+                  - apiVersion
+                  - kind
+                  - metadata
+                  - spec
+                  title: Projects.Project
+                  type: object
+                title: Projects.ListResponse
+                type: array
+          description: List of projects in organization
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+  /projects/{project_id_or_name}:
+    delete:
+      operationId: Projects.Delete
+      description: Delete a project.
+      tags:
+      - Projects
+      parameters:
+      - description: Id or name of the project
+        in: path
+        name: project_id_or_name
+        required: true
+        schema:
+          anyOf:
+          - description: ID of a Project
+            example: 7addf73c-f7e8-43a4-bc44-b2414f956c7f
+            format: uuid
+            title: Project.ID
+            type: string
+          - description: Project name must match the regex
+            example: my-project
+            minLength: 1
+            pattern: \A[\w\-\.]+\z
+            title: Project.Name
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                description: ''
+                properties:
+                  project_id:
+                    description: ID of a Project
+                    example: bdc3abf1-6cd4-43cd-9f2f-5e9d83e1d16d
+                    format: uuid
+                    title: Project.ID
+                    type: string
+                title: Projects.DeleteResponse
+                type: object
+          description: ID of the deleted project
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+    get:
+      operationId: Projects.Describe
+      description: Describe project.
+      tags:
+      - Projects
+      parameters:
+      - description: Id or name of the project
+        in: path
+        name: project_id_or_name
+        required: true
+        schema:
+          anyOf:
+          - description: ID of a Project
+            example: ebcda0ed-7f7f-4527-8e21-8089cfc1c000
+            format: uuid
+            title: Project.ID
+            type: string
+          - description: Project name must match the regex
+            example: my-project
+            minLength: 1
+            pattern: \A[\w\-\.]+\z
+            title: Project.Name
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  apiVersion:
+                    default: v2
+                    description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                    example: v2
+                    readOnly: true
+                    title: ApiVersion
+                    type: string
+                  kind:
+                    default: Project
+                    description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                    example: Project
+                    readOnly: true
+                    title: Kind
+                    type: string
+                  metadata:
+                    description: Metadata of the project, all fields are read only
+                    properties:
+                      connected:
+                        description: Connection status between Semaphore and repository.
+                        type: boolean
+                      created_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      created_by:
+                        properties:
+                          id:
+                            description: ID of a User
+                            example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                            format: uuid
+                            title: User.ID
+                            type: string
+                        title: User
+                        type: object
+                      description:
+                        description: Description of the project
+                        type: string
+                      id:
+                        description: ID of a Project
+                        example: ed12ab59-9224-45c8-82d6-79bf158aaae6
+                        format: uuid
+                        title: Project.ID
+                        type: string
+                      name:
+                        description: Secret name must match the regex
+                        example: my-secret
+                        minLength: 1
+                        pattern: '^[@: -._a-zA-Z0-9]+$'
+                        title: Secret.Name
+                        type: string
+                      org_id:
+                        description: ID of a Organization
+                        example: ff19729a-a8d5-4a62-8c5c-9bdbabf6607e
+                        format: uuid
+                        title: Organization.ID
+                        type: string
+                    readOnly: true
+                    required:
+                    - id
+                    - name
+                    type: object
+                  spec:
+                    description: Specification of the project
+                    properties:
+                      description:
+                        description: Description of the project
+                        type: string
+                      name:
+                        description: Project name must match the regex
+                        example: my-project
+                        minLength: 1
+                        pattern: \A[\w\-\.]+\z
+                        title: Project.Name
+                        type: string
+                      repository:
+                        description: Repository settings for the project
+                        properties:
+                          forked_pull_requests:
+                            description: Whether to include forked pull requests in the project, read more [here](https://docs.semaphoreci.com/essentials/project-workflow-trigger-options/#exposing-secrets-in-forked-pull-requests).
+                            properties:
+                              allowed_contributors:
+                                description: List of contributors that can create workflows from forked PRs. Empty list means that everyone can.
+                                example: []
+                                items:
+                                  description: Contributor handle
+                                  title: Contributor
+                                  type: string
+                                type: array
+                              allowed_secrets:
+                                description: The allowed_secrets property specifies the array of secrets names that are allowed to be exported into jobs triggered by forked-pull-requests. If the array is empty, no secrets will be exported.
+                                items:
+                                  description: Secret name must match the regex
+                                  example: my-secret
+                                  minLength: 1
+                                  pattern: '^[@: -._a-zA-Z0-9]+$'
+                                  title: Secret.Name
+                                  type: string
+                                type: array
+                            type: object
+                          integration_type:
+                            description: Provider of the repository and authentication method
+                            enum:
+                            - GITHUB_APP
+                            - GITHUB_OAUTH_TOKEN
+                            - BITBUCKET
+                            type: string
+                          pipeline_file:
+                            default: .semaphore/semaphore.yml
+                            description: Path to the pipeline file to run the projec pipelines with
+                            type: string
+                          run_on:
+                            description: Which event will trigger the pipelines for this project. In most cases it is useful set to ["BRANCHES"]
+                            items:
+                              enum:
+                              - BRANCHES
+                              - TAGS
+                              - PULL_REQUESTS
+                              - FORKED_PULL_REQUESTS
+                              title: Projects.RunType
+                              type: string
+                            type: array
+                          status:
+                            description: "The status property is used to specify which Semaphore pipeline(s) will submit a status check on GitHub pull requests.\n                A pipeline can create a single status check as a result of a whole pipeline. Or each block in a pipeline can create its own status check.\n                For most of the projects `path: \".semaphore/semaphore.yml\", level: \"PIPELINE\"` will be suitable. **If left empty default value assumed.** "
+                            properties:
+                              pipeline_files:
+                                default:
+                                - level: PIPELINE
+                                  path: .semaphore/semaphore.yml
+                                items:
+                                  description: List of pipeline files that will submit a status check on GitHub pull requests
+                                  properties:
+                                    level:
+                                      description: Level of the status check
+                                      enum:
+                                      - BLOCK
+                                      - PIPELINE
+                                      type: string
+                                    path:
+                                      default: .semaphore/semaphore.yml
+                                      description: Path to the pipeline file
+                                      type: string
+                                  required:
+                                  - path
+                                  - level
+                                  type: object
+                                type: array
+                            type: object
+                          url:
+                            description: URL of the repository
+                            example: git@github.com:semaphoreci/toolbox.git
+                            type: string
+                          whitelist:
+                            description: Whitelist of branches and tags that can be built using this project
+                            properties:
+                              branches:
+                                description: List of branches that can be build. Regular expressions allowed. Empty list means that all branches can. Used only when RunType BRANCHES is included.
+                                items:
+                                  type: string
+                                type: array
+                              tags:
+                                description: List of tags that can be build. Regular expressions allowed. Empty list means that all tags can. Used only when RunType TAGS is included.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                        required:
+                        - url
+                        - integration_type
+                        - run_on
+                        type: object
+                      visibility:
+                        description: Visibility of the project
+                        enum:
+                        - PUBLIC
+                        - PRIVATE
+                        type: string
+                    required:
+                    - repository
+                    - name
+                    type: object
+                required:
+                - apiVersion
+                - kind
+                - metadata
+                - spec
+                title: Projects.Project
+                type: object
+          description: Project
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+    put:
+      operationId: Projects.Update
+      description: Update a project.
+      tags:
+      - Projects
+      parameters:
+      - description: Id or name of the project
+        in: path
+        name: project_id_or_name
+        required: true
+        schema:
+          anyOf:
+          - description: ID of a Project
+            example: e9fc91f4-ad27-47d3-8f0a-e12c7946bff0
+            format: uuid
+            title: Project.ID
+            type: string
+          - description: Project name must match the regex
+            example: my-project
+            minLength: 1
+            pattern: \A[\w\-\.]+\z
+            title: Project.Name
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                apiVersion:
+                  default: v2
+                  description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                  example: v2
+                  readOnly: true
+                  title: ApiVersion
+                  type: string
+                kind:
+                  default: Project
+                  description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                  example: Project
+                  readOnly: true
+                  title: Kind
+                  type: string
+                metadata:
+                  description: Metadata of the project, all fields are read only
+                  properties:
+                    connected:
+                      description: Connection status between Semaphore and repository.
+                      type: boolean
+                    created_at:
+                      description: Timestamp in ISO 8601 format
+                      format: date-time
+                      title: Timestamp
+                      type: string
+                    created_by:
+                      properties:
+                        id:
+                          description: ID of a User
+                          example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                          format: uuid
+                          title: User.ID
+                          type: string
+                      title: User
+                      type: object
+                    description:
+                      description: Description of the project
+                      type: string
+                    id:
+                      description: ID of a Project
+                      example: ed12ab59-9224-45c8-82d6-79bf158aaae6
+                      format: uuid
+                      title: Project.ID
+                      type: string
+                    name:
+                      description: Secret name must match the regex
+                      example: my-secret
+                      minLength: 1
+                      pattern: '^[@: -._a-zA-Z0-9]+$'
+                      title: Secret.Name
+                      type: string
+                    org_id:
+                      description: ID of a Organization
+                      example: ff19729a-a8d5-4a62-8c5c-9bdbabf6607e
+                      format: uuid
+                      title: Organization.ID
+                      type: string
+                  readOnly: true
+                  required:
+                  - id
+                  - name
+                  type: object
+                spec:
+                  description: Specification of the project
+                  properties:
+                    description:
+                      description: Description of the project
+                      type: string
+                    name:
+                      description: Project name must match the regex
+                      example: my-project
+                      minLength: 1
+                      pattern: \A[\w\-\.]+\z
+                      title: Project.Name
+                      type: string
+                    repository:
+                      description: Repository settings for the project
+                      properties:
+                        forked_pull_requests:
+                          description: Whether to include forked pull requests in the project, read more [here](https://docs.semaphoreci.com/essentials/project-workflow-trigger-options/#exposing-secrets-in-forked-pull-requests).
+                          properties:
+                            allowed_contributors:
+                              description: List of contributors that can create workflows from forked PRs. Empty list means that everyone can.
+                              example: []
+                              items:
+                                description: Contributor handle
+                                title: Contributor
+                                type: string
+                              type: array
+                            allowed_secrets:
+                              description: The allowed_secrets property specifies the array of secrets names that are allowed to be exported into jobs triggered by forked-pull-requests. If the array is empty, no secrets will be exported.
+                              items:
+                                description: Secret name must match the regex
+                                example: my-secret
+                                minLength: 1
+                                pattern: '^[@: -._a-zA-Z0-9]+$'
+                                title: Secret.Name
+                                type: string
+                              type: array
+                          type: object
+                        integration_type:
+                          description: Provider of the repository and authentication method
+                          enum:
+                          - GITHUB_APP
+                          - GITHUB_OAUTH_TOKEN
+                          - BITBUCKET
+                          type: string
+                        pipeline_file:
+                          default: .semaphore/semaphore.yml
+                          description: Path to the pipeline file to run the projec pipelines with
+                          type: string
+                        run_on:
+                          description: Which event will trigger the pipelines for this project. In most cases it is useful set to ["BRANCHES"]
+                          items:
+                            enum:
+                            - BRANCHES
+                            - TAGS
+                            - PULL_REQUESTS
+                            - FORKED_PULL_REQUESTS
+                            title: Projects.RunType
+                            type: string
+                          type: array
+                        status:
+                          description: "The status property is used to specify which Semaphore pipeline(s) will submit a status check on GitHub pull requests.\n                A pipeline can create a single status check as a result of a whole pipeline. Or each block in a pipeline can create its own status check.\n                For most of the projects `path: \".semaphore/semaphore.yml\", level: \"PIPELINE\"` will be suitable. **If left empty default value assumed.** "
+                          properties:
+                            pipeline_files:
+                              default:
+                              - level: PIPELINE
+                                path: .semaphore/semaphore.yml
+                              items:
+                                description: List of pipeline files that will submit a status check on GitHub pull requests
+                                properties:
+                                  level:
+                                    description: Level of the status check
+                                    enum:
+                                    - BLOCK
+                                    - PIPELINE
+                                    type: string
+                                  path:
+                                    default: .semaphore/semaphore.yml
+                                    description: Path to the pipeline file
+                                    type: string
+                                required:
+                                - path
+                                - level
+                                type: object
+                              type: array
+                          type: object
+                        url:
+                          description: URL of the repository
+                          example: git@github.com:semaphoreci/toolbox.git
+                          type: string
+                        whitelist:
+                          description: Whitelist of branches and tags that can be built using this project
+                          properties:
+                            branches:
+                              description: List of branches that can be build. Regular expressions allowed. Empty list means that all branches can. Used only when RunType BRANCHES is included.
+                              items:
+                                type: string
+                              type: array
+                            tags:
+                              description: List of tags that can be build. Regular expressions allowed. Empty list means that all tags can. Used only when RunType TAGS is included.
+                              items:
+                                type: string
+                              type: array
+                          type: object
+                      required:
+                      - url
+                      - integration_type
+                      - run_on
+                      type: object
+                    visibility:
+                      description: Visibility of the project
+                      enum:
+                      - PUBLIC
+                      - PRIVATE
+                      type: string
+                  required:
+                  - repository
+                  - name
+                  type: object
+              required:
+              - apiVersion
+              - kind
+              - metadata
+              - spec
+              title: Projects.Project
+              type: object
+        description: Updated secret, only spec can be updated
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  apiVersion:
+                    default: v2
+                    description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                    example: v2
+                    readOnly: true
+                    title: ApiVersion
+                    type: string
+                  kind:
+                    default: Project
+                    description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                    example: Project
+                    readOnly: true
+                    title: Kind
+                    type: string
+                  metadata:
+                    description: Metadata of the project, all fields are read only
+                    properties:
+                      connected:
+                        description: Connection status between Semaphore and repository.
+                        type: boolean
+                      created_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      created_by:
+                        properties:
+                          id:
+                            description: ID of a User
+                            example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                            format: uuid
+                            title: User.ID
+                            type: string
+                        title: User
+                        type: object
+                      description:
+                        description: Description of the project
+                        type: string
+                      id:
+                        description: ID of a Project
+                        example: ed12ab59-9224-45c8-82d6-79bf158aaae6
+                        format: uuid
+                        title: Project.ID
+                        type: string
+                      name:
+                        description: Secret name must match the regex
+                        example: my-secret
+                        minLength: 1
+                        pattern: '^[@: -._a-zA-Z0-9]+$'
+                        title: Secret.Name
+                        type: string
+                      org_id:
+                        description: ID of a Organization
+                        example: ff19729a-a8d5-4a62-8c5c-9bdbabf6607e
+                        format: uuid
+                        title: Organization.ID
+                        type: string
+                    readOnly: true
+                    required:
+                    - id
+                    - name
+                    type: object
+                  spec:
+                    description: Specification of the project
+                    properties:
+                      description:
+                        description: Description of the project
+                        type: string
+                      name:
+                        description: Project name must match the regex
+                        example: my-project
+                        minLength: 1
+                        pattern: \A[\w\-\.]+\z
+                        title: Project.Name
+                        type: string
+                      repository:
+                        description: Repository settings for the project
+                        properties:
+                          forked_pull_requests:
+                            description: Whether to include forked pull requests in the project, read more [here](https://docs.semaphoreci.com/essentials/project-workflow-trigger-options/#exposing-secrets-in-forked-pull-requests).
+                            properties:
+                              allowed_contributors:
+                                description: List of contributors that can create workflows from forked PRs. Empty list means that everyone can.
+                                example: []
+                                items:
+                                  description: Contributor handle
+                                  title: Contributor
+                                  type: string
+                                type: array
+                              allowed_secrets:
+                                description: The allowed_secrets property specifies the array of secrets names that are allowed to be exported into jobs triggered by forked-pull-requests. If the array is empty, no secrets will be exported.
+                                items:
+                                  description: Secret name must match the regex
+                                  example: my-secret
+                                  minLength: 1
+                                  pattern: '^[@: -._a-zA-Z0-9]+$'
+                                  title: Secret.Name
+                                  type: string
+                                type: array
+                            type: object
+                          integration_type:
+                            description: Provider of the repository and authentication method
+                            enum:
+                            - GITHUB_APP
+                            - GITHUB_OAUTH_TOKEN
+                            - BITBUCKET
+                            type: string
+                          pipeline_file:
+                            default: .semaphore/semaphore.yml
+                            description: Path to the pipeline file to run the projec pipelines with
+                            type: string
+                          run_on:
+                            description: Which event will trigger the pipelines for this project. In most cases it is useful set to ["BRANCHES"]
+                            items:
+                              enum:
+                              - BRANCHES
+                              - TAGS
+                              - PULL_REQUESTS
+                              - FORKED_PULL_REQUESTS
+                              title: Projects.RunType
+                              type: string
+                            type: array
+                          status:
+                            description: "The status property is used to specify which Semaphore pipeline(s) will submit a status check on GitHub pull requests.\n                A pipeline can create a single status check as a result of a whole pipeline. Or each block in a pipeline can create its own status check.\n                For most of the projects `path: \".semaphore/semaphore.yml\", level: \"PIPELINE\"` will be suitable. **If left empty default value assumed.** "
+                            properties:
+                              pipeline_files:
+                                default:
+                                - level: PIPELINE
+                                  path: .semaphore/semaphore.yml
+                                items:
+                                  description: List of pipeline files that will submit a status check on GitHub pull requests
+                                  properties:
+                                    level:
+                                      description: Level of the status check
+                                      enum:
+                                      - BLOCK
+                                      - PIPELINE
+                                      type: string
+                                    path:
+                                      default: .semaphore/semaphore.yml
+                                      description: Path to the pipeline file
+                                      type: string
+                                  required:
+                                  - path
+                                  - level
+                                  type: object
+                                type: array
+                            type: object
+                          url:
+                            description: URL of the repository
+                            example: git@github.com:semaphoreci/toolbox.git
+                            type: string
+                          whitelist:
+                            description: Whitelist of branches and tags that can be built using this project
+                            properties:
+                              branches:
+                                description: List of branches that can be build. Regular expressions allowed. Empty list means that all branches can. Used only when RunType BRANCHES is included.
+                                items:
+                                  type: string
+                                type: array
+                              tags:
+                                description: List of tags that can be build. Regular expressions allowed. Empty list means that all tags can. Used only when RunType TAGS is included.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                        required:
+                        - url
+                        - integration_type
+                        - run_on
+                        type: object
+                      visibility:
+                        description: Visibility of the project
+                        enum:
+                        - PUBLIC
+                        - PRIVATE
+                        type: string
+                    required:
+                    - repository
+                    - name
+                    type: object
+                required:
+                - apiVersion
+                - kind
+                - metadata
+                - spec
+                title: Projects.Project
+                type: object
+          description: Updated secret
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+components:
+  securitySchemes:
+    authorization:
+      description: Token that you get from semaphore [account settings](https://me.semaphoreci.com/account).
+      name: authorization
+      scheme: bearer
+      type: http

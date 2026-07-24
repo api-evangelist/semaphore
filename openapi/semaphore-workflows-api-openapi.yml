@@ -1,0 +1,814 @@
+openapi: 3.0.3
+info:
+  title: Semaphore Public Dashboards Workflows API
+  description: 'The Semaphore Public API is a RESTful API that allows you to interact with Semaphore CI/CD.
+
+    ## Authorization
+
+    Authorization is done via bearer token. You can obtain a token by visiting your [account settings](https://me.semaphoreci.com/account).
+
+
+    ## Pagination with link headers
+
+    Each list request supports pagination. List responses include a [link header](https://datatracker.ietf.org/doc/html/rfc5988#section-5) with the pagination URLs.
+
+    Link headers contain next, previous, first relative URLs.
+
+    '
+  version: v2
+  contact:
+    url: https://semaphore.io/contact
+    email: support@semaphoreci.com
+  termsOfService: https://semaphore.io/terms
+  license:
+    name: Proprietary
+    url: https://semaphore.io/terms
+servers:
+- url: https://{org_name}.semaphoreci.com/api/v2
+  variables:
+    org_name:
+      default: me
+      description: Organization name
+security:
+- authorization: []
+tags:
+- name: Workflows
+  description: Workflow management
+paths:
+  /workflows:
+    get:
+      operationId: Workflows.List
+      description: List workflows using project id.
+      tags:
+      - Workflows
+      parameters:
+      - description: The id of the project to list the workflows for
+        in: query
+        name: project_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: Branch name
+        example: main
+        in: query
+        name: branch_name
+        required: false
+        schema:
+          type: string
+      - description: Return only workflows created before this timestamp
+        example: '2021-01-01T00:00:00Z'
+        in: query
+        name: created_before
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: Return only workflows created after this timestamp
+        example: '2021-01-01T00:00:00Z'
+        in: query
+        name: created_after
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: Return only workflows with given label (label is branch/tag name, PR number, snapshot generated label etc.)
+        example: v2
+        in: query
+        name: label
+        required: false
+        schema:
+          type: string
+      - description: Type of git reference for which workflow is initiated.
+        example: BRANCH
+        in: query
+        name: git_ref_type
+        required: false
+        schema:
+          enum:
+          - BRANCH
+          - TAG
+          - PR
+          type: string
+      - description: Direction of the list from the provided token
+        in: query
+        name: direction
+        required: false
+        schema:
+          default: NEXT
+          description: "Use NEXT with value of next_page_token to get next page of results,\n              use PREVIOUS with value of previous_page_token to get previous page of results."
+          enum:
+          - NEXT
+          - PREVIOUS
+          type: string
+      - description: Starting point for listing, if you are fetching first page leave it empty
+        in: query
+        name: page_token
+        required: false
+        schema:
+          default: ''
+          type: string
+      - description: Page size
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 20
+          maximum: 100
+          minimum: 1
+          title: PageSize
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                description: Workflow list. Follow the link headers for fetching additional pages of results
+                items:
+                  properties:
+                    branch_id:
+                      description: ID of a Branch
+                      example: 76ee0686-789f-4930-a5c5-ac72d93815c8
+                      format: uuid
+                      title: Branch.ID
+                      type: string
+                    commit_sha:
+                      format: sha-1
+                      type: string
+                    created_at:
+                      description: Timestamp in ISO 8601 format
+                      format: date-time
+                      title: Timestamp
+                      type: string
+                    hook_id:
+                      description: ID of a Hook
+                      example: 0380850a-ac70-4f95-93b5-dc89ebdf48fb
+                      format: uuid
+                      title: Hook.ID
+                      type: string
+                    initial_ppl_id:
+                      description: The ID of the initial pipeline that was ran by this workflow
+                      format: uuid
+                      type: string
+                    project_id:
+                      description: ID of a Project
+                      example: cdbad08d-903b-43c5-8e9a-99c5b74a89aa
+                      format: uuid
+                      title: Project.ID
+                      type: string
+                    requester_id:
+                      description: ID of a User
+                      example: 5df2cadb-310f-4c14-8784-e27289133a78
+                      format: uuid
+                      title: User.ID
+                      type: string
+                    triggered_by:
+                      enum:
+                      - HOOK
+                      - SCHEDULE
+                      - API
+                      - MANUAL_RUN
+                      type: string
+                    wf_id:
+                      description: ID of a Workflow
+                      example: f850cdcf-d3de-4d50-91bf-b6190fa5f9c0
+                      format: uuid
+                      title: Workflow.ID
+                      type: string
+                  title: Workflows.Workflow
+                  type: object
+                title: Workflows.ListResponse
+                type: array
+          description: List of workflows in a project
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+    post:
+      operationId: Workflows.Schedule
+      description: Schedule a workflow for running
+      tags:
+      - Workflows
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: Workflow schedule parameters
+              properties:
+                commit_sha:
+                  description: Commit sha of the desired commit.
+                  type: string
+                pipeline_file:
+                  default: .semaphore/semaphore.yml
+                  description: he path within the repository to the YAML file that contains the pipeline definition
+                  type: string
+                project_id:
+                  description: Id of the project to schedule the workflow in.
+                  format: uuid
+                  type: string
+                reference:
+                  description: git reference for the desired branch, tag, or pull request
+                  example: refs/tags/v1.0
+                  type: string
+              required:
+              - project_id
+              - reference
+              title: Workflows.ScheduleParameters
+              type: object
+        description: Workflow schedule parameters
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  hook_id:
+                    description: ID of a Hook
+                    example: 9f794fc1-b637-47cd-8128-ad68a1436da8
+                    format: uuid
+                    title: Hook.ID
+                    type: string
+                  ppl_id:
+                    description: ID of a Pipeline
+                    example: 0fa8f3e2-c4ae-4796-81fc-7b635d111314
+                    format: uuid
+                    title: Pipeline.ID
+                    type: string
+                  wf_id:
+                    description: ID of a Workflow
+                    example: 3c41a156-a280-47fa-bb3b-d15421e99a1c
+                    format: uuid
+                    title: Workflow.ID
+                    type: string
+                title: Workflows.ScheduleResponse
+                type: object
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+  /workflows/{wf_id}:
+    get:
+      operationId: Workflows.Describe
+      description: Describe a workflow based on workflow id
+      tags:
+      - Workflows
+      parameters:
+      - description: Workflow id
+        example: 7b84a2e0-f0c4-4100-9aad-b77d2325f476
+        in: path
+        name: wf_id
+        required: true
+        schema:
+          description: ID of a Workflow
+          example: 232c2d5a-3122-4818-a8a4-288cac7c29ac
+          format: uuid
+          title: Workflow.ID
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  branch_id:
+                    description: ID of a Branch
+                    example: 76ee0686-789f-4930-a5c5-ac72d93815c8
+                    format: uuid
+                    title: Branch.ID
+                    type: string
+                  commit_sha:
+                    format: sha-1
+                    type: string
+                  created_at:
+                    description: Timestamp in ISO 8601 format
+                    format: date-time
+                    title: Timestamp
+                    type: string
+                  hook_id:
+                    description: ID of a Hook
+                    example: 0380850a-ac70-4f95-93b5-dc89ebdf48fb
+                    format: uuid
+                    title: Hook.ID
+                    type: string
+                  initial_ppl_id:
+                    description: The ID of the initial pipeline that was ran by this workflow
+                    format: uuid
+                    type: string
+                  project_id:
+                    description: ID of a Project
+                    example: cdbad08d-903b-43c5-8e9a-99c5b74a89aa
+                    format: uuid
+                    title: Project.ID
+                    type: string
+                  requester_id:
+                    description: ID of a User
+                    example: 5df2cadb-310f-4c14-8784-e27289133a78
+                    format: uuid
+                    title: User.ID
+                    type: string
+                  triggered_by:
+                    enum:
+                    - HOOK
+                    - SCHEDULE
+                    - API
+                    - MANUAL_RUN
+                    type: string
+                  wf_id:
+                    description: ID of a Workflow
+                    example: f850cdcf-d3de-4d50-91bf-b6190fa5f9c0
+                    format: uuid
+                    title: Workflow.ID
+                    type: string
+                title: Workflows.Workflow
+                type: object
+          description: Workflow
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+  /workflows/{wf_id}/reschedule:
+    post:
+      operationId: Workflows.Reschedule
+      description: Schedule a workflow for re-running
+      tags:
+      - Workflows
+      parameters:
+      - description: Workflow id
+        example: 5f3bba98-1d60-4a21-af09-2de1db0a5b8c
+        in: path
+        name: wf_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                request_token:
+                  format: uuid
+                  type: string
+              required:
+              - request_token
+              type: object
+        description: Request token can be any string
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  ppl_id:
+                    description: ID of a Pipeline
+                    example: 586c1e84-9b4f-47b7-8d75-40f0913c9b03
+                    format: uuid
+                    title: Pipeline.ID
+                    type: string
+                  wf_id:
+                    description: ID of a Workflow
+                    example: 161d6c5e-e3e5-4c4f-8c77-3c338b8b96c7
+                    format: uuid
+                    title: Workflow.ID
+                    type: string
+                title: Workflows.RescheduleResponse
+                type: object
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+  /workflows/{wf_id}/terminate:
+    post:
+      operationId: Workflows.Terminate
+      description: Stop a scheduled workflow
+      tags:
+      - Workflows
+      parameters:
+      - description: Workflow id
+        example: e78b0d2e-af4e-4a1a-85ba-4a7e9918db25
+        in: path
+        name: wf_id
+        required: true
+        schema:
+          description: ID of a Workflow
+          example: edd44c05-ccd0-4758-99d8-d0715d45a802
+          format: uuid
+          title: Workflow.ID
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    description: Message indicating the workflow termination status
+                    type: string
+                title: Workflows.TerminateResponse
+                type: object
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+components:
+  securitySchemes:
+    authorization:
+      description: Token that you get from semaphore [account settings](https://me.semaphoreci.com/account).
+      name: authorization
+      scheme: bearer
+      type: http

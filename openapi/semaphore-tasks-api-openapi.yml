@@ -1,0 +1,2118 @@
+openapi: 3.0.3
+info:
+  title: Semaphore Public Dashboards Tasks API
+  description: 'The Semaphore Public API is a RESTful API that allows you to interact with Semaphore CI/CD.
+
+    ## Authorization
+
+    Authorization is done via bearer token. You can obtain a token by visiting your [account settings](https://me.semaphoreci.com/account).
+
+
+    ## Pagination with link headers
+
+    Each list request supports pagination. List responses include a [link header](https://datatracker.ietf.org/doc/html/rfc5988#section-5) with the pagination URLs.
+
+    Link headers contain next, previous, first relative URLs.
+
+    '
+  version: v2
+  contact:
+    url: https://semaphore.io/contact
+    email: support@semaphoreci.com
+  termsOfService: https://semaphore.io/terms
+  license:
+    name: Proprietary
+    url: https://semaphore.io/terms
+servers:
+- url: https://{org_name}.semaphoreci.com/api/v2
+  variables:
+    org_name:
+      default: me
+      description: Organization name
+security:
+- authorization: []
+tags:
+- name: Tasks
+  description: Task management
+paths:
+  /projects/{project_id_or_name}/tasks:
+    post:
+      operationId: Tasks.Create
+      description: Create a task from given params
+      tags:
+      - Tasks
+      parameters:
+      - description: Id or name of the project
+        in: path
+        name: project_id_or_name
+        required: true
+        schema:
+          anyOf:
+          - description: ID of a Project
+            example: 969a3894-cd74-4451-aabd-ecd2598d0e61
+            format: uuid
+            title: Project.ID
+            type: string
+          - description: Project name must match the regex
+            example: my-project
+            minLength: 1
+            pattern: \A[\w\-\.]+\z
+            title: Project.Name
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: Task Create request body
+              properties:
+                apiVersion:
+                  default: v2
+                  description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                  example: v2
+                  readOnly: true
+                  title: ApiVersion
+                  type: string
+                kind:
+                  default: Task
+                  description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                  example: Task
+                  readOnly: true
+                  title: Kind
+                  type: string
+                spec:
+                  description: Task Specification
+                  properties:
+                    branch:
+                      example: master
+                      type: string
+                    cron_schedule:
+                      example: 0 0 * * *
+                      type: string
+                    description:
+                      example: Periodic task description
+                      type: string
+                    name:
+                      example: Periodic task
+                      type: string
+                    parameters:
+                      items:
+                        description: Task Parameter
+                        properties:
+                          default_value:
+                            example: Default value
+                            type: string
+                          description:
+                            example: Parameter description
+                            type: string
+                          name:
+                            example: PARAM_NAME
+                            pattern: ^[A-Z_]{1,}[A-Z0-9_]*$
+                            type: string
+                          options:
+                            items:
+                              type: string
+                            type: array
+                          required:
+                            example: true
+                            type: boolean
+                        required:
+                        - name
+                        - required
+                        title: Task.Parameter
+                        type: object
+                      type: array
+                    paused:
+                      example: false
+                      type: boolean
+                    pipeline_file:
+                      example: pipeline.yml
+                      type: string
+                  required:
+                  - name
+                  - branch
+                  - pipeline_file
+                  title: Task.Spec
+                  type: object
+              required:
+              - apiVersion
+              - kind
+              - spec
+              title: Task.CreateRequestBody
+              type: object
+        description: ''
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  apiVersion:
+                    default: v2
+                    description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                    example: v2
+                    readOnly: true
+                    title: ApiVersion
+                    type: string
+                  kind:
+                    default: Task
+                    description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                    example: Task
+                    readOnly: true
+                    title: Kind
+                    type: string
+                  metadata:
+                    description: Task Metadata
+                    properties:
+                      id:
+                        description: ID of a Task
+                        example: 49f06438-9c54-4d1d-9e4a-76faa292b150
+                        format: uuid
+                        title: Task.ID
+                        type: string
+                      inserted_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      paused_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      paused_by:
+                        nullable: true
+                        properties:
+                          id:
+                            description: ID of a User
+                            example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                            format: uuid
+                            title: User.ID
+                            type: string
+                        title: User
+                        type: object
+                      project_id:
+                        description: ID of a Project
+                        example: a3fa7cf5-0fee-4a76-ab75-f1a57f1316c1
+                        format: uuid
+                        title: Project.ID
+                        type: string
+                      scheduled:
+                        example: false
+                        type: boolean
+                      suspended:
+                        example: false
+                        type: boolean
+                      updated_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      updated_by:
+                        nullable: true
+                        properties:
+                          id:
+                            description: ID of a User
+                            example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                            format: uuid
+                            title: User.ID
+                            type: string
+                        title: User
+                        type: object
+                    required:
+                    - id
+                    - project_id
+                    - suspended
+                    - updated_by
+                    - inserted_at
+                    - updated_at
+                    title: Task.Metadata
+                    type: object
+                  spec:
+                    description: Task Specification
+                    properties:
+                      branch:
+                        example: master
+                        type: string
+                      cron_schedule:
+                        example: 0 0 * * *
+                        type: string
+                      description:
+                        example: Periodic task description
+                        type: string
+                      name:
+                        example: Periodic task
+                        type: string
+                      parameters:
+                        items:
+                          description: Task Parameter
+                          properties:
+                            default_value:
+                              example: Default value
+                              type: string
+                            description:
+                              example: Parameter description
+                              type: string
+                            name:
+                              example: PARAM_NAME
+                              pattern: ^[A-Z_]{1,}[A-Z0-9_]*$
+                              type: string
+                            options:
+                              items:
+                                type: string
+                              type: array
+                            required:
+                              example: true
+                              type: boolean
+                          required:
+                          - name
+                          - required
+                          title: Task.Parameter
+                          type: object
+                        type: array
+                      paused:
+                        example: false
+                        type: boolean
+                      pipeline_file:
+                        example: pipeline.yml
+                        type: string
+                    required:
+                    - name
+                    - branch
+                    - pipeline_file
+                    title: Task.Spec
+                    type: object
+                title: Tasks.Task
+                type: object
+          description: Task
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+    get:
+      operationId: Tasks.List
+      description: List tasks for organization and/or project ID
+      tags:
+      - Tasks
+      parameters:
+      - description: Id or name of the project
+        in: path
+        name: project_id_or_name
+        required: true
+        schema:
+          anyOf:
+          - description: ID of a Project
+            example: dbddd505-77fc-4a21-a676-d8bf4489551d
+            format: uuid
+            title: Project.ID
+            type: string
+          - description: Project name must match the regex
+            example: my-project
+            minLength: 1
+            pattern: \A[\w\-\.]+\z
+            title: Project.Name
+            type: string
+      - description: Search string for task name
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+      - description: Direction of the list from the provided token
+        in: query
+        name: direction
+        required: false
+        schema:
+          default: NEXT
+          description: "Use NEXT with value of next_page_token to get next page of results,\n              use PREVIOUS with value of previous_page_token to get previous page of results."
+          enum:
+          - NEXT
+          - PREVIOUS
+          type: string
+      - description: Starting point for listing, if you are fetching first page leave it empty
+        in: query
+        name: page_token
+        required: false
+        schema:
+          default: ''
+          type: string
+      - description: Page size
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 20
+          maximum: 100
+          minimum: 1
+          title: PageSize
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    apiVersion:
+                      default: v2
+                      description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                      example: v2
+                      readOnly: true
+                      title: ApiVersion
+                      type: string
+                    kind:
+                      default: Task
+                      description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                      example: Task
+                      readOnly: true
+                      title: Kind
+                      type: string
+                    metadata:
+                      description: Task Metadata
+                      properties:
+                        id:
+                          description: ID of a Task
+                          example: 49f06438-9c54-4d1d-9e4a-76faa292b150
+                          format: uuid
+                          title: Task.ID
+                          type: string
+                        inserted_at:
+                          description: Timestamp in ISO 8601 format
+                          format: date-time
+                          title: Timestamp
+                          type: string
+                        paused_at:
+                          description: Timestamp in ISO 8601 format
+                          format: date-time
+                          title: Timestamp
+                          type: string
+                        paused_by:
+                          nullable: true
+                          properties:
+                            id:
+                              description: ID of a User
+                              example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                              format: uuid
+                              title: User.ID
+                              type: string
+                          title: User
+                          type: object
+                        project_id:
+                          description: ID of a Project
+                          example: a3fa7cf5-0fee-4a76-ab75-f1a57f1316c1
+                          format: uuid
+                          title: Project.ID
+                          type: string
+                        scheduled:
+                          example: false
+                          type: boolean
+                        suspended:
+                          example: false
+                          type: boolean
+                        updated_at:
+                          description: Timestamp in ISO 8601 format
+                          format: date-time
+                          title: Timestamp
+                          type: string
+                        updated_by:
+                          nullable: true
+                          properties:
+                            id:
+                              description: ID of a User
+                              example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                              format: uuid
+                              title: User.ID
+                              type: string
+                          title: User
+                          type: object
+                      required:
+                      - id
+                      - project_id
+                      - suspended
+                      - updated_by
+                      - inserted_at
+                      - updated_at
+                      title: Task.Metadata
+                      type: object
+                    spec:
+                      description: Task Specification
+                      properties:
+                        branch:
+                          example: master
+                          type: string
+                        cron_schedule:
+                          example: 0 0 * * *
+                          type: string
+                        description:
+                          example: Periodic task description
+                          type: string
+                        name:
+                          example: Periodic task
+                          type: string
+                        parameters:
+                          items:
+                            description: Task Parameter
+                            properties:
+                              default_value:
+                                example: Default value
+                                type: string
+                              description:
+                                example: Parameter description
+                                type: string
+                              name:
+                                example: PARAM_NAME
+                                pattern: ^[A-Z_]{1,}[A-Z0-9_]*$
+                                type: string
+                              options:
+                                items:
+                                  type: string
+                                type: array
+                              required:
+                                example: true
+                                type: boolean
+                            required:
+                            - name
+                            - required
+                            title: Task.Parameter
+                            type: object
+                          type: array
+                        paused:
+                          example: false
+                          type: boolean
+                        pipeline_file:
+                          example: pipeline.yml
+                          type: string
+                      required:
+                      - name
+                      - branch
+                      - pipeline_file
+                      title: Task.Spec
+                      type: object
+                  title: Tasks.Task
+                  type: object
+                title: Tasks.ListResponse
+                type: array
+          description: List of tasks
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+  /projects/{project_id_or_name}/tasks/{task_id}:
+    delete:
+      operationId: Tasks.Delete
+      description: Delete a task by given ID
+      tags:
+      - Tasks
+      parameters:
+      - description: Id or name of the project
+        in: path
+        name: project_id_or_name
+        required: true
+        schema:
+          anyOf:
+          - description: ID of a Project
+            example: 42227668-22e7-4ac9-a3e8-ba15a4596fc6
+            format: uuid
+            title: Project.ID
+            type: string
+          - description: Project name must match the regex
+            example: my-project
+            minLength: 1
+            pattern: \A[\w\-\.]+\z
+            title: Project.Name
+            type: string
+      - description: Task ID
+        in: path
+        name: task_id
+        required: true
+        schema:
+          description: ID of a Task
+          example: cbfcd4d0-fc05-4008-adb7-b7f311c90d78
+          format: uuid
+          title: Task.ID
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  apiVersion:
+                    default: v2
+                    description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                    example: v2
+                    readOnly: true
+                    title: ApiVersion
+                    type: string
+                  kind:
+                    default: Task
+                    description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                    example: Task
+                    readOnly: true
+                    title: Kind
+                    type: string
+                  metadata:
+                    description: Task Metadata
+                    properties:
+                      id:
+                        description: ID of a Task
+                        example: 49f06438-9c54-4d1d-9e4a-76faa292b150
+                        format: uuid
+                        title: Task.ID
+                        type: string
+                      inserted_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      paused_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      paused_by:
+                        nullable: true
+                        properties:
+                          id:
+                            description: ID of a User
+                            example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                            format: uuid
+                            title: User.ID
+                            type: string
+                        title: User
+                        type: object
+                      project_id:
+                        description: ID of a Project
+                        example: a3fa7cf5-0fee-4a76-ab75-f1a57f1316c1
+                        format: uuid
+                        title: Project.ID
+                        type: string
+                      scheduled:
+                        example: false
+                        type: boolean
+                      suspended:
+                        example: false
+                        type: boolean
+                      updated_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      updated_by:
+                        nullable: true
+                        properties:
+                          id:
+                            description: ID of a User
+                            example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                            format: uuid
+                            title: User.ID
+                            type: string
+                        title: User
+                        type: object
+                    required:
+                    - id
+                    - project_id
+                    - suspended
+                    - updated_by
+                    - inserted_at
+                    - updated_at
+                    title: Task.Metadata
+                    type: object
+                  spec:
+                    description: Task Specification
+                    properties:
+                      branch:
+                        example: master
+                        type: string
+                      cron_schedule:
+                        example: 0 0 * * *
+                        type: string
+                      description:
+                        example: Periodic task description
+                        type: string
+                      name:
+                        example: Periodic task
+                        type: string
+                      parameters:
+                        items:
+                          description: Task Parameter
+                          properties:
+                            default_value:
+                              example: Default value
+                              type: string
+                            description:
+                              example: Parameter description
+                              type: string
+                            name:
+                              example: PARAM_NAME
+                              pattern: ^[A-Z_]{1,}[A-Z0-9_]*$
+                              type: string
+                            options:
+                              items:
+                                type: string
+                              type: array
+                            required:
+                              example: true
+                              type: boolean
+                          required:
+                          - name
+                          - required
+                          title: Task.Parameter
+                          type: object
+                        type: array
+                      paused:
+                        example: false
+                        type: boolean
+                      pipeline_file:
+                        example: pipeline.yml
+                        type: string
+                    required:
+                    - name
+                    - branch
+                    - pipeline_file
+                    title: Task.Spec
+                    type: object
+                title: Tasks.Task
+                type: object
+          description: Task Deleted
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+    get:
+      operationId: Tasks.Describe
+      description: Describe a task by given ID
+      tags:
+      - Tasks
+      parameters:
+      - description: Id or name of the project
+        in: path
+        name: project_id_or_name
+        required: true
+        schema:
+          anyOf:
+          - description: ID of a Project
+            example: 8c199c5f-9667-490e-99a4-1fe6e7465b82
+            format: uuid
+            title: Project.ID
+            type: string
+          - description: Project name must match the regex
+            example: my-project
+            minLength: 1
+            pattern: \A[\w\-\.]+\z
+            title: Project.Name
+            type: string
+      - description: Task ID
+        in: path
+        name: task_id
+        required: true
+        schema:
+          description: ID of a Task
+          example: 316bea6e-95f2-4a63-b5c2-e0c981c2b246
+          format: uuid
+          title: Task.ID
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  apiVersion:
+                    default: v2
+                    description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                    example: v2
+                    readOnly: true
+                    title: ApiVersion
+                    type: string
+                  kind:
+                    default: Task
+                    description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                    example: Task
+                    readOnly: true
+                    title: Kind
+                    type: string
+                  metadata:
+                    description: Task Metadata
+                    properties:
+                      id:
+                        description: ID of a Task
+                        example: 49f06438-9c54-4d1d-9e4a-76faa292b150
+                        format: uuid
+                        title: Task.ID
+                        type: string
+                      inserted_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      paused_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      paused_by:
+                        nullable: true
+                        properties:
+                          id:
+                            description: ID of a User
+                            example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                            format: uuid
+                            title: User.ID
+                            type: string
+                        title: User
+                        type: object
+                      project_id:
+                        description: ID of a Project
+                        example: a3fa7cf5-0fee-4a76-ab75-f1a57f1316c1
+                        format: uuid
+                        title: Project.ID
+                        type: string
+                      scheduled:
+                        example: false
+                        type: boolean
+                      suspended:
+                        example: false
+                        type: boolean
+                      updated_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      updated_by:
+                        nullable: true
+                        properties:
+                          id:
+                            description: ID of a User
+                            example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                            format: uuid
+                            title: User.ID
+                            type: string
+                        title: User
+                        type: object
+                    required:
+                    - id
+                    - project_id
+                    - suspended
+                    - updated_by
+                    - inserted_at
+                    - updated_at
+                    title: Task.Metadata
+                    type: object
+                  spec:
+                    description: Task Specification
+                    properties:
+                      branch:
+                        example: master
+                        type: string
+                      cron_schedule:
+                        example: 0 0 * * *
+                        type: string
+                      description:
+                        example: Periodic task description
+                        type: string
+                      name:
+                        example: Periodic task
+                        type: string
+                      parameters:
+                        items:
+                          description: Task Parameter
+                          properties:
+                            default_value:
+                              example: Default value
+                              type: string
+                            description:
+                              example: Parameter description
+                              type: string
+                            name:
+                              example: PARAM_NAME
+                              pattern: ^[A-Z_]{1,}[A-Z0-9_]*$
+                              type: string
+                            options:
+                              items:
+                                type: string
+                              type: array
+                            required:
+                              example: true
+                              type: boolean
+                          required:
+                          - name
+                          - required
+                          title: Task.Parameter
+                          type: object
+                        type: array
+                      paused:
+                        example: false
+                        type: boolean
+                      pipeline_file:
+                        example: pipeline.yml
+                        type: string
+                    required:
+                    - name
+                    - branch
+                    - pipeline_file
+                    title: Task.Spec
+                    type: object
+                title: Tasks.Task
+                type: object
+          description: Task
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+    put:
+      operationId: Tasks.Replace
+      description: Replace tasks with new data
+      tags:
+      - Tasks
+      parameters:
+      - description: Id or name of the project
+        in: path
+        name: project_id_or_name
+        required: true
+        schema:
+          anyOf:
+          - description: ID of a Project
+            example: c33a966b-17c4-4c4e-a00c-5b2c8a109a62
+            format: uuid
+            title: Project.ID
+            type: string
+          - description: Project name must match the regex
+            example: my-project
+            minLength: 1
+            pattern: \A[\w\-\.]+\z
+            title: Project.Name
+            type: string
+      - description: Task ID
+        in: path
+        name: task_id
+        required: true
+        schema:
+          description: ID of a Task
+          example: 38d60f82-5cc1-4bf2-8751-5f531081b87e
+          format: uuid
+          title: Task.ID
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: Task Replace request body
+              properties:
+                apiVersion:
+                  default: v2
+                  description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                  example: v2
+                  readOnly: true
+                  title: ApiVersion
+                  type: string
+                kind:
+                  default: Task
+                  description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                  example: Task
+                  readOnly: true
+                  title: Kind
+                  type: string
+                spec:
+                  description: Task Specification
+                  properties:
+                    branch:
+                      example: master
+                      type: string
+                    cron_schedule:
+                      example: 0 0 * * *
+                      type: string
+                    description:
+                      example: Periodic task description
+                      type: string
+                    name:
+                      example: Periodic task
+                      type: string
+                    parameters:
+                      items:
+                        description: Task Parameter
+                        properties:
+                          default_value:
+                            example: Default value
+                            type: string
+                          description:
+                            example: Parameter description
+                            type: string
+                          name:
+                            example: PARAM_NAME
+                            pattern: ^[A-Z_]{1,}[A-Z0-9_]*$
+                            type: string
+                          options:
+                            items:
+                              type: string
+                            type: array
+                          required:
+                            example: true
+                            type: boolean
+                        required:
+                        - name
+                        - required
+                        title: Task.Parameter
+                        type: object
+                      type: array
+                    paused:
+                      example: false
+                      type: boolean
+                    pipeline_file:
+                      example: pipeline.yml
+                      type: string
+                  required:
+                  - name
+                  - branch
+                  - pipeline_file
+                  title: Task.Spec
+                  type: object
+              required:
+              - apiVersion
+              - kind
+              - spec
+              title: Task.ReplaceRequestBody
+              type: object
+        description: ''
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  apiVersion:
+                    default: v2
+                    description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                    example: v2
+                    readOnly: true
+                    title: ApiVersion
+                    type: string
+                  kind:
+                    default: Task
+                    description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                    example: Task
+                    readOnly: true
+                    title: Kind
+                    type: string
+                  metadata:
+                    description: Task Metadata
+                    properties:
+                      id:
+                        description: ID of a Task
+                        example: 49f06438-9c54-4d1d-9e4a-76faa292b150
+                        format: uuid
+                        title: Task.ID
+                        type: string
+                      inserted_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      paused_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      paused_by:
+                        nullable: true
+                        properties:
+                          id:
+                            description: ID of a User
+                            example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                            format: uuid
+                            title: User.ID
+                            type: string
+                        title: User
+                        type: object
+                      project_id:
+                        description: ID of a Project
+                        example: a3fa7cf5-0fee-4a76-ab75-f1a57f1316c1
+                        format: uuid
+                        title: Project.ID
+                        type: string
+                      scheduled:
+                        example: false
+                        type: boolean
+                      suspended:
+                        example: false
+                        type: boolean
+                      updated_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      updated_by:
+                        nullable: true
+                        properties:
+                          id:
+                            description: ID of a User
+                            example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                            format: uuid
+                            title: User.ID
+                            type: string
+                        title: User
+                        type: object
+                    required:
+                    - id
+                    - project_id
+                    - suspended
+                    - updated_by
+                    - inserted_at
+                    - updated_at
+                    title: Task.Metadata
+                    type: object
+                  spec:
+                    description: Task Specification
+                    properties:
+                      branch:
+                        example: master
+                        type: string
+                      cron_schedule:
+                        example: 0 0 * * *
+                        type: string
+                      description:
+                        example: Periodic task description
+                        type: string
+                      name:
+                        example: Periodic task
+                        type: string
+                      parameters:
+                        items:
+                          description: Task Parameter
+                          properties:
+                            default_value:
+                              example: Default value
+                              type: string
+                            description:
+                              example: Parameter description
+                              type: string
+                            name:
+                              example: PARAM_NAME
+                              pattern: ^[A-Z_]{1,}[A-Z0-9_]*$
+                              type: string
+                            options:
+                              items:
+                                type: string
+                              type: array
+                            required:
+                              example: true
+                              type: boolean
+                          required:
+                          - name
+                          - required
+                          title: Task.Parameter
+                          type: object
+                        type: array
+                      paused:
+                        example: false
+                        type: boolean
+                      pipeline_file:
+                        example: pipeline.yml
+                        type: string
+                    required:
+                    - name
+                    - branch
+                    - pipeline_file
+                    title: Task.Spec
+                    type: object
+                title: Tasks.Task
+                type: object
+          description: Task
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+    patch:
+      operationId: Tasks.Update
+      description: Update (patch) task with given params
+      tags:
+      - Tasks
+      parameters:
+      - description: Id or name of the project
+        in: path
+        name: project_id_or_name
+        required: true
+        schema:
+          anyOf:
+          - description: ID of a Project
+            example: 71466bf8-e40a-4653-8926-dc4d971a5e45
+            format: uuid
+            title: Project.ID
+            type: string
+          - description: Project name must match the regex
+            example: my-project
+            minLength: 1
+            pattern: \A[\w\-\.]+\z
+            title: Project.Name
+            type: string
+      - description: Task ID
+        in: path
+        name: task_id
+        required: true
+        schema:
+          description: ID of a Task
+          example: 4e15f8af-429b-4147-b45b-f389fe79509b
+          format: uuid
+          title: Task.ID
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: Task Update request body
+              properties:
+                apiVersion:
+                  default: v2
+                  description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                  example: v2
+                  readOnly: true
+                  title: ApiVersion
+                  type: string
+                kind:
+                  default: Task
+                  description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                  example: Task
+                  readOnly: true
+                  title: Kind
+                  type: string
+                spec:
+                  description: Task Specification
+                  properties:
+                    branch:
+                      example: master
+                      type: string
+                    cron_schedule:
+                      example: 0 0 * * *
+                      type: string
+                    description:
+                      example: Periodic task description
+                      type: string
+                    name:
+                      example: Periodic task
+                      type: string
+                    parameters:
+                      items:
+                        description: Task Parameter
+                        properties:
+                          default_value:
+                            example: Default value
+                            type: string
+                          description:
+                            example: Parameter description
+                            type: string
+                          name:
+                            example: PARAM_NAME
+                            pattern: ^[A-Z_]{1,}[A-Z0-9_]*$
+                            type: string
+                          options:
+                            items:
+                              type: string
+                            type: array
+                          required:
+                            example: true
+                            type: boolean
+                        required:
+                        - name
+                        - required
+                        title: Task.Parameter
+                        type: object
+                      type: array
+                    paused:
+                      example: false
+                      type: boolean
+                    pipeline_file:
+                      example: pipeline.yml
+                      type: string
+                  title: Task.Spec
+                  type: object
+              required:
+              - apiVersion
+              - kind
+              - spec
+              type: object
+        description: ''
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  apiVersion:
+                    default: v2
+                    description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                    example: v2
+                    readOnly: true
+                    title: ApiVersion
+                    type: string
+                  kind:
+                    default: Task
+                    description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                    example: Task
+                    readOnly: true
+                    title: Kind
+                    type: string
+                  metadata:
+                    description: Task Metadata
+                    properties:
+                      id:
+                        description: ID of a Task
+                        example: 49f06438-9c54-4d1d-9e4a-76faa292b150
+                        format: uuid
+                        title: Task.ID
+                        type: string
+                      inserted_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      paused_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      paused_by:
+                        nullable: true
+                        properties:
+                          id:
+                            description: ID of a User
+                            example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                            format: uuid
+                            title: User.ID
+                            type: string
+                        title: User
+                        type: object
+                      project_id:
+                        description: ID of a Project
+                        example: a3fa7cf5-0fee-4a76-ab75-f1a57f1316c1
+                        format: uuid
+                        title: Project.ID
+                        type: string
+                      scheduled:
+                        example: false
+                        type: boolean
+                      suspended:
+                        example: false
+                        type: boolean
+                      updated_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      updated_by:
+                        nullable: true
+                        properties:
+                          id:
+                            description: ID of a User
+                            example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                            format: uuid
+                            title: User.ID
+                            type: string
+                        title: User
+                        type: object
+                    required:
+                    - id
+                    - project_id
+                    - suspended
+                    - updated_by
+                    - inserted_at
+                    - updated_at
+                    title: Task.Metadata
+                    type: object
+                  spec:
+                    description: Task Specification
+                    properties:
+                      branch:
+                        example: master
+                        type: string
+                      cron_schedule:
+                        example: 0 0 * * *
+                        type: string
+                      description:
+                        example: Periodic task description
+                        type: string
+                      name:
+                        example: Periodic task
+                        type: string
+                      parameters:
+                        items:
+                          description: Task Parameter
+                          properties:
+                            default_value:
+                              example: Default value
+                              type: string
+                            description:
+                              example: Parameter description
+                              type: string
+                            name:
+                              example: PARAM_NAME
+                              pattern: ^[A-Z_]{1,}[A-Z0-9_]*$
+                              type: string
+                            options:
+                              items:
+                                type: string
+                              type: array
+                            required:
+                              example: true
+                              type: boolean
+                          required:
+                          - name
+                          - required
+                          title: Task.Parameter
+                          type: object
+                        type: array
+                      paused:
+                        example: false
+                        type: boolean
+                      pipeline_file:
+                        example: pipeline.yml
+                        type: string
+                    required:
+                    - name
+                    - branch
+                    - pipeline_file
+                    title: Task.Spec
+                    type: object
+                title: Tasks.Task
+                type: object
+          description: Task
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+  /projects/{project_id_or_name}/tasks/{task_id}/triggers:
+    post:
+      operationId: Tasks.Trigger
+      description: Creates a workflow originating from task
+      tags:
+      - Tasks
+      parameters:
+      - description: Id or name of the project
+        in: path
+        name: project_id_or_name
+        required: true
+        schema:
+          anyOf:
+          - description: ID of a Project
+            example: 43a29719-ca26-4c3d-800b-6bf007a356a3
+            format: uuid
+            title: Project.ID
+            type: string
+          - description: Project name must match the regex
+            example: my-project
+            minLength: 1
+            pattern: \A[\w\-\.]+\z
+            title: Project.Name
+            type: string
+      - description: Task ID
+        in: path
+        name: task_id
+        required: true
+        schema:
+          description: ID of a Task
+          example: c94c2e3e-fe76-44e1-9bf2-5f931a2ebf82
+          format: uuid
+          title: Task.ID
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: Task Trigger request body
+              properties:
+                apiVersion:
+                  default: v2
+                  description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                  example: v2
+                  readOnly: true
+                  title: ApiVersion
+                  type: string
+                kind:
+                  default: TaskTrigger
+                  description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                  example: TaskTrigger
+                  readOnly: true
+                  title: Kind
+                  type: string
+                spec:
+                  description: Task Trigger specification
+                  properties:
+                    branch:
+                      example: master
+                      type: string
+                    parameters:
+                      items:
+                        description: Task Trigger Parameter
+                        properties:
+                          name:
+                            example: Parameter name
+                            type: string
+                          value:
+                            example: Parameter value
+                            type: string
+                        required:
+                        - name
+                        - value
+                        title: Task.Trigger.Parameter
+                        type: object
+                      type: array
+                    pipeline_file:
+                      example: .semaphore/semaphore.yml
+                      type: string
+                  title: Task.Trigger.Spec
+                  type: object
+              required:
+              - apiVersion
+              - kind
+              - spec
+              type: object
+        description: ''
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                description: Task Trigger
+                properties:
+                  apiVersion:
+                    default: v2
+                    description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                    example: v2
+                    readOnly: true
+                    title: ApiVersion
+                    type: string
+                  kind:
+                    default: TaskTrigger
+                    description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                    example: TaskTrigger
+                    readOnly: true
+                    title: Kind
+                    type: string
+                  metadata:
+                    description: Task Trigger Metadata
+                    properties:
+                      scheduled_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      status:
+                        example: passed
+                        type: string
+                      triggered_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      triggered_by:
+                        properties:
+                          id:
+                            description: ID of a User
+                            example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                            format: uuid
+                            title: User.ID
+                            type: string
+                        title: User
+                        type: object
+                      workflow_id:
+                        description: ID of a Workflow
+                        example: 33c93e7e-5239-4b80-8d86-1cdcc0a15087
+                        format: uuid
+                        title: Workflow.ID
+                        type: string
+                    title: Task.Trigger.Metadata
+                    type: object
+                  spec:
+                    description: Task Trigger specification
+                    properties:
+                      branch:
+                        example: master
+                        type: string
+                      parameters:
+                        items:
+                          description: Task Trigger Parameter
+                          properties:
+                            name:
+                              example: Parameter name
+                              type: string
+                            value:
+                              example: Parameter value
+                              type: string
+                          required:
+                          - name
+                          - value
+                          title: Task.Trigger.Parameter
+                          type: object
+                        type: array
+                      pipeline_file:
+                        example: .semaphore/semaphore.yml
+                        type: string
+                    title: Task.Trigger.Spec
+                    type: object
+                required:
+                - apiVersion
+                - kind
+                - metadata
+                - spec
+                title: Task.Trigger
+                type: object
+          description: Task
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+components:
+  securitySchemes:
+    authorization:
+      description: Token that you get from semaphore [account settings](https://me.semaphoreci.com/account).
+      name: authorization
+      scheme: bearer
+      type: http

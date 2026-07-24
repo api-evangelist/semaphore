@@ -1,0 +1,414 @@
+openapi: 3.0.3
+info:
+  title: Semaphore Public Dashboards SelfHostedAgents API
+  description: 'The Semaphore Public API is a RESTful API that allows you to interact with Semaphore CI/CD.
+
+    ## Authorization
+
+    Authorization is done via bearer token. You can obtain a token by visiting your [account settings](https://me.semaphoreci.com/account).
+
+
+    ## Pagination with link headers
+
+    Each list request supports pagination. List responses include a [link header](https://datatracker.ietf.org/doc/html/rfc5988#section-5) with the pagination URLs.
+
+    Link headers contain next, previous, first relative URLs.
+
+    '
+  version: v2
+  contact:
+    url: https://semaphore.io/contact
+    email: support@semaphoreci.com
+  termsOfService: https://semaphore.io/terms
+  license:
+    name: Proprietary
+    url: https://semaphore.io/terms
+servers:
+- url: https://{org_name}.semaphoreci.com/api/v2
+  variables:
+    org_name:
+      default: me
+      description: Organization name
+security:
+- authorization: []
+tags:
+- name: SelfHostedAgents
+  description: Self-hosted agent management
+paths:
+  /agents:
+    get:
+      operationId: SelfHostedAgents.List
+      description: List all registered self-hosted agents. Optionally filter by agent type.
+      tags:
+      - SelfHostedAgents
+      parameters:
+      - description: The name of the agent type to filter for. If not specified, agents for all agent types will be returned.
+        in: query
+        name: agent_type
+        required: false
+        schema:
+          description: Name of the agent type
+          type: string
+      - description: Starting point for listing, if you are fetching first page leave it empty
+        in: query
+        name: page_token
+        required: false
+        schema:
+          default: ''
+          type: string
+      - description: Page size
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 20
+          maximum: 100
+          minimum: 1
+          title: PageSize
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  description: Self-hosted agent
+                  properties:
+                    apiVersion:
+                      default: v2
+                      description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                      example: v2
+                      readOnly: true
+                      title: ApiVersion
+                      type: string
+                    kind:
+                      default: SelfHostedAgent
+                      description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                      example: SelfHostedAgent
+                      readOnly: true
+                      title: Kind
+                      type: string
+                    metadata:
+                      description: Metadata of the agent, all fields are read only
+                      properties:
+                        arch:
+                          description: Architecture the agent is built for
+                          type: string
+                        connected_at:
+                          description: Timestamp in ISO 8601 format
+                          format: date-time
+                          title: Timestamp
+                          type: string
+                        disabled_at:
+                          description: Timestamp in ISO 8601 format
+                          format: date-time
+                          title: Timestamp
+                          type: string
+                        hostname:
+                          description: Hostname the agent is running on
+                          type: string
+                        ip_address:
+                          description: The public IP address of the agent
+                          type: string
+                        name:
+                          description: Unique name of the agent
+                          type: string
+                        org_id:
+                          description: ID of a Organization
+                          example: c9746a87-aa53-48dd-96c6-737e27bee4f7
+                          format: uuid
+                          title: Organization.ID
+                          type: string
+                        os:
+                          description: OS the agent is running on
+                          example: Ubuntu 20.04.6 LTS
+                          type: string
+                        pid:
+                          description: ''
+                          type: integer
+                        status:
+                          enum:
+                          - WAITING_FOR_JOB
+                          - RUNNING_JOB
+                          type: string
+                        type:
+                          description: Self-hosted agent type of the agent
+                          example: s1-my-type
+                          type: string
+                        version:
+                          description: Version of the agent
+                          example: v2.2.6
+                          type: string
+                      type: object
+                  required:
+                  - apiVersion
+                  - kind
+                  title: SelfHostedAgents.Agent
+                  type: object
+                title: SelfHostedAgents.ListAgentsResponse
+                type: array
+          description: Self-hosted agent type
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+  /agents/{agent_name}:
+    get:
+      operationId: SelfHostedAgents.Describe
+      description: Describe a single registered self-hosted agent by agent name.
+      tags:
+      - SelfHostedAgents
+      parameters:
+      - description: Unique name of the self-hosted agent.
+        in: path
+        name: agent_name
+        required: true
+        schema:
+          description: Unique name of the self-hosted agent
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                description: Self-hosted agent
+                properties:
+                  apiVersion:
+                    default: v2
+                    description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                    example: v2
+                    readOnly: true
+                    title: ApiVersion
+                    type: string
+                  kind:
+                    default: SelfHostedAgent
+                    description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                    example: SelfHostedAgent
+                    readOnly: true
+                    title: Kind
+                    type: string
+                  metadata:
+                    description: Metadata of the agent, all fields are read only
+                    properties:
+                      arch:
+                        description: Architecture the agent is built for
+                        type: string
+                      connected_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      disabled_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      hostname:
+                        description: Hostname the agent is running on
+                        type: string
+                      ip_address:
+                        description: The public IP address of the agent
+                        type: string
+                      name:
+                        description: Unique name of the agent
+                        type: string
+                      org_id:
+                        description: ID of a Organization
+                        example: c9746a87-aa53-48dd-96c6-737e27bee4f7
+                        format: uuid
+                        title: Organization.ID
+                        type: string
+                      os:
+                        description: OS the agent is running on
+                        example: Ubuntu 20.04.6 LTS
+                        type: string
+                      pid:
+                        description: ''
+                        type: integer
+                      status:
+                        enum:
+                        - WAITING_FOR_JOB
+                        - RUNNING_JOB
+                        type: string
+                      type:
+                        description: Self-hosted agent type of the agent
+                        example: s1-my-type
+                        type: string
+                      version:
+                        description: Version of the agent
+                        example: v2.2.6
+                        type: string
+                    type: object
+                required:
+                - apiVersion
+                - kind
+                title: SelfHostedAgents.Agent
+                type: object
+          description: Self-hosted agents
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+components:
+  securitySchemes:
+    authorization:
+      description: Token that you get from semaphore [account settings](https://me.semaphoreci.com/account).
+      name: authorization
+      scheme: bearer
+      type: http

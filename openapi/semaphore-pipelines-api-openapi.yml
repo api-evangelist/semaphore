@@ -1,0 +1,1198 @@
+openapi: 3.0.3
+info:
+  title: Semaphore Public Dashboards Pipelines API
+  description: 'The Semaphore Public API is a RESTful API that allows you to interact with Semaphore CI/CD.
+
+    ## Authorization
+
+    Authorization is done via bearer token. You can obtain a token by visiting your [account settings](https://me.semaphoreci.com/account).
+
+
+    ## Pagination with link headers
+
+    Each list request supports pagination. List responses include a [link header](https://datatracker.ietf.org/doc/html/rfc5988#section-5) with the pagination URLs.
+
+    Link headers contain next, previous, first relative URLs.
+
+    '
+  version: v2
+  contact:
+    url: https://semaphore.io/contact
+    email: support@semaphoreci.com
+  termsOfService: https://semaphore.io/terms
+  license:
+    name: Proprietary
+    url: https://semaphore.io/terms
+servers:
+- url: https://{org_name}.semaphoreci.com/api/v2
+  variables:
+    org_name:
+      default: me
+      description: Organization name
+security:
+- authorization: []
+tags:
+- name: Pipelines
+  description: Pipeline management
+paths:
+  /pipelines:
+    get:
+      operationId: Pipelines.List
+      description: List pipelines using project id or workflow id.
+      tags:
+      - Pipelines
+      parameters:
+      - description: "The id of a project or workflow to list the pipeliens for. Either project_id or wf_id is required.\n            The required_id parameter is just a placeholder"
+        explode: true
+        in: query
+        name: filters
+        required: true
+        schema:
+          oneOf:
+          - properties:
+              project_id:
+                description: id of the project
+                example: 294bb313-5f37-4b23-a088-e177d6d67890
+                format: uuid
+                type: string
+              wf_id:
+                description: id of a workflow
+                example: a896d216-51b7-4898-bc6b-d9a2e792b31c
+                format: uuid
+                type: string
+            required:
+            - project_id
+            type: object
+          - properties:
+              project_id:
+                description: id of the project
+                example: 10c6a598-4ce0-4a77-975f-09555c2d5df5
+                format: uuid
+                type: string
+              wf_id:
+                description: id of a workflow
+                example: d58c84a8-103b-41c5-aea9-7457488c7cc4
+                format: uuid
+                type: string
+            required:
+            - wf_id
+            type: object
+          type: object
+        style: form
+      - description: Label of the branch/pr/tag
+        example: main
+        in: query
+        name: label
+        required: false
+        schema:
+          type: string
+      - description: Yaml file path
+        example: .semaphore/semaphore.yml
+        in: query
+        name: yml_file_path
+        required: false
+        schema:
+          type: string
+      - description: Return only pipelines created before this timestamp
+        example: '2021-01-01T00:00:00Z'
+        in: query
+        name: created_before
+        required: true
+        schema:
+          description: Timestamp in ISO 8601 format
+          format: date-time
+          title: Timestamp
+          type: string
+        style: form
+      - description: Return only pipelines created after this timestamp
+        example: '2021-01-01T00:00:00Z'
+        in: query
+        name: created_after
+        required: true
+        schema:
+          description: Timestamp in ISO 8601 format
+          format: date-time
+          title: Timestamp
+          type: string
+        style: form
+      - description: Return only pipelines that finished before this timestamp
+        example: '2021-01-01T00:00:00Z'
+        in: query
+        name: done_before
+        required: false
+        schema:
+          description: Timestamp in ISO 8601 format
+          format: date-time
+          title: Timestamp
+          type: string
+      - description: Return only pipelines that finished after this timestamp
+        example: '2021-01-01T00:00:00Z'
+        in: query
+        name: done_after
+        required: false
+        schema:
+          description: Timestamp in ISO 8601 format
+          format: date-time
+          title: Timestamp
+          type: string
+      - description: Direction of the list from the provided token
+        in: query
+        name: direction
+        required: false
+        schema:
+          default: NEXT
+          description: "Use NEXT with value of next_page_token to get next page of results,\n              use PREVIOUS with value of previous_page_token to get previous page of results."
+          enum:
+          - NEXT
+          - PREVIOUS
+          type: string
+      - description: Starting point for listing, if you are fetching first page leave it empty
+        in: query
+        name: page_token
+        required: false
+        schema:
+          default: ''
+          type: string
+      - description: Page size
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 20
+          maximum: 100
+          minimum: 1
+          title: PageSize
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                description: Pipelines list. Follow the link headers for fetching additional pages of results
+                items:
+                  properties:
+                    branch_id:
+                      description: ID of the branch in the UI
+                      example: a79557f2-dc4e-4807-ba89-601401eb3b1e
+                      format: uuid
+                      type: string
+                    branch_name:
+                      description: Name of git branch for which pipeline was scheduled
+                      example: main
+                      type: string
+                    commit_sha:
+                      description: Git commit sha for which pipeline was scheduled
+                      example: ac3f9796df42db976814e3fee670e11e3fd4b98a
+                      type: string
+                    created_at:
+                      description: Timestamp in ISO 8601 format
+                      format: date-time
+                      title: Timestamp
+                      type: string
+                    done_at:
+                      description: Timestamp in ISO 8601 format
+                      format: date-time
+                      title: Timestamp
+                      type: string
+                    error_description:
+                      description: Stores error description when pipeline is MALFORMED
+                      example: ''
+                      type: string
+                    hook_id:
+                      description: The id of the hook recieved from VC provider
+                      example: cd7f6162-9b6e-435a-89a7-3968b542e9c7
+                      format: uuid
+                      type: string
+                    name:
+                      example: Pipeline
+                      type: string
+                    org_id:
+                      description: ID of a Organization
+                      example: 36b2481c-55a4-4ace-9f8a-ac4f7d9549be
+                      format: uuid
+                      title: Organization.ID
+                      type: string
+                    pending_at:
+                      description: Timestamp in ISO 8601 format
+                      format: date-time
+                      title: Timestamp
+                      type: string
+                    ppl_id:
+                      description: ID of a Pipeline
+                      example: 4f49eb59-148b-41bd-90be-20d4f67653f6
+                      format: uuid
+                      title: Pipeline.ID
+                      type: string
+                    project_id:
+                      description: ID of a Project
+                      example: 77cd0b15-d7af-410c-b462-d3611b0ef1a0
+                      format: uuid
+                      title: Project.ID
+                      type: string
+                    queuing_at:
+                      description: Timestamp in ISO 8601 format
+                      format: date-time
+                      title: Timestamp
+                      type: string
+                    result:
+                      description: Result state
+                      enum:
+                      - PASSED
+                      - STOPPED
+                      - CANCELED
+                      - FAILED
+                      title: Pipelines.Result
+                      type: string
+                    result_reason:
+                      description: "Describes the result reason if result is not PASSED\n         Reasons for result different from PASSED\n\n         FAILED:\n          - TEST - one or more of user tests failed\n          - MALFORMED - Pipeline failed because YAML definition is malformed\n          - STUCK  - Pipeline was stuck for some internal reason and then aborted\n         STOPPED or CANCELED:\n          - USER - terminated on users requests\n          - INTERNAL - terminated for internal reasons (probably something was stuck)\n          - STRATEGY - terminated based on selected cancelation strategy\n          - FAST_FAILING - terminated because something other failed (in case of multiple subpipelines)\n          - DELETED - terminated because branch was deleted while pipeline's build was running\n          - TIMEOUT - Pipeline run longer than execution_time_limit and was terminated"
+                      enum:
+                      - TEST
+                      - MALFORMED
+                      - STUCK
+                      - USER
+                      - INTERNAL
+                      - STRATEGY
+                      - FAST_FAILING
+                      - DELETED
+                      - TIMEOUT
+                      type: string
+                    running_at:
+                      description: Timestamp in ISO 8601 format
+                      format: date-time
+                      title: Timestamp
+                      type: string
+                    state:
+                      description: "Pipeline states, the normal flow is\n        INITIALIZING -> PENDING -> QUEUING (until older finishes) -> RUNNING -> DONE\n        If termination is requested while pipeline is in RUNNING it goes to STOPPING"
+                      enum:
+                      - INITIALIZING
+                      - PENDING
+                      - QUEUING
+                      - RUNNING
+                      - STOPPING
+                      - DONE
+                      type: string
+                    stopping_at:
+                      description: Timestamp in ISO 8601 format
+                      format: date-time
+                      title: Timestamp
+                      type: string
+                    terminate_request:
+                      description: "It is empty string if there is no need for termination.\n       Otherwise, it contains desired termination action (stop or cancel)"
+                      example: stop
+                      type: string
+                    terminated_by:
+                      nullable: true
+                      properties:
+                        id:
+                          description: ID of a User
+                          example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                          format: uuid
+                          title: User.ID
+                          type: string
+                      title: User
+                      type: object
+                    wf_id:
+                      description: ID of a Workflow
+                      example: 52f2847c-1817-48f2-95a8-b7e6b98c65e0
+                      format: uuid
+                      title: Workflow.ID
+                      type: string
+                    working_directory:
+                      example: .semaphore
+                      type: string
+                    yaml_file_name:
+                      example: semaphore.yml
+                      type: string
+                  title: Pipelines.Pipeline
+                  type: object
+                title: Pipelines.ListResp
+                type: array
+          description: List of pipelines in a project or workflow
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+  /pipelines/{pipeline_id}:
+    get:
+      operationId: Pipelines.Describe
+      description: Describe a pipeline using pipeline_id
+      tags:
+      - Pipelines
+      parameters:
+      - description: Id of the pipeline
+        in: path
+        name: pipeline_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: "Option to include all information about all blocks and jobs.\n           This option is much more expensive--if you are only interested in the status of a pipeline, don't set detailed to true."
+        in: query
+        name: detailed
+        required: false
+        schema:
+          default: false
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                description: Pipeline describe response containg pipeline info and contained blocks info
+                properties:
+                  blocks:
+                    items:
+                      properties:
+                        block_id:
+                          example: 484e263a-424a-4820-bff0-bba436c54042
+                          format: uuid
+                          type: string
+                        build_req_id:
+                          format: uuid
+                          type: string
+                        error_description:
+                          type: string
+                        jobs:
+                          items:
+                            description: Job started within block
+                            properties:
+                              index:
+                                description: Position in which it is definied in definition file within block
+                                type: integer
+                              job_id:
+                                description: Job unique identifier wthin build system
+                                format: uuid
+                                type: string
+                              name:
+                                description: Job name
+                                type: string
+                              result:
+                                type: string
+                              status:
+                                type: string
+                            type: object
+                          type: array
+                        name:
+                          type: string
+                        result:
+                          description: Result state
+                          enum:
+                          - PASSED
+                          - STOPPED
+                          - CANCELED
+                          - FAILED
+                          title: Pipelines.Result
+                          type: string
+                        result_reason:
+                          description: "Reasons for result different from PASSED\n\n         FAILED:\n          - TEST - one or more of user tests failed\n          - MALFORMED - Block failed due to one of next:\n                        - missing cmd_file, malformed job_matrix or multiple blocks with same name\n          - STUCK  - Block was stuck for some internal reason and then aborted\n         STOPPED or CANCELED:\n          - USER - terminated on users requests\n          - INTERNAL - terminated for internal reasons (probably something was stuck)\n          - STRATEGY - terminated based on selected cancelation strategy\n          - FAST_FAILING - terminated because something other failed (other block run in parallel)\n          - DELETED - terminated because branch was deleted while blocks's build was running\n          - TIMEOUT - Block run longer than execution_time_limit and was stopped\n          - SKIPPED - Filtered out (not executed because did not satisfy filter conditions)"
+                          enum:
+                          - TEST
+                          - MALFORMED
+                          - USER
+                          - INTERNAL
+                          - STRATEGY
+                          - FAST_FAILING
+                          - DELETED
+                          - TIMEOUT
+                          - SKIPPED
+                          type: string
+                        state:
+                          description: "States that describe blocks's execution.\n        Normal block state transition looks like:\n        INITIALIZING -> WAITING -> RUNNING -> DONE"
+                          enum:
+                          - WAITING
+                          - RUNNING
+                          - STOPPING
+                          - INITIALIZING
+                          - DONE
+                          type: string
+                      title: Pipelines.Block
+                      type: object
+                    type: array
+                  pipeline:
+                    properties:
+                      branch_id:
+                        description: ID of the branch in the UI
+                        example: a79557f2-dc4e-4807-ba89-601401eb3b1e
+                        format: uuid
+                        type: string
+                      branch_name:
+                        description: Name of git branch for which pipeline was scheduled
+                        example: main
+                        type: string
+                      commit_sha:
+                        description: Git commit sha for which pipeline was scheduled
+                        example: ac3f9796df42db976814e3fee670e11e3fd4b98a
+                        type: string
+                      created_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      done_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      error_description:
+                        description: Stores error description when pipeline is MALFORMED
+                        example: ''
+                        type: string
+                      hook_id:
+                        description: The id of the hook recieved from VC provider
+                        example: cd7f6162-9b6e-435a-89a7-3968b542e9c7
+                        format: uuid
+                        type: string
+                      name:
+                        example: Pipeline
+                        type: string
+                      org_id:
+                        description: ID of a Organization
+                        example: 36b2481c-55a4-4ace-9f8a-ac4f7d9549be
+                        format: uuid
+                        title: Organization.ID
+                        type: string
+                      pending_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      ppl_id:
+                        description: ID of a Pipeline
+                        example: 4f49eb59-148b-41bd-90be-20d4f67653f6
+                        format: uuid
+                        title: Pipeline.ID
+                        type: string
+                      project_id:
+                        description: ID of a Project
+                        example: 77cd0b15-d7af-410c-b462-d3611b0ef1a0
+                        format: uuid
+                        title: Project.ID
+                        type: string
+                      queuing_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      result:
+                        description: Result state
+                        enum:
+                        - PASSED
+                        - STOPPED
+                        - CANCELED
+                        - FAILED
+                        title: Pipelines.Result
+                        type: string
+                      result_reason:
+                        description: "Describes the result reason if result is not PASSED\n         Reasons for result different from PASSED\n\n         FAILED:\n          - TEST - one or more of user tests failed\n          - MALFORMED - Pipeline failed because YAML definition is malformed\n          - STUCK  - Pipeline was stuck for some internal reason and then aborted\n         STOPPED or CANCELED:\n          - USER - terminated on users requests\n          - INTERNAL - terminated for internal reasons (probably something was stuck)\n          - STRATEGY - terminated based on selected cancelation strategy\n          - FAST_FAILING - terminated because something other failed (in case of multiple subpipelines)\n          - DELETED - terminated because branch was deleted while pipeline's build was running\n          - TIMEOUT - Pipeline run longer than execution_time_limit and was terminated"
+                        enum:
+                        - TEST
+                        - MALFORMED
+                        - STUCK
+                        - USER
+                        - INTERNAL
+                        - STRATEGY
+                        - FAST_FAILING
+                        - DELETED
+                        - TIMEOUT
+                        type: string
+                      running_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      state:
+                        description: "Pipeline states, the normal flow is\n        INITIALIZING -> PENDING -> QUEUING (until older finishes) -> RUNNING -> DONE\n        If termination is requested while pipeline is in RUNNING it goes to STOPPING"
+                        enum:
+                        - INITIALIZING
+                        - PENDING
+                        - QUEUING
+                        - RUNNING
+                        - STOPPING
+                        - DONE
+                        type: string
+                      stopping_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      terminate_request:
+                        description: "It is empty string if there is no need for termination.\n       Otherwise, it contains desired termination action (stop or cancel)"
+                        example: stop
+                        type: string
+                      terminated_by:
+                        nullable: true
+                        properties:
+                          id:
+                            description: ID of a User
+                            example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                            format: uuid
+                            title: User.ID
+                            type: string
+                        title: User
+                        type: object
+                      wf_id:
+                        description: ID of a Workflow
+                        example: 52f2847c-1817-48f2-95a8-b7e6b98c65e0
+                        format: uuid
+                        title: Workflow.ID
+                        type: string
+                      working_directory:
+                        example: .semaphore
+                        type: string
+                      yaml_file_name:
+                        example: semaphore.yml
+                        type: string
+                    title: Pipelines.Pipeline
+                    type: object
+                title: Pipelines.DescribeResp
+                type: object
+          description: Pipeline status optionally containing information about all blocks and jobs in the pipeline.
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+  /pipelines/{pipeline_id}/describe_topology:
+    get:
+      operationId: Pipelines.DescribeTopology
+      description: Describe pipeline topology using pipeline_id
+      tags:
+      - Pipelines
+      parameters:
+      - description: Id of the pipeline
+        in: path
+        name: pipeline_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                description: Block topology description
+                properties:
+                  after_pipeline:
+                    properties:
+                      jobs:
+                        items:
+                          description: The job names in after pipeline, empty list means no after_pipeline is present
+                          type: string
+                        type: array
+                    type: object
+                  blocks:
+                    items:
+                      properties:
+                        dependencies:
+                          description: "List of *block* names, this block depends on.\n                              All listed blocks have to transition to done-passed\n                              before this block can be scheduled."
+                          items:
+                            type: string
+                          type: array
+                        jobs:
+                          description: The job names within the Block
+                          items:
+                            type: string
+                          type: array
+                        name:
+                          description: The name of the Block
+                          type: string
+                      type: object
+                    type: array
+                title: Pipelines.DescribeTopologyResp
+                type: object
+          description: Pipeline topology
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+  /pipelines/{pipeline_id}/partial_rebuild:
+    post:
+      operationId: Pipelines.PartialRebuild
+      description: "Schedule a new pipeline based on given one which will only run blocks which\n      execution failed in original pipeline."
+      tags:
+      - Pipelines
+      parameters:
+      - description: Id of the pipeline
+        in: path
+        name: pipeline_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                request_token:
+                  description: "When partial rebuild request is received, request_token is checked first.\n                  If pipeline's partial rebuild with the same request_token is already scheduled:\n                  - OK and previously generated ppl_id are returned,\n                    without scheduling new partial rebuild of pipeline.\n                  - Other parameters are not checked; they are assumed to be the same."
+                  type: string
+              required:
+              - request_token
+              type: object
+        description: Idempotency token
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                  pipeline_id:
+                    format: uuid
+                    type: string
+                title: PartialRebuildResponse
+                type: object
+          description: Message and created pipeline id
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+  /pipelines/{pipeline_id}/terminate:
+    post:
+      operationId: Pipelines.Terminate
+      description: Terminate a pipeline using pipeline_id
+      tags:
+      - Pipelines
+      parameters:
+      - description: Id of the pipeline
+        in: path
+        name: pipeline_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                terminate_request:
+                  type: boolean
+              required:
+              - terminate_request
+              type: object
+        description: Must set terminate request to true
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    description: Message confirming the success of the operation. You can rely on status code for successful termination.
+                    example: Pipeline {id} terminated successfully.
+                    type: string
+                title: TerminateResponse
+                type: object
+          description: Pipeline topology
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+  /yaml:
+    post:
+      operationId: Pipelines.ValidateYaml
+      tags:
+      - Pipelines
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                yml_definition:
+                  description: Pipeline YAML definition, be careful to escape the contents
+                  type: string
+              required:
+              - yml_definition
+              type: object
+        description: Json containing a YAML file to be validated
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: YAML definition is valid.
+                    type: string
+                type: object
+          description: Valid YAML response, check out 400 response as well.
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                type: object
+          description: Message explaining the errors in YAML
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+components:
+  securitySchemes:
+    authorization:
+      description: Token that you get from semaphore [account settings](https://me.semaphoreci.com/account).
+      name: authorization
+      scheme: bearer
+      type: http

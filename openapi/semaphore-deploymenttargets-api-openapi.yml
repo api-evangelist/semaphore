@@ -1,0 +1,3111 @@
+openapi: 3.0.3
+info:
+  title: Semaphore Public Dashboards DeploymentTargets API
+  description: 'The Semaphore Public API is a RESTful API that allows you to interact with Semaphore CI/CD.
+
+    ## Authorization
+
+    Authorization is done via bearer token. You can obtain a token by visiting your [account settings](https://me.semaphoreci.com/account).
+
+
+    ## Pagination with link headers
+
+    Each list request supports pagination. List responses include a [link header](https://datatracker.ietf.org/doc/html/rfc5988#section-5) with the pagination URLs.
+
+    Link headers contain next, previous, first relative URLs.
+
+    '
+  version: v2
+  contact:
+    url: https://semaphore.io/contact
+    email: support@semaphoreci.com
+  termsOfService: https://semaphore.io/terms
+  license:
+    name: Proprietary
+    url: https://semaphore.io/terms
+servers:
+- url: https://{org_name}.semaphoreci.com/api/v2
+  variables:
+    org_name:
+      default: me
+      description: Organization name
+security:
+- authorization: []
+tags:
+- name: DeploymentTargets
+  description: Deployment target management
+paths:
+  /projects/{project_id_or_name}/deployment_targets:
+    post:
+      operationId: DeploymentTargets.Create
+      description: Create a deployment target for the project.
+      tags:
+      - DeploymentTargets
+      parameters:
+      - description: Id or name of the project
+        in: path
+        name: project_id_or_name
+        required: true
+        schema:
+          anyOf:
+          - description: ID of a Project
+            example: c92c0098-5842-4867-b2d9-de8aae1505d2
+            format: uuid
+            title: Project.ID
+            type: string
+          - description: Project name must match the regex
+            example: my-project
+            minLength: 1
+            pattern: \A[\w\-\.]+\z
+            title: Project.Name
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                deployment_target:
+                  properties:
+                    apiVersion:
+                      default: v2
+                      description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                      example: v2
+                      readOnly: true
+                      title: ApiVersion
+                      type: string
+                    kind:
+                      default: DeploymentTarget
+                      description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                      example: DeploymentTarget
+                      readOnly: true
+                      title: Kind
+                      type: string
+                    metadata:
+                      description: Metadata of the deployment targets, all fields are read only
+                      properties:
+                        created_at:
+                          description: Timestamp in ISO 8601 format
+                          format: date-time
+                          title: Timestamp
+                          type: string
+                        created_by:
+                          properties:
+                            id:
+                              description: ID of a User
+                              example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                              format: uuid
+                              title: User.ID
+                              type: string
+                          title: User
+                          type: object
+                        description:
+                          description: Description of the deployment target
+                          type: string
+                        id:
+                          description: ID of a DeploymentTarget
+                          example: 9c777b65-213f-4fe1-bc6b-727d2cdde97d
+                          format: uuid
+                          title: DeploymentTarget.ID
+                          type: string
+                        last_deployment:
+                          description: A deployment history item contains relevant details about deployments triggered for a deployment target.
+                          nullable: true
+                          properties:
+                            env_vars:
+                              description: Environment variables of the deployment target
+                              items:
+                                description: EnvVar
+                                properties:
+                                  name:
+                                    description: Name of the environment variable
+                                    example: MY_SECRET
+                                    minLength: 1
+                                    type: string
+                                  value:
+                                    description: Value of the environment variable
+                                    example: secret
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - name
+                                - value
+                                title: Secrets.Secret.EnvVar
+                                type: object
+                              type: array
+                            id:
+                              description: ID of a Deployment
+                              example: a0424427-ff28-4f77-a893-0fdf5f50c380
+                              format: uuid
+                              title: Deployment.ID
+                              type: string
+                            origin_pipeline_id:
+                              description: ID of a Pipeline
+                              example: 97ba55d1-90d7-40b9-a2dd-bdbd02389b58
+                              format: uuid
+                              nullable: true
+                              title: Pipeline.ID
+                              type: string
+                            pipeline_id:
+                              description: ID of a Pipeline
+                              example: adc5a26f-4077-47bc-8d4f-cb4467f2c103
+                              format: uuid
+                              nullable: true
+                              title: Pipeline.ID
+                              type: string
+                            state:
+                              description: The state of the last deployment of the deployment target
+                              enum:
+                              - PENDING
+                              - STARTED
+                              - FAILED
+                              type: string
+                            state_message:
+                              description: The message of the last deployment of the deployment target
+                              type: string
+                            target_id:
+                              description: ID of a DeploymentTarget
+                              example: 4a9e9001-6703-4815-9c19-ed2e9e8c87ea
+                              format: uuid
+                              title: DeploymentTarget.ID
+                              type: string
+                            target_name:
+                              description: The name of the deployment target
+                              type: string
+                            triggered_at:
+                              description: Timestamp in ISO 8601 format
+                              format: date-time
+                              title: Timestamp
+                              type: string
+                            triggered_by:
+                              properties:
+                                id:
+                                  description: ID of a User
+                                  example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                                  format: uuid
+                                  title: User.ID
+                                  type: string
+                              title: User
+                              type: object
+                          title: DeploymentTargets.HistoryItem
+                          type: object
+                        name:
+                          description: 'DeploymentTargets name must be unique on project level, must match the name regex: `^[A-Za-z0-9_.-]+$`'
+                          example: production
+                          minLength: 1
+                          pattern: ^[A-Za-z0-9_\.\-]+$
+                          title: DeploymentTargets.Name
+                          type: string
+                        org_id:
+                          description: ID of a Organization
+                          example: 02b7c528-b0f1-4266-8e5e-10b7b984e76a
+                          format: uuid
+                          title: Organization.ID
+                          type: string
+                        project_id:
+                          description: ID of a Project
+                          example: 726dbefd-b30c-4c80-bc9a-c0613968a2ca
+                          format: uuid
+                          title: Project.ID
+                          type: string
+                        state:
+                          description: "State of the deployment target.\n - `SYNCING` - Deployment Target secret is synchronizing\n - `USABLE` - Deployment Target is active and can be used or modified\n - `UNUSABLE` - Deployment Target is corrupted and cannot be used or modified\n - `CORDONED` - Deployment Target has been cordoned and deactivated\n "
+                          enum:
+                          - SYNCING
+                          - USABLE
+                          - UNUSABLE
+                          - CORDONED
+                          type: string
+                        updated_at:
+                          description: Timestamp in ISO 8601 format
+                          format: date-time
+                          title: Timestamp
+                          type: string
+                        updated_by:
+                          properties:
+                            id:
+                              description: ID of a User
+                              example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                              format: uuid
+                              title: User.ID
+                              type: string
+                          title: User
+                          type: object
+                      readOnly: true
+                      required:
+                      - id
+                      - name
+                      - project_id
+                      type: object
+                    spec:
+                      description: Specification of the deployment target
+                      properties:
+                        active:
+                          description: The state of the deployment target, true if the deployment is not cordoned
+                          type: boolean
+                        bookmark_parameters:
+                          description: The names of the promotion parameters. You can later use values of these parameters to filter deployments in deployment history.
+                          items:
+                            description: The name of the promotion parameter
+                            type: string
+                          maxItems: 3
+                          minItems: 0
+                          type: array
+                        description:
+                          description: Description of the deployment target
+                          type: string
+                        env_vars:
+                          description: Environment variables of the deployment target, only in create requests.
+                          items:
+                            description: EnvVar
+                            properties:
+                              name:
+                                description: Name of the environment variable
+                                example: MY_SECRET
+                                minLength: 1
+                                type: string
+                              value:
+                                description: Value of the environment variable
+                                example: secret
+                                minLength: 1
+                                type: string
+                            required:
+                            - name
+                            - value
+                            title: Secrets.Secret.EnvVar
+                            type: object
+                          type: array
+                        files:
+                          description: Files of the deployment target, only in create requests.
+                          items:
+                            description: File
+                            properties:
+                              content:
+                                description: base64 encoded content of the file or a md5 checksum
+                                type: string
+                              path:
+                                description: Name of the file. Both absolute and relative paths are allowed.
+                                example: /path/to/file
+                                minLength: 1
+                                type: string
+                            required:
+                            - path
+                            - content
+                            title: Secrets.Secret.File
+                            type: object
+                          type: array
+                        name:
+                          description: 'DeploymentTargets name must be unique on project level, must match the name regex: `^[A-Za-z0-9_.-]+$`'
+                          example: production
+                          minLength: 1
+                          pattern: ^[A-Za-z0-9_\.\-]+$
+                          title: DeploymentTargets.Name
+                          type: string
+                        object_rules:
+                          description: "Configure which branches, tags or PRs can trigger a deployment.\n            **If left empty all branches, tags or PRs can trigger a deployment.**"
+                          properties:
+                            branches:
+                              oneOf:
+                              - description: Allows all branch to trigger a deployment
+                                enum:
+                                - ALL
+                                title: DeploymentTargets.DeploymentTarget.ObjectRule.Branch.All
+                                type: string
+                              - description: The pattern to match against the branch name
+                                title: DeploymentTargets.DeploymentTarget.ObjectRule.Branch.MatchType
+                                type: array
+                              title: DeploymentTargets.DeploymentTarget.ObjectRule.Branch
+                            prs:
+                              default: NONE
+                              description: Allows all or none of the PRs to trigger a deployment
+                              enum:
+                              - ALL
+                              - NONE
+                              type: string
+                            tags:
+                              oneOf:
+                              - description: Allows all tag to trigger a deployment
+                                enum:
+                                - ALL
+                                title: DeploymentTargets.DeploymentTarget.ObjectRule.Tag.All
+                                type: string
+                              - description: The pattern to match against the tag name
+                                title: DeploymentTargets.DeploymentTarget.ObjectRule.Tag.MatchType
+                                type: array
+                              title: DeploymentTargets.DeploymentTarget.ObjectRule.Tag
+                          type: object
+                        subject_rules:
+                          description: '
+
+                            Configure who can trigger a deployment.
+
+                            **If left empty all users can trigger a deployment.**
+
+                            '
+                          properties:
+                            any:
+                              default: false
+                              description: Allows any user or auto-promotion to trigger a deployment, if true all other rules are ignored and all users can trigger a deployment
+                              type: boolean
+                            auto:
+                              description: Allows auto-promotions to be triggered
+                              type: boolean
+                            roles:
+                              description: "The list of roles of users that are allowed to trigger a deployment,\n                 by default project roles are `Reader`, `Contributor` and `Admin`, read more [here](https://docs.semaphoreci.com/security/default-roles/#project-roles).\n                 Role names are case insensitive."
+                              items:
+                                description: The name of the role.
+                                example: Contributor
+                                type: string
+                              type: array
+                            users:
+                              description: The list of users that are allowed to trigger a deployment
+                              items:
+                                anyOf:
+                                - description: The uuid of the user
+                                  format: uuid
+                                  type: string
+                                - description: The git handle of the user
+                                  type: string
+                                description: The git handle or id of the user
+                              type: array
+                          type: object
+                        url:
+                          description: The URL of the target
+                          type: string
+                      required:
+                      - name
+                      type: object
+                  required:
+                  - apiVersion
+                  - kind
+                  - spec
+                  title: DeploymentTargets.DeploymentTarget
+                  type: object
+                unique_token:
+                  description: "The unique value used as an idempotency token.\n        If there are multiple requests with the same  `unique_token` values only the first one will be processed,\n        and the rest will be disregarded but the response will be 200 OK as if those requests were processed successfully."
+                  type: string
+              required:
+              - unique_token
+              - deployment_target
+              title: DeploymentTargets.CreateRequest
+              type: object
+        description: Deployment target to be created and a unique token.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  apiVersion:
+                    default: v2
+                    description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                    example: v2
+                    readOnly: true
+                    title: ApiVersion
+                    type: string
+                  kind:
+                    default: DeploymentTarget
+                    description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                    example: DeploymentTarget
+                    readOnly: true
+                    title: Kind
+                    type: string
+                  metadata:
+                    description: Metadata of the deployment targets, all fields are read only
+                    properties:
+                      created_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      created_by:
+                        properties:
+                          id:
+                            description: ID of a User
+                            example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                            format: uuid
+                            title: User.ID
+                            type: string
+                        title: User
+                        type: object
+                      description:
+                        description: Description of the deployment target
+                        type: string
+                      id:
+                        description: ID of a DeploymentTarget
+                        example: 9c777b65-213f-4fe1-bc6b-727d2cdde97d
+                        format: uuid
+                        title: DeploymentTarget.ID
+                        type: string
+                      last_deployment:
+                        description: A deployment history item contains relevant details about deployments triggered for a deployment target.
+                        nullable: true
+                        properties:
+                          env_vars:
+                            description: Environment variables of the deployment target
+                            items:
+                              description: EnvVar
+                              properties:
+                                name:
+                                  description: Name of the environment variable
+                                  example: MY_SECRET
+                                  minLength: 1
+                                  type: string
+                                value:
+                                  description: Value of the environment variable
+                                  example: secret
+                                  minLength: 1
+                                  type: string
+                              required:
+                              - name
+                              - value
+                              title: Secrets.Secret.EnvVar
+                              type: object
+                            type: array
+                          id:
+                            description: ID of a Deployment
+                            example: a0424427-ff28-4f77-a893-0fdf5f50c380
+                            format: uuid
+                            title: Deployment.ID
+                            type: string
+                          origin_pipeline_id:
+                            description: ID of a Pipeline
+                            example: 97ba55d1-90d7-40b9-a2dd-bdbd02389b58
+                            format: uuid
+                            nullable: true
+                            title: Pipeline.ID
+                            type: string
+                          pipeline_id:
+                            description: ID of a Pipeline
+                            example: adc5a26f-4077-47bc-8d4f-cb4467f2c103
+                            format: uuid
+                            nullable: true
+                            title: Pipeline.ID
+                            type: string
+                          state:
+                            description: The state of the last deployment of the deployment target
+                            enum:
+                            - PENDING
+                            - STARTED
+                            - FAILED
+                            type: string
+                          state_message:
+                            description: The message of the last deployment of the deployment target
+                            type: string
+                          target_id:
+                            description: ID of a DeploymentTarget
+                            example: 4a9e9001-6703-4815-9c19-ed2e9e8c87ea
+                            format: uuid
+                            title: DeploymentTarget.ID
+                            type: string
+                          target_name:
+                            description: The name of the deployment target
+                            type: string
+                          triggered_at:
+                            description: Timestamp in ISO 8601 format
+                            format: date-time
+                            title: Timestamp
+                            type: string
+                          triggered_by:
+                            properties:
+                              id:
+                                description: ID of a User
+                                example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                                format: uuid
+                                title: User.ID
+                                type: string
+                            title: User
+                            type: object
+                        title: DeploymentTargets.HistoryItem
+                        type: object
+                      name:
+                        description: 'DeploymentTargets name must be unique on project level, must match the name regex: `^[A-Za-z0-9_.-]+$`'
+                        example: production
+                        minLength: 1
+                        pattern: ^[A-Za-z0-9_\.\-]+$
+                        title: DeploymentTargets.Name
+                        type: string
+                      org_id:
+                        description: ID of a Organization
+                        example: 02b7c528-b0f1-4266-8e5e-10b7b984e76a
+                        format: uuid
+                        title: Organization.ID
+                        type: string
+                      project_id:
+                        description: ID of a Project
+                        example: 726dbefd-b30c-4c80-bc9a-c0613968a2ca
+                        format: uuid
+                        title: Project.ID
+                        type: string
+                      state:
+                        description: "State of the deployment target.\n - `SYNCING` - Deployment Target secret is synchronizing\n - `USABLE` - Deployment Target is active and can be used or modified\n - `UNUSABLE` - Deployment Target is corrupted and cannot be used or modified\n - `CORDONED` - Deployment Target has been cordoned and deactivated\n "
+                        enum:
+                        - SYNCING
+                        - USABLE
+                        - UNUSABLE
+                        - CORDONED
+                        type: string
+                      updated_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      updated_by:
+                        properties:
+                          id:
+                            description: ID of a User
+                            example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                            format: uuid
+                            title: User.ID
+                            type: string
+                        title: User
+                        type: object
+                    readOnly: true
+                    required:
+                    - id
+                    - name
+                    - project_id
+                    type: object
+                  spec:
+                    description: Specification of the deployment target
+                    properties:
+                      active:
+                        description: The state of the deployment target, true if the deployment is not cordoned
+                        type: boolean
+                      bookmark_parameters:
+                        description: The names of the promotion parameters. You can later use values of these parameters to filter deployments in deployment history.
+                        items:
+                          description: The name of the promotion parameter
+                          type: string
+                        maxItems: 3
+                        minItems: 0
+                        type: array
+                      description:
+                        description: Description of the deployment target
+                        type: string
+                      env_vars:
+                        description: Environment variables of the deployment target, only in create requests.
+                        items:
+                          description: EnvVar
+                          properties:
+                            name:
+                              description: Name of the environment variable
+                              example: MY_SECRET
+                              minLength: 1
+                              type: string
+                            value:
+                              description: Value of the environment variable
+                              example: secret
+                              minLength: 1
+                              type: string
+                          required:
+                          - name
+                          - value
+                          title: Secrets.Secret.EnvVar
+                          type: object
+                        type: array
+                      files:
+                        description: Files of the deployment target, only in create requests.
+                        items:
+                          description: File
+                          properties:
+                            content:
+                              description: base64 encoded content of the file or a md5 checksum
+                              type: string
+                            path:
+                              description: Name of the file. Both absolute and relative paths are allowed.
+                              example: /path/to/file
+                              minLength: 1
+                              type: string
+                          required:
+                          - path
+                          - content
+                          title: Secrets.Secret.File
+                          type: object
+                        type: array
+                      name:
+                        description: 'DeploymentTargets name must be unique on project level, must match the name regex: `^[A-Za-z0-9_.-]+$`'
+                        example: production
+                        minLength: 1
+                        pattern: ^[A-Za-z0-9_\.\-]+$
+                        title: DeploymentTargets.Name
+                        type: string
+                      object_rules:
+                        description: "Configure which branches, tags or PRs can trigger a deployment.\n            **If left empty all branches, tags or PRs can trigger a deployment.**"
+                        properties:
+                          branches:
+                            oneOf:
+                            - description: Allows all branch to trigger a deployment
+                              enum:
+                              - ALL
+                              title: DeploymentTargets.DeploymentTarget.ObjectRule.Branch.All
+                              type: string
+                            - description: The pattern to match against the branch name
+                              title: DeploymentTargets.DeploymentTarget.ObjectRule.Branch.MatchType
+                              type: array
+                            title: DeploymentTargets.DeploymentTarget.ObjectRule.Branch
+                          prs:
+                            default: NONE
+                            description: Allows all or none of the PRs to trigger a deployment
+                            enum:
+                            - ALL
+                            - NONE
+                            type: string
+                          tags:
+                            oneOf:
+                            - description: Allows all tag to trigger a deployment
+                              enum:
+                              - ALL
+                              title: DeploymentTargets.DeploymentTarget.ObjectRule.Tag.All
+                              type: string
+                            - description: The pattern to match against the tag name
+                              title: DeploymentTargets.DeploymentTarget.ObjectRule.Tag.MatchType
+                              type: array
+                            title: DeploymentTargets.DeploymentTarget.ObjectRule.Tag
+                        type: object
+                      subject_rules:
+                        description: '
+
+                          Configure who can trigger a deployment.
+
+                          **If left empty all users can trigger a deployment.**
+
+                          '
+                        properties:
+                          any:
+                            default: false
+                            description: Allows any user or auto-promotion to trigger a deployment, if true all other rules are ignored and all users can trigger a deployment
+                            type: boolean
+                          auto:
+                            description: Allows auto-promotions to be triggered
+                            type: boolean
+                          roles:
+                            description: "The list of roles of users that are allowed to trigger a deployment,\n                 by default project roles are `Reader`, `Contributor` and `Admin`, read more [here](https://docs.semaphoreci.com/security/default-roles/#project-roles).\n                 Role names are case insensitive."
+                            items:
+                              description: The name of the role.
+                              example: Contributor
+                              type: string
+                            type: array
+                          users:
+                            description: The list of users that are allowed to trigger a deployment
+                            items:
+                              anyOf:
+                              - description: The uuid of the user
+                                format: uuid
+                                type: string
+                              - description: The git handle of the user
+                                type: string
+                              description: The git handle or id of the user
+                            type: array
+                        type: object
+                      url:
+                        description: The URL of the target
+                        type: string
+                    required:
+                    - name
+                    type: object
+                required:
+                - apiVersion
+                - kind
+                - spec
+                title: DeploymentTargets.DeploymentTarget
+                type: object
+          description: Created deployment target
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+    get:
+      operationId: DeploymentTargets.List
+      description: List of deployment targets for the project.
+      tags:
+      - DeploymentTargets
+      parameters:
+      - description: Id or name of the project
+        in: path
+        name: project_id_or_name
+        required: true
+        schema:
+          anyOf:
+          - description: ID of a Project
+            example: 6dc230a9-dba8-4295-93b8-9ffb7a7aedbe
+            format: uuid
+            title: Project.ID
+            type: string
+          - description: Project name must match the regex
+            example: my-project
+            minLength: 1
+            pattern: \A[\w\-\.]+\z
+            title: Project.Name
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    apiVersion:
+                      default: v2
+                      description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                      example: v2
+                      readOnly: true
+                      title: ApiVersion
+                      type: string
+                    kind:
+                      default: DeploymentTarget
+                      description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                      example: DeploymentTarget
+                      readOnly: true
+                      title: Kind
+                      type: string
+                    metadata:
+                      description: Metadata of the deployment targets, all fields are read only
+                      properties:
+                        created_at:
+                          description: Timestamp in ISO 8601 format
+                          format: date-time
+                          title: Timestamp
+                          type: string
+                        created_by:
+                          properties:
+                            id:
+                              description: ID of a User
+                              example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                              format: uuid
+                              title: User.ID
+                              type: string
+                          title: User
+                          type: object
+                        description:
+                          description: Description of the deployment target
+                          type: string
+                        id:
+                          description: ID of a DeploymentTarget
+                          example: 9c777b65-213f-4fe1-bc6b-727d2cdde97d
+                          format: uuid
+                          title: DeploymentTarget.ID
+                          type: string
+                        last_deployment:
+                          description: A deployment history item contains relevant details about deployments triggered for a deployment target.
+                          nullable: true
+                          properties:
+                            env_vars:
+                              description: Environment variables of the deployment target
+                              items:
+                                description: EnvVar
+                                properties:
+                                  name:
+                                    description: Name of the environment variable
+                                    example: MY_SECRET
+                                    minLength: 1
+                                    type: string
+                                  value:
+                                    description: Value of the environment variable
+                                    example: secret
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - name
+                                - value
+                                title: Secrets.Secret.EnvVar
+                                type: object
+                              type: array
+                            id:
+                              description: ID of a Deployment
+                              example: a0424427-ff28-4f77-a893-0fdf5f50c380
+                              format: uuid
+                              title: Deployment.ID
+                              type: string
+                            origin_pipeline_id:
+                              description: ID of a Pipeline
+                              example: 97ba55d1-90d7-40b9-a2dd-bdbd02389b58
+                              format: uuid
+                              nullable: true
+                              title: Pipeline.ID
+                              type: string
+                            pipeline_id:
+                              description: ID of a Pipeline
+                              example: adc5a26f-4077-47bc-8d4f-cb4467f2c103
+                              format: uuid
+                              nullable: true
+                              title: Pipeline.ID
+                              type: string
+                            state:
+                              description: The state of the last deployment of the deployment target
+                              enum:
+                              - PENDING
+                              - STARTED
+                              - FAILED
+                              type: string
+                            state_message:
+                              description: The message of the last deployment of the deployment target
+                              type: string
+                            target_id:
+                              description: ID of a DeploymentTarget
+                              example: 4a9e9001-6703-4815-9c19-ed2e9e8c87ea
+                              format: uuid
+                              title: DeploymentTarget.ID
+                              type: string
+                            target_name:
+                              description: The name of the deployment target
+                              type: string
+                            triggered_at:
+                              description: Timestamp in ISO 8601 format
+                              format: date-time
+                              title: Timestamp
+                              type: string
+                            triggered_by:
+                              properties:
+                                id:
+                                  description: ID of a User
+                                  example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                                  format: uuid
+                                  title: User.ID
+                                  type: string
+                              title: User
+                              type: object
+                          title: DeploymentTargets.HistoryItem
+                          type: object
+                        name:
+                          description: 'DeploymentTargets name must be unique on project level, must match the name regex: `^[A-Za-z0-9_.-]+$`'
+                          example: production
+                          minLength: 1
+                          pattern: ^[A-Za-z0-9_\.\-]+$
+                          title: DeploymentTargets.Name
+                          type: string
+                        org_id:
+                          description: ID of a Organization
+                          example: 02b7c528-b0f1-4266-8e5e-10b7b984e76a
+                          format: uuid
+                          title: Organization.ID
+                          type: string
+                        project_id:
+                          description: ID of a Project
+                          example: 726dbefd-b30c-4c80-bc9a-c0613968a2ca
+                          format: uuid
+                          title: Project.ID
+                          type: string
+                        state:
+                          description: "State of the deployment target.\n - `SYNCING` - Deployment Target secret is synchronizing\n - `USABLE` - Deployment Target is active and can be used or modified\n - `UNUSABLE` - Deployment Target is corrupted and cannot be used or modified\n - `CORDONED` - Deployment Target has been cordoned and deactivated\n "
+                          enum:
+                          - SYNCING
+                          - USABLE
+                          - UNUSABLE
+                          - CORDONED
+                          type: string
+                        updated_at:
+                          description: Timestamp in ISO 8601 format
+                          format: date-time
+                          title: Timestamp
+                          type: string
+                        updated_by:
+                          properties:
+                            id:
+                              description: ID of a User
+                              example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                              format: uuid
+                              title: User.ID
+                              type: string
+                          title: User
+                          type: object
+                      readOnly: true
+                      required:
+                      - id
+                      - name
+                      - project_id
+                      type: object
+                    spec:
+                      description: Specification of the deployment target
+                      properties:
+                        active:
+                          description: The state of the deployment target, true if the deployment is not cordoned
+                          type: boolean
+                        bookmark_parameters:
+                          description: The names of the promotion parameters. You can later use values of these parameters to filter deployments in deployment history.
+                          items:
+                            description: The name of the promotion parameter
+                            type: string
+                          maxItems: 3
+                          minItems: 0
+                          type: array
+                        description:
+                          description: Description of the deployment target
+                          type: string
+                        env_vars:
+                          description: Environment variables of the deployment target, only in create requests.
+                          items:
+                            description: EnvVar
+                            properties:
+                              name:
+                                description: Name of the environment variable
+                                example: MY_SECRET
+                                minLength: 1
+                                type: string
+                              value:
+                                description: Value of the environment variable
+                                example: secret
+                                minLength: 1
+                                type: string
+                            required:
+                            - name
+                            - value
+                            title: Secrets.Secret.EnvVar
+                            type: object
+                          type: array
+                        files:
+                          description: Files of the deployment target, only in create requests.
+                          items:
+                            description: File
+                            properties:
+                              content:
+                                description: base64 encoded content of the file or a md5 checksum
+                                type: string
+                              path:
+                                description: Name of the file. Both absolute and relative paths are allowed.
+                                example: /path/to/file
+                                minLength: 1
+                                type: string
+                            required:
+                            - path
+                            - content
+                            title: Secrets.Secret.File
+                            type: object
+                          type: array
+                        name:
+                          description: 'DeploymentTargets name must be unique on project level, must match the name regex: `^[A-Za-z0-9_.-]+$`'
+                          example: production
+                          minLength: 1
+                          pattern: ^[A-Za-z0-9_\.\-]+$
+                          title: DeploymentTargets.Name
+                          type: string
+                        object_rules:
+                          description: "Configure which branches, tags or PRs can trigger a deployment.\n            **If left empty all branches, tags or PRs can trigger a deployment.**"
+                          properties:
+                            branches:
+                              oneOf:
+                              - description: Allows all branch to trigger a deployment
+                                enum:
+                                - ALL
+                                title: DeploymentTargets.DeploymentTarget.ObjectRule.Branch.All
+                                type: string
+                              - description: The pattern to match against the branch name
+                                title: DeploymentTargets.DeploymentTarget.ObjectRule.Branch.MatchType
+                                type: array
+                              title: DeploymentTargets.DeploymentTarget.ObjectRule.Branch
+                            prs:
+                              default: NONE
+                              description: Allows all or none of the PRs to trigger a deployment
+                              enum:
+                              - ALL
+                              - NONE
+                              type: string
+                            tags:
+                              oneOf:
+                              - description: Allows all tag to trigger a deployment
+                                enum:
+                                - ALL
+                                title: DeploymentTargets.DeploymentTarget.ObjectRule.Tag.All
+                                type: string
+                              - description: The pattern to match against the tag name
+                                title: DeploymentTargets.DeploymentTarget.ObjectRule.Tag.MatchType
+                                type: array
+                              title: DeploymentTargets.DeploymentTarget.ObjectRule.Tag
+                          type: object
+                        subject_rules:
+                          description: '
+
+                            Configure who can trigger a deployment.
+
+                            **If left empty all users can trigger a deployment.**
+
+                            '
+                          properties:
+                            any:
+                              default: false
+                              description: Allows any user or auto-promotion to trigger a deployment, if true all other rules are ignored and all users can trigger a deployment
+                              type: boolean
+                            auto:
+                              description: Allows auto-promotions to be triggered
+                              type: boolean
+                            roles:
+                              description: "The list of roles of users that are allowed to trigger a deployment,\n                 by default project roles are `Reader`, `Contributor` and `Admin`, read more [here](https://docs.semaphoreci.com/security/default-roles/#project-roles).\n                 Role names are case insensitive."
+                              items:
+                                description: The name of the role.
+                                example: Contributor
+                                type: string
+                              type: array
+                            users:
+                              description: The list of users that are allowed to trigger a deployment
+                              items:
+                                anyOf:
+                                - description: The uuid of the user
+                                  format: uuid
+                                  type: string
+                                - description: The git handle of the user
+                                  type: string
+                                description: The git handle or id of the user
+                              type: array
+                          type: object
+                        url:
+                          description: The URL of the target
+                          type: string
+                      required:
+                      - name
+                      type: object
+                  required:
+                  - apiVersion
+                  - kind
+                  - spec
+                  title: DeploymentTargets.DeploymentTarget
+                  type: object
+                title: DeploymentTargets.ListResponse
+                type: array
+          description: List of deployment targets
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+  /projects/{project_id_or_name}/deployment_targets/{id_or_name}:
+    delete:
+      operationId: DeploymentTargets.Delete
+      description: Delete a deployment target for the project.
+      tags:
+      - DeploymentTargets
+      parameters:
+      - description: Id or name of the project
+        in: path
+        name: project_id_or_name
+        required: true
+        schema:
+          anyOf:
+          - description: ID of a Project
+            example: 19563d51-0eb8-449c-934b-05eae500593a
+            format: uuid
+            title: Project.ID
+            type: string
+          - description: Project name must match the regex
+            example: my-project
+            minLength: 1
+            pattern: \A[\w\-\.]+\z
+            title: Project.Name
+            type: string
+      - description: Id or name of the deployment target
+        in: path
+        name: id_or_name
+        required: true
+        schema:
+          description: Id or name of the deployment target
+          type: string
+      - description: Idempotency token for the delete operation
+        in: query
+        name: unique_token
+        required: true
+        schema:
+          description: Idempotency token
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    description: ID of a DeploymentTarget
+                    example: ebcd9452-b3b1-40f4-885c-c5d43ea0b40a
+                    format: uuid
+                    title: DeploymentTarget.ID
+                    type: string
+                title: DeploymentTargets.DeleteResponse
+                type: object
+          description: ID of the deleted deployment target
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+    get:
+      operationId: DeploymentTargets.Describe
+      description: Describe a deployment target for the project.
+      tags:
+      - DeploymentTargets
+      parameters:
+      - description: Id or name of the project
+        in: path
+        name: project_id_or_name
+        required: true
+        schema:
+          anyOf:
+          - description: ID of a Project
+            example: 52e76aa3-d5c2-4e0a-a1f0-5dbb98ec0544
+            format: uuid
+            title: Project.ID
+            type: string
+          - description: Project name must match the regex
+            example: my-project
+            minLength: 1
+            pattern: \A[\w\-\.]+\z
+            title: Project.Name
+            type: string
+      - description: Id or name of the deployment target
+        in: path
+        name: id_or_name
+        required: true
+        schema:
+          description: Id or name of the deployment target
+          type: string
+      - description: If true, fetches the secret associated with the deployment target
+        in: query
+        name: with_credentials
+        required: false
+        schema:
+          default: false
+          description: If true, fetches the credentials associated with the deployment target
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  apiVersion:
+                    default: v2
+                    description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                    example: v2
+                    readOnly: true
+                    title: ApiVersion
+                    type: string
+                  kind:
+                    default: DeploymentTarget
+                    description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                    example: DeploymentTarget
+                    readOnly: true
+                    title: Kind
+                    type: string
+                  metadata:
+                    description: Metadata of the deployment targets, all fields are read only
+                    properties:
+                      created_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      created_by:
+                        properties:
+                          id:
+                            description: ID of a User
+                            example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                            format: uuid
+                            title: User.ID
+                            type: string
+                        title: User
+                        type: object
+                      description:
+                        description: Description of the deployment target
+                        type: string
+                      id:
+                        description: ID of a DeploymentTarget
+                        example: 9c777b65-213f-4fe1-bc6b-727d2cdde97d
+                        format: uuid
+                        title: DeploymentTarget.ID
+                        type: string
+                      last_deployment:
+                        description: A deployment history item contains relevant details about deployments triggered for a deployment target.
+                        nullable: true
+                        properties:
+                          env_vars:
+                            description: Environment variables of the deployment target
+                            items:
+                              description: EnvVar
+                              properties:
+                                name:
+                                  description: Name of the environment variable
+                                  example: MY_SECRET
+                                  minLength: 1
+                                  type: string
+                                value:
+                                  description: Value of the environment variable
+                                  example: secret
+                                  minLength: 1
+                                  type: string
+                              required:
+                              - name
+                              - value
+                              title: Secrets.Secret.EnvVar
+                              type: object
+                            type: array
+                          id:
+                            description: ID of a Deployment
+                            example: a0424427-ff28-4f77-a893-0fdf5f50c380
+                            format: uuid
+                            title: Deployment.ID
+                            type: string
+                          origin_pipeline_id:
+                            description: ID of a Pipeline
+                            example: 97ba55d1-90d7-40b9-a2dd-bdbd02389b58
+                            format: uuid
+                            nullable: true
+                            title: Pipeline.ID
+                            type: string
+                          pipeline_id:
+                            description: ID of a Pipeline
+                            example: adc5a26f-4077-47bc-8d4f-cb4467f2c103
+                            format: uuid
+                            nullable: true
+                            title: Pipeline.ID
+                            type: string
+                          state:
+                            description: The state of the last deployment of the deployment target
+                            enum:
+                            - PENDING
+                            - STARTED
+                            - FAILED
+                            type: string
+                          state_message:
+                            description: The message of the last deployment of the deployment target
+                            type: string
+                          target_id:
+                            description: ID of a DeploymentTarget
+                            example: 4a9e9001-6703-4815-9c19-ed2e9e8c87ea
+                            format: uuid
+                            title: DeploymentTarget.ID
+                            type: string
+                          target_name:
+                            description: The name of the deployment target
+                            type: string
+                          triggered_at:
+                            description: Timestamp in ISO 8601 format
+                            format: date-time
+                            title: Timestamp
+                            type: string
+                          triggered_by:
+                            properties:
+                              id:
+                                description: ID of a User
+                                example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                                format: uuid
+                                title: User.ID
+                                type: string
+                            title: User
+                            type: object
+                        title: DeploymentTargets.HistoryItem
+                        type: object
+                      name:
+                        description: 'DeploymentTargets name must be unique on project level, must match the name regex: `^[A-Za-z0-9_.-]+$`'
+                        example: production
+                        minLength: 1
+                        pattern: ^[A-Za-z0-9_\.\-]+$
+                        title: DeploymentTargets.Name
+                        type: string
+                      org_id:
+                        description: ID of a Organization
+                        example: 02b7c528-b0f1-4266-8e5e-10b7b984e76a
+                        format: uuid
+                        title: Organization.ID
+                        type: string
+                      project_id:
+                        description: ID of a Project
+                        example: 726dbefd-b30c-4c80-bc9a-c0613968a2ca
+                        format: uuid
+                        title: Project.ID
+                        type: string
+                      state:
+                        description: "State of the deployment target.\n - `SYNCING` - Deployment Target secret is synchronizing\n - `USABLE` - Deployment Target is active and can be used or modified\n - `UNUSABLE` - Deployment Target is corrupted and cannot be used or modified\n - `CORDONED` - Deployment Target has been cordoned and deactivated\n "
+                        enum:
+                        - SYNCING
+                        - USABLE
+                        - UNUSABLE
+                        - CORDONED
+                        type: string
+                      updated_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      updated_by:
+                        properties:
+                          id:
+                            description: ID of a User
+                            example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                            format: uuid
+                            title: User.ID
+                            type: string
+                        title: User
+                        type: object
+                    readOnly: true
+                    required:
+                    - id
+                    - name
+                    - project_id
+                    type: object
+                  spec:
+                    description: Specification of the deployment target
+                    properties:
+                      active:
+                        description: The state of the deployment target, true if the deployment is not cordoned
+                        type: boolean
+                      bookmark_parameters:
+                        description: The names of the promotion parameters. You can later use values of these parameters to filter deployments in deployment history.
+                        items:
+                          description: The name of the promotion parameter
+                          type: string
+                        maxItems: 3
+                        minItems: 0
+                        type: array
+                      description:
+                        description: Description of the deployment target
+                        type: string
+                      env_vars:
+                        description: Environment variables of the deployment target, only in create requests.
+                        items:
+                          description: EnvVar
+                          properties:
+                            name:
+                              description: Name of the environment variable
+                              example: MY_SECRET
+                              minLength: 1
+                              type: string
+                            value:
+                              description: Value of the environment variable
+                              example: secret
+                              minLength: 1
+                              type: string
+                          required:
+                          - name
+                          - value
+                          title: Secrets.Secret.EnvVar
+                          type: object
+                        type: array
+                      files:
+                        description: Files of the deployment target, only in create requests.
+                        items:
+                          description: File
+                          properties:
+                            content:
+                              description: base64 encoded content of the file or a md5 checksum
+                              type: string
+                            path:
+                              description: Name of the file. Both absolute and relative paths are allowed.
+                              example: /path/to/file
+                              minLength: 1
+                              type: string
+                          required:
+                          - path
+                          - content
+                          title: Secrets.Secret.File
+                          type: object
+                        type: array
+                      name:
+                        description: 'DeploymentTargets name must be unique on project level, must match the name regex: `^[A-Za-z0-9_.-]+$`'
+                        example: production
+                        minLength: 1
+                        pattern: ^[A-Za-z0-9_\.\-]+$
+                        title: DeploymentTargets.Name
+                        type: string
+                      object_rules:
+                        description: "Configure which branches, tags or PRs can trigger a deployment.\n            **If left empty all branches, tags or PRs can trigger a deployment.**"
+                        properties:
+                          branches:
+                            oneOf:
+                            - description: Allows all branch to trigger a deployment
+                              enum:
+                              - ALL
+                              title: DeploymentTargets.DeploymentTarget.ObjectRule.Branch.All
+                              type: string
+                            - description: The pattern to match against the branch name
+                              title: DeploymentTargets.DeploymentTarget.ObjectRule.Branch.MatchType
+                              type: array
+                            title: DeploymentTargets.DeploymentTarget.ObjectRule.Branch
+                          prs:
+                            default: NONE
+                            description: Allows all or none of the PRs to trigger a deployment
+                            enum:
+                            - ALL
+                            - NONE
+                            type: string
+                          tags:
+                            oneOf:
+                            - description: Allows all tag to trigger a deployment
+                              enum:
+                              - ALL
+                              title: DeploymentTargets.DeploymentTarget.ObjectRule.Tag.All
+                              type: string
+                            - description: The pattern to match against the tag name
+                              title: DeploymentTargets.DeploymentTarget.ObjectRule.Tag.MatchType
+                              type: array
+                            title: DeploymentTargets.DeploymentTarget.ObjectRule.Tag
+                        type: object
+                      subject_rules:
+                        description: '
+
+                          Configure who can trigger a deployment.
+
+                          **If left empty all users can trigger a deployment.**
+
+                          '
+                        properties:
+                          any:
+                            default: false
+                            description: Allows any user or auto-promotion to trigger a deployment, if true all other rules are ignored and all users can trigger a deployment
+                            type: boolean
+                          auto:
+                            description: Allows auto-promotions to be triggered
+                            type: boolean
+                          roles:
+                            description: "The list of roles of users that are allowed to trigger a deployment,\n                 by default project roles are `Reader`, `Contributor` and `Admin`, read more [here](https://docs.semaphoreci.com/security/default-roles/#project-roles).\n                 Role names are case insensitive."
+                            items:
+                              description: The name of the role.
+                              example: Contributor
+                              type: string
+                            type: array
+                          users:
+                            description: The list of users that are allowed to trigger a deployment
+                            items:
+                              anyOf:
+                              - description: The uuid of the user
+                                format: uuid
+                                type: string
+                              - description: The git handle of the user
+                                type: string
+                              description: The git handle or id of the user
+                            type: array
+                        type: object
+                      url:
+                        description: The URL of the target
+                        type: string
+                    required:
+                    - name
+                    type: object
+                required:
+                - apiVersion
+                - kind
+                - spec
+                title: DeploymentTargets.DeploymentTarget
+                type: object
+          description: Described deployment target
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+    patch:
+      operationId: DeploymentTargets.Update
+      description: Update a deployment target for the project. Fields that are not provided will not be updated.
+      tags:
+      - DeploymentTargets
+      parameters:
+      - description: Id or name of the project
+        in: path
+        name: project_id_or_name
+        required: true
+        schema:
+          anyOf:
+          - description: ID of a Project
+            example: 140560e5-352b-4b51-a728-1bb144a7a0d7
+            format: uuid
+            title: Project.ID
+            type: string
+          - description: Project name must match the regex
+            example: my-project
+            minLength: 1
+            pattern: \A[\w\-\.]+\z
+            title: Project.Name
+            type: string
+      - description: Id or name of the deployment target
+        in: path
+        name: id_or_name
+        required: true
+        schema:
+          description: Id or name of the deployment target
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                deployment_target:
+                  properties:
+                    apiVersion:
+                      default: v2
+                      description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                      example: v2
+                      readOnly: true
+                      title: ApiVersion
+                      type: string
+                    kind:
+                      default: DeploymentTarget
+                      description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                      example: DeploymentTarget
+                      readOnly: true
+                      title: Kind
+                      type: string
+                    metadata:
+                      description: Metadata of the deployment targets, all fields are read only
+                      properties:
+                        created_at:
+                          description: Timestamp in ISO 8601 format
+                          format: date-time
+                          title: Timestamp
+                          type: string
+                        created_by:
+                          properties:
+                            id:
+                              description: ID of a User
+                              example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                              format: uuid
+                              title: User.ID
+                              type: string
+                          title: User
+                          type: object
+                        description:
+                          description: Description of the deployment target
+                          type: string
+                        id:
+                          description: ID of a DeploymentTarget
+                          example: 9c777b65-213f-4fe1-bc6b-727d2cdde97d
+                          format: uuid
+                          title: DeploymentTarget.ID
+                          type: string
+                        last_deployment:
+                          description: A deployment history item contains relevant details about deployments triggered for a deployment target.
+                          nullable: true
+                          properties:
+                            env_vars:
+                              description: Environment variables of the deployment target
+                              items:
+                                description: EnvVar
+                                properties:
+                                  name:
+                                    description: Name of the environment variable
+                                    example: MY_SECRET
+                                    minLength: 1
+                                    type: string
+                                  value:
+                                    description: Value of the environment variable
+                                    example: secret
+                                    minLength: 1
+                                    type: string
+                                required:
+                                - name
+                                - value
+                                title: Secrets.Secret.EnvVar
+                                type: object
+                              type: array
+                            id:
+                              description: ID of a Deployment
+                              example: a0424427-ff28-4f77-a893-0fdf5f50c380
+                              format: uuid
+                              title: Deployment.ID
+                              type: string
+                            origin_pipeline_id:
+                              description: ID of a Pipeline
+                              example: 97ba55d1-90d7-40b9-a2dd-bdbd02389b58
+                              format: uuid
+                              nullable: true
+                              title: Pipeline.ID
+                              type: string
+                            pipeline_id:
+                              description: ID of a Pipeline
+                              example: adc5a26f-4077-47bc-8d4f-cb4467f2c103
+                              format: uuid
+                              nullable: true
+                              title: Pipeline.ID
+                              type: string
+                            state:
+                              description: The state of the last deployment of the deployment target
+                              enum:
+                              - PENDING
+                              - STARTED
+                              - FAILED
+                              type: string
+                            state_message:
+                              description: The message of the last deployment of the deployment target
+                              type: string
+                            target_id:
+                              description: ID of a DeploymentTarget
+                              example: 4a9e9001-6703-4815-9c19-ed2e9e8c87ea
+                              format: uuid
+                              title: DeploymentTarget.ID
+                              type: string
+                            target_name:
+                              description: The name of the deployment target
+                              type: string
+                            triggered_at:
+                              description: Timestamp in ISO 8601 format
+                              format: date-time
+                              title: Timestamp
+                              type: string
+                            triggered_by:
+                              properties:
+                                id:
+                                  description: ID of a User
+                                  example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                                  format: uuid
+                                  title: User.ID
+                                  type: string
+                              title: User
+                              type: object
+                          title: DeploymentTargets.HistoryItem
+                          type: object
+                        name:
+                          description: 'DeploymentTargets name must be unique on project level, must match the name regex: `^[A-Za-z0-9_.-]+$`'
+                          example: production
+                          minLength: 1
+                          pattern: ^[A-Za-z0-9_\.\-]+$
+                          title: DeploymentTargets.Name
+                          type: string
+                        org_id:
+                          description: ID of a Organization
+                          example: 02b7c528-b0f1-4266-8e5e-10b7b984e76a
+                          format: uuid
+                          title: Organization.ID
+                          type: string
+                        project_id:
+                          description: ID of a Project
+                          example: 726dbefd-b30c-4c80-bc9a-c0613968a2ca
+                          format: uuid
+                          title: Project.ID
+                          type: string
+                        state:
+                          description: "State of the deployment target.\n - `SYNCING` - Deployment Target secret is synchronizing\n - `USABLE` - Deployment Target is active and can be used or modified\n - `UNUSABLE` - Deployment Target is corrupted and cannot be used or modified\n - `CORDONED` - Deployment Target has been cordoned and deactivated\n "
+                          enum:
+                          - SYNCING
+                          - USABLE
+                          - UNUSABLE
+                          - CORDONED
+                          type: string
+                        updated_at:
+                          description: Timestamp in ISO 8601 format
+                          format: date-time
+                          title: Timestamp
+                          type: string
+                        updated_by:
+                          properties:
+                            id:
+                              description: ID of a User
+                              example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                              format: uuid
+                              title: User.ID
+                              type: string
+                          title: User
+                          type: object
+                      readOnly: true
+                      required:
+                      - id
+                      - name
+                      - project_id
+                      type: object
+                    spec:
+                      description: Specification of the deployment target
+                      properties:
+                        active:
+                          description: The state of the deployment target, true if the deployment is not cordoned
+                          type: boolean
+                        bookmark_parameters:
+                          description: The names of the promotion parameters. You can later use values of these parameters to filter deployments in deployment history.
+                          items:
+                            description: The name of the promotion parameter
+                            type: string
+                          maxItems: 3
+                          minItems: 0
+                          type: array
+                        description:
+                          description: Description of the deployment target
+                          type: string
+                        env_vars:
+                          description: Environment variables of the deployment target, only in create requests.
+                          items:
+                            description: EnvVar
+                            properties:
+                              name:
+                                description: Name of the environment variable
+                                example: MY_SECRET
+                                minLength: 1
+                                type: string
+                              value:
+                                description: Value of the environment variable
+                                example: secret
+                                minLength: 1
+                                type: string
+                            required:
+                            - name
+                            - value
+                            title: Secrets.Secret.EnvVar
+                            type: object
+                          type: array
+                        files:
+                          description: Files of the deployment target, only in create requests.
+                          items:
+                            description: File
+                            properties:
+                              content:
+                                description: base64 encoded content of the file or a md5 checksum
+                                type: string
+                              path:
+                                description: Name of the file. Both absolute and relative paths are allowed.
+                                example: /path/to/file
+                                minLength: 1
+                                type: string
+                            required:
+                            - path
+                            - content
+                            title: Secrets.Secret.File
+                            type: object
+                          type: array
+                        name:
+                          description: 'DeploymentTargets name must be unique on project level, must match the name regex: `^[A-Za-z0-9_.-]+$`'
+                          example: production
+                          minLength: 1
+                          pattern: ^[A-Za-z0-9_\.\-]+$
+                          title: DeploymentTargets.Name
+                          type: string
+                        object_rules:
+                          description: "Configure which branches, tags or PRs can trigger a deployment.\n            **If left empty all branches, tags or PRs can trigger a deployment.**"
+                          properties:
+                            branches:
+                              oneOf:
+                              - description: Allows all branch to trigger a deployment
+                                enum:
+                                - ALL
+                                title: DeploymentTargets.DeploymentTarget.ObjectRule.Branch.All
+                                type: string
+                              - description: The pattern to match against the branch name
+                                title: DeploymentTargets.DeploymentTarget.ObjectRule.Branch.MatchType
+                                type: array
+                              title: DeploymentTargets.DeploymentTarget.ObjectRule.Branch
+                            prs:
+                              default: NONE
+                              description: Allows all or none of the PRs to trigger a deployment
+                              enum:
+                              - ALL
+                              - NONE
+                              type: string
+                            tags:
+                              oneOf:
+                              - description: Allows all tag to trigger a deployment
+                                enum:
+                                - ALL
+                                title: DeploymentTargets.DeploymentTarget.ObjectRule.Tag.All
+                                type: string
+                              - description: The pattern to match against the tag name
+                                title: DeploymentTargets.DeploymentTarget.ObjectRule.Tag.MatchType
+                                type: array
+                              title: DeploymentTargets.DeploymentTarget.ObjectRule.Tag
+                          type: object
+                        subject_rules:
+                          description: '
+
+                            Configure who can trigger a deployment.
+
+                            **If left empty all users can trigger a deployment.**
+
+                            '
+                          properties:
+                            any:
+                              default: false
+                              description: Allows any user or auto-promotion to trigger a deployment, if true all other rules are ignored and all users can trigger a deployment
+                              type: boolean
+                            auto:
+                              description: Allows auto-promotions to be triggered
+                              type: boolean
+                            roles:
+                              description: "The list of roles of users that are allowed to trigger a deployment,\n                 by default project roles are `Reader`, `Contributor` and `Admin`, read more [here](https://docs.semaphoreci.com/security/default-roles/#project-roles).\n                 Role names are case insensitive."
+                              items:
+                                description: The name of the role.
+                                example: Contributor
+                                type: string
+                              type: array
+                            users:
+                              description: The list of users that are allowed to trigger a deployment
+                              items:
+                                anyOf:
+                                - description: The uuid of the user
+                                  format: uuid
+                                  type: string
+                                - description: The git handle of the user
+                                  type: string
+                                description: The git handle or id of the user
+                              type: array
+                          type: object
+                        url:
+                          description: The URL of the target
+                          type: string
+                      required:
+                      - name
+                      type: object
+                  required:
+                  - apiVersion
+                  - kind
+                  - spec
+                  title: DeploymentTargets.DeploymentTarget
+                  type: object
+                unique_token:
+                  description: The unique idempotency UUID.
+                  type: string
+              required:
+              - unique_token
+              - deployment_target
+              title: DeploymentTargets.UpdateRequest
+              type: object
+        description: Deployment target to be updated and a unique token.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  apiVersion:
+                    default: v2
+                    description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                    example: v2
+                    readOnly: true
+                    title: ApiVersion
+                    type: string
+                  kind:
+                    default: DeploymentTarget
+                    description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                    example: DeploymentTarget
+                    readOnly: true
+                    title: Kind
+                    type: string
+                  metadata:
+                    description: Metadata of the deployment targets, all fields are read only
+                    properties:
+                      created_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      created_by:
+                        properties:
+                          id:
+                            description: ID of a User
+                            example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                            format: uuid
+                            title: User.ID
+                            type: string
+                        title: User
+                        type: object
+                      description:
+                        description: Description of the deployment target
+                        type: string
+                      id:
+                        description: ID of a DeploymentTarget
+                        example: 9c777b65-213f-4fe1-bc6b-727d2cdde97d
+                        format: uuid
+                        title: DeploymentTarget.ID
+                        type: string
+                      last_deployment:
+                        description: A deployment history item contains relevant details about deployments triggered for a deployment target.
+                        nullable: true
+                        properties:
+                          env_vars:
+                            description: Environment variables of the deployment target
+                            items:
+                              description: EnvVar
+                              properties:
+                                name:
+                                  description: Name of the environment variable
+                                  example: MY_SECRET
+                                  minLength: 1
+                                  type: string
+                                value:
+                                  description: Value of the environment variable
+                                  example: secret
+                                  minLength: 1
+                                  type: string
+                              required:
+                              - name
+                              - value
+                              title: Secrets.Secret.EnvVar
+                              type: object
+                            type: array
+                          id:
+                            description: ID of a Deployment
+                            example: a0424427-ff28-4f77-a893-0fdf5f50c380
+                            format: uuid
+                            title: Deployment.ID
+                            type: string
+                          origin_pipeline_id:
+                            description: ID of a Pipeline
+                            example: 97ba55d1-90d7-40b9-a2dd-bdbd02389b58
+                            format: uuid
+                            nullable: true
+                            title: Pipeline.ID
+                            type: string
+                          pipeline_id:
+                            description: ID of a Pipeline
+                            example: adc5a26f-4077-47bc-8d4f-cb4467f2c103
+                            format: uuid
+                            nullable: true
+                            title: Pipeline.ID
+                            type: string
+                          state:
+                            description: The state of the last deployment of the deployment target
+                            enum:
+                            - PENDING
+                            - STARTED
+                            - FAILED
+                            type: string
+                          state_message:
+                            description: The message of the last deployment of the deployment target
+                            type: string
+                          target_id:
+                            description: ID of a DeploymentTarget
+                            example: 4a9e9001-6703-4815-9c19-ed2e9e8c87ea
+                            format: uuid
+                            title: DeploymentTarget.ID
+                            type: string
+                          target_name:
+                            description: The name of the deployment target
+                            type: string
+                          triggered_at:
+                            description: Timestamp in ISO 8601 format
+                            format: date-time
+                            title: Timestamp
+                            type: string
+                          triggered_by:
+                            properties:
+                              id:
+                                description: ID of a User
+                                example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                                format: uuid
+                                title: User.ID
+                                type: string
+                            title: User
+                            type: object
+                        title: DeploymentTargets.HistoryItem
+                        type: object
+                      name:
+                        description: 'DeploymentTargets name must be unique on project level, must match the name regex: `^[A-Za-z0-9_.-]+$`'
+                        example: production
+                        minLength: 1
+                        pattern: ^[A-Za-z0-9_\.\-]+$
+                        title: DeploymentTargets.Name
+                        type: string
+                      org_id:
+                        description: ID of a Organization
+                        example: 02b7c528-b0f1-4266-8e5e-10b7b984e76a
+                        format: uuid
+                        title: Organization.ID
+                        type: string
+                      project_id:
+                        description: ID of a Project
+                        example: 726dbefd-b30c-4c80-bc9a-c0613968a2ca
+                        format: uuid
+                        title: Project.ID
+                        type: string
+                      state:
+                        description: "State of the deployment target.\n - `SYNCING` - Deployment Target secret is synchronizing\n - `USABLE` - Deployment Target is active and can be used or modified\n - `UNUSABLE` - Deployment Target is corrupted and cannot be used or modified\n - `CORDONED` - Deployment Target has been cordoned and deactivated\n "
+                        enum:
+                        - SYNCING
+                        - USABLE
+                        - UNUSABLE
+                        - CORDONED
+                        type: string
+                      updated_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      updated_by:
+                        properties:
+                          id:
+                            description: ID of a User
+                            example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                            format: uuid
+                            title: User.ID
+                            type: string
+                        title: User
+                        type: object
+                    readOnly: true
+                    required:
+                    - id
+                    - name
+                    - project_id
+                    type: object
+                  spec:
+                    description: Specification of the deployment target
+                    properties:
+                      active:
+                        description: The state of the deployment target, true if the deployment is not cordoned
+                        type: boolean
+                      bookmark_parameters:
+                        description: The names of the promotion parameters. You can later use values of these parameters to filter deployments in deployment history.
+                        items:
+                          description: The name of the promotion parameter
+                          type: string
+                        maxItems: 3
+                        minItems: 0
+                        type: array
+                      description:
+                        description: Description of the deployment target
+                        type: string
+                      env_vars:
+                        description: Environment variables of the deployment target, only in create requests.
+                        items:
+                          description: EnvVar
+                          properties:
+                            name:
+                              description: Name of the environment variable
+                              example: MY_SECRET
+                              minLength: 1
+                              type: string
+                            value:
+                              description: Value of the environment variable
+                              example: secret
+                              minLength: 1
+                              type: string
+                          required:
+                          - name
+                          - value
+                          title: Secrets.Secret.EnvVar
+                          type: object
+                        type: array
+                      files:
+                        description: Files of the deployment target, only in create requests.
+                        items:
+                          description: File
+                          properties:
+                            content:
+                              description: base64 encoded content of the file or a md5 checksum
+                              type: string
+                            path:
+                              description: Name of the file. Both absolute and relative paths are allowed.
+                              example: /path/to/file
+                              minLength: 1
+                              type: string
+                          required:
+                          - path
+                          - content
+                          title: Secrets.Secret.File
+                          type: object
+                        type: array
+                      name:
+                        description: 'DeploymentTargets name must be unique on project level, must match the name regex: `^[A-Za-z0-9_.-]+$`'
+                        example: production
+                        minLength: 1
+                        pattern: ^[A-Za-z0-9_\.\-]+$
+                        title: DeploymentTargets.Name
+                        type: string
+                      object_rules:
+                        description: "Configure which branches, tags or PRs can trigger a deployment.\n            **If left empty all branches, tags or PRs can trigger a deployment.**"
+                        properties:
+                          branches:
+                            oneOf:
+                            - description: Allows all branch to trigger a deployment
+                              enum:
+                              - ALL
+                              title: DeploymentTargets.DeploymentTarget.ObjectRule.Branch.All
+                              type: string
+                            - description: The pattern to match against the branch name
+                              title: DeploymentTargets.DeploymentTarget.ObjectRule.Branch.MatchType
+                              type: array
+                            title: DeploymentTargets.DeploymentTarget.ObjectRule.Branch
+                          prs:
+                            default: NONE
+                            description: Allows all or none of the PRs to trigger a deployment
+                            enum:
+                            - ALL
+                            - NONE
+                            type: string
+                          tags:
+                            oneOf:
+                            - description: Allows all tag to trigger a deployment
+                              enum:
+                              - ALL
+                              title: DeploymentTargets.DeploymentTarget.ObjectRule.Tag.All
+                              type: string
+                            - description: The pattern to match against the tag name
+                              title: DeploymentTargets.DeploymentTarget.ObjectRule.Tag.MatchType
+                              type: array
+                            title: DeploymentTargets.DeploymentTarget.ObjectRule.Tag
+                        type: object
+                      subject_rules:
+                        description: '
+
+                          Configure who can trigger a deployment.
+
+                          **If left empty all users can trigger a deployment.**
+
+                          '
+                        properties:
+                          any:
+                            default: false
+                            description: Allows any user or auto-promotion to trigger a deployment, if true all other rules are ignored and all users can trigger a deployment
+                            type: boolean
+                          auto:
+                            description: Allows auto-promotions to be triggered
+                            type: boolean
+                          roles:
+                            description: "The list of roles of users that are allowed to trigger a deployment,\n                 by default project roles are `Reader`, `Contributor` and `Admin`, read more [here](https://docs.semaphoreci.com/security/default-roles/#project-roles).\n                 Role names are case insensitive."
+                            items:
+                              description: The name of the role.
+                              example: Contributor
+                              type: string
+                            type: array
+                          users:
+                            description: The list of users that are allowed to trigger a deployment
+                            items:
+                              anyOf:
+                              - description: The uuid of the user
+                                format: uuid
+                                type: string
+                              - description: The git handle of the user
+                                type: string
+                              description: The git handle or id of the user
+                            type: array
+                        type: object
+                      url:
+                        description: The URL of the target
+                        type: string
+                    required:
+                    - name
+                    type: object
+                required:
+                - apiVersion
+                - kind
+                - spec
+                title: DeploymentTargets.DeploymentTarget
+                type: object
+          description: Updated deployment target
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+  /projects/{project_id_or_name}/deployment_targets/{id_or_name}/activate:
+    patch:
+      operationId: DeploymentTargets.Activate
+      description: Activate a deployment target for the project.
+      tags:
+      - DeploymentTargets
+      parameters:
+      - description: Id or name of the project
+        in: path
+        name: project_id_or_name
+        required: true
+        schema:
+          anyOf:
+          - description: ID of a Project
+            example: 7b409a00-3160-4a36-9527-3b53d6de8926
+            format: uuid
+            title: Project.ID
+            type: string
+          - description: Project name must match the regex
+            example: my-project
+            minLength: 1
+            pattern: \A[\w\-\.]+\z
+            title: Project.Name
+            type: string
+      - description: Id or name of the deployment target
+        in: path
+        name: id_or_name
+        required: true
+        schema:
+          description: Id or name of the deployment target
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    description: ID of a DeploymentTarget
+                    example: 2bc0207c-155f-4824-be69-6136bd5e0a1d
+                    format: uuid
+                    title: DeploymentTarget.ID
+                    type: string
+                  state:
+                    description: "State of the deployment target, `CORDONED` deployment target is an deactivated deployment target.\n           Deployment Target in `USABLE` state can be used or modified."
+                    enum:
+                    - USABLE
+                    - CORDONED
+                    type: string
+                title: DeploymentTargets.CordonResponse
+                type: object
+          description: Activated deployment target
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+  /projects/{project_id_or_name}/deployment_targets/{id_or_name}/deactivate:
+    patch:
+      operationId: DeploymentTargets.Deactivate
+      description: Deactivate a deployment target for the project.
+      tags:
+      - DeploymentTargets
+      parameters:
+      - description: Id or name of the project
+        in: path
+        name: project_id_or_name
+        required: true
+        schema:
+          anyOf:
+          - description: ID of a Project
+            example: 5e7822f2-0663-44e0-a722-ed64d29c80fb
+            format: uuid
+            title: Project.ID
+            type: string
+          - description: Project name must match the regex
+            example: my-project
+            minLength: 1
+            pattern: \A[\w\-\.]+\z
+            title: Project.Name
+            type: string
+      - description: Id or name of the deployment target
+        in: path
+        name: id_or_name
+        required: true
+        schema:
+          description: Id or name of the deployment target
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    description: ID of a DeploymentTarget
+                    example: 2bc0207c-155f-4824-be69-6136bd5e0a1d
+                    format: uuid
+                    title: DeploymentTarget.ID
+                    type: string
+                  state:
+                    description: "State of the deployment target, `CORDONED` deployment target is an deactivated deployment target.\n           Deployment Target in `USABLE` state can be used or modified."
+                    enum:
+                    - USABLE
+                    - CORDONED
+                    type: string
+                title: DeploymentTargets.CordonResponse
+                type: object
+          description: Deactivated deployment target
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+  /projects/{project_id_or_name}/deployment_targets/{id_or_name}/history:
+    get:
+      operationId: DeploymentTargets.History
+      description: This endpoint provides the deployment history for a specific deployment target.
+      tags:
+      - DeploymentTargets
+      parameters:
+      - description: Id or name of the project
+        in: path
+        name: project_id_or_name
+        required: true
+        schema:
+          anyOf:
+          - description: ID of a Project
+            example: ccaedf80-b27c-4471-8c6f-3e936f3b457c
+            format: uuid
+            title: Project.ID
+            type: string
+          - description: Project name must match the regex
+            example: my-project
+            minLength: 1
+            pattern: \A[\w\-\.]+\z
+            title: Project.Name
+            type: string
+      - description: Id or name of the deployment target
+        in: path
+        name: id_or_name
+        required: true
+        schema:
+          description: Id or name of the deployment target
+          type: string
+      - description: Git reference type
+        in: query
+        name: git_ref_type
+        required: false
+        schema:
+          description: Git reference type
+          type: string
+      - description: Git reference label
+        in: query
+        name: git_ref_label
+        required: false
+        schema:
+          description: Git reference label
+          type: string
+      - description: Triggerer ID or value
+        in: query
+        name: triggered_by
+        required: false
+        schema:
+          description: Triggerer ID or value
+          type: string
+      - description: 'Value of promotion parameter with the name from bookmark slot #1'
+        in: query
+        name: parameter1
+        required: false
+        schema:
+          description: 'Value of promotion parameter with the name from bookmark slot #1'
+          type: string
+      - description: 'Value of promotion parameter with the name from bookmark slot #2'
+        in: query
+        name: parameter2
+        required: false
+        schema:
+          description: 'Value of promotion parameter with the name from bookmark slot #2'
+          type: string
+      - description: 'Value of promotion parameter with the name from bookmark slot #3'
+        in: query
+        name: parameter3
+        required: false
+        schema:
+          description: 'Value of promotion parameter with the name from bookmark slot #3'
+          type: string
+      - description: Direction of the list from the provided token
+        in: query
+        name: direction
+        required: false
+        schema:
+          default: NEXT
+          description: "Use NEXT the token to get next page of results,\n              use PREVIOUS to get the deployments before the token."
+          enum:
+          - NEXT
+          - PREVIOUS
+          type: string
+      - description: Starting point for listing, if you are fetching first page leave it empty
+        in: query
+        name: page_token
+        required: false
+        schema:
+          default: ''
+          type: string
+      - description: Page size
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 20
+          maximum: 100
+          minimum: 1
+          title: PageSize
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  description: A deployment history item contains relevant details about deployments triggered for a deployment target.
+                  nullable: true
+                  properties:
+                    env_vars:
+                      description: Environment variables of the deployment target
+                      items:
+                        description: EnvVar
+                        properties:
+                          name:
+                            description: Name of the environment variable
+                            example: MY_SECRET
+                            minLength: 1
+                            type: string
+                          value:
+                            description: Value of the environment variable
+                            example: secret
+                            minLength: 1
+                            type: string
+                        required:
+                        - name
+                        - value
+                        title: Secrets.Secret.EnvVar
+                        type: object
+                      type: array
+                    id:
+                      description: ID of a Deployment
+                      example: a0424427-ff28-4f77-a893-0fdf5f50c380
+                      format: uuid
+                      title: Deployment.ID
+                      type: string
+                    origin_pipeline_id:
+                      description: ID of a Pipeline
+                      example: 97ba55d1-90d7-40b9-a2dd-bdbd02389b58
+                      format: uuid
+                      nullable: true
+                      title: Pipeline.ID
+                      type: string
+                    pipeline_id:
+                      description: ID of a Pipeline
+                      example: adc5a26f-4077-47bc-8d4f-cb4467f2c103
+                      format: uuid
+                      nullable: true
+                      title: Pipeline.ID
+                      type: string
+                    state:
+                      description: The state of the last deployment of the deployment target
+                      enum:
+                      - PENDING
+                      - STARTED
+                      - FAILED
+                      type: string
+                    state_message:
+                      description: The message of the last deployment of the deployment target
+                      type: string
+                    target_id:
+                      description: ID of a DeploymentTarget
+                      example: 4a9e9001-6703-4815-9c19-ed2e9e8c87ea
+                      format: uuid
+                      title: DeploymentTarget.ID
+                      type: string
+                    target_name:
+                      description: The name of the deployment target
+                      type: string
+                    triggered_at:
+                      description: Timestamp in ISO 8601 format
+                      format: date-time
+                      title: Timestamp
+                      type: string
+                    triggered_by:
+                      properties:
+                        id:
+                          description: ID of a User
+                          example: 18b40eaf-ce10-49c3-93f2-e4fe72d5160b
+                          format: uuid
+                          title: User.ID
+                          type: string
+                      title: User
+                      type: object
+                  title: DeploymentTargets.HistoryItem
+                  type: object
+                title: DeploymentTargets.HistoryResponse
+                type: array
+          description: History of deployment target
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+components:
+  securitySchemes:
+    authorization:
+      description: Token that you get from semaphore [account settings](https://me.semaphoreci.com/account).
+      name: authorization
+      scheme: bearer
+      type: http

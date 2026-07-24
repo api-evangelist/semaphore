@@ -1,0 +1,1897 @@
+openapi: 3.0.3
+info:
+  title: Semaphore Public Dashboards Notifications API
+  description: 'The Semaphore Public API is a RESTful API that allows you to interact with Semaphore CI/CD.
+
+    ## Authorization
+
+    Authorization is done via bearer token. You can obtain a token by visiting your [account settings](https://me.semaphoreci.com/account).
+
+
+    ## Pagination with link headers
+
+    Each list request supports pagination. List responses include a [link header](https://datatracker.ietf.org/doc/html/rfc5988#section-5) with the pagination URLs.
+
+    Link headers contain next, previous, first relative URLs.
+
+    '
+  version: v2
+  contact:
+    url: https://semaphore.io/contact
+    email: support@semaphoreci.com
+  termsOfService: https://semaphore.io/terms
+  license:
+    name: Proprietary
+    url: https://semaphore.io/terms
+servers:
+- url: https://{org_name}.semaphoreci.com/api/v2
+  variables:
+    org_name:
+      default: me
+      description: Organization name
+security:
+- authorization: []
+tags:
+- name: Notifications
+  description: Notification management
+paths:
+  /notifications:
+    post:
+      operationId: Notifications.Create
+      description: Create a notification.
+      tags:
+      - Notifications
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                apiVersion:
+                  default: v2
+                  description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                  example: v2
+                  readOnly: true
+                  title: ApiVersion
+                  type: string
+                kind:
+                  default: Notification
+                  description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                  example: Notification
+                  readOnly: true
+                  title: Kind
+                  type: string
+                metadata:
+                  description: Metadata of the notification, all fields are read only
+                  properties:
+                    created_at:
+                      description: Timestamp in ISO 8601 format
+                      format: date-time
+                      title: Timestamp
+                      type: string
+                    id:
+                      description: ID of a Notification
+                      example: ee251df7-6946-4544-840d-b8ac7c02c3e3
+                      format: uuid
+                      title: Notification.ID
+                      type: string
+                    name:
+                      description: Name of the notification
+                      type: string
+                    org_id:
+                      description: ID of a Organization
+                      example: 83293713-b759-46ba-8432-f4c641e3bf14
+                      format: uuid
+                      title: Organization.ID
+                      type: string
+                    status:
+                      properties:
+                        failures:
+                          description: A failure contains a timestamp and a description of a failure
+                          items:
+                            properties:
+                              description:
+                                description: Description of the failure
+                                type: string
+                              timestamp:
+                                description: Timestamp in ISO 8601 format
+                                format: date-time
+                                title: Timestamp
+                                type: string
+                            type: object
+                          type: array
+                      title: Notifications.Notification.Status
+                      type: object
+                    updated_at:
+                      description: Timestamp in ISO 8601 format
+                      format: date-time
+                      nullable: true
+                      title: Timestamp
+                      type: string
+                  readOnly: true
+                  required:
+                  - id
+                  - name
+                  type: object
+                spec:
+                  description: Specification of the notification
+                  properties:
+                    name:
+                      description: Name of the notification
+                      type: string
+                    rules:
+                      description: 'Rules must have at least one element. Maximal number of rules: 20.'
+                      items:
+                        properties:
+                          filter:
+                            description: Filter for the notification rule
+                            properties:
+                              branches:
+                                description: "List of branch names to trigger this rule. Default: all branches.\n             Examples:\n               - \"master\" - strictly match the master branch\n               - \"/^release-*/\" - regex matches branches that start with 'release-' prefix"
+                                items:
+                                  type: string
+                                type: array
+                              pipelines:
+                                default: semaphore.yml
+                                description: "List of pipeline names to trigger this rule. The rule matches pipeline file name disregarding the path.\n            Examples:\n              - \"semaphore.yml\" - will match `semaphore.yml` pipeline\n              - \"/^stg-*/\" - regex matches pipelines that start with 'stg-' prefix"
+                                items:
+                                  type: string
+                                type: array
+                              projects:
+                                description: "List of project names to trigger this rule. Default no projects.\n             Examples:\n              - \"cli\" - strictly match the CLI project\n              - \"/^s2-*/\" - regex mathes projects that start with 's2-' prefix"
+                                items:
+                                  type: string
+                                type: array
+                              results:
+                                description: 'List of results to trigger this rule. Default: every result.'
+                                items:
+                                  description: 'Either a string or a regex, possible values: `PASSED`, `STOPPED`, `CANCELED`, `FAILED`.'
+                                  enum:
+                                  - PASSED
+                                  - STOPPED
+                                  - CANCELED
+                                  - FAILED
+                                  type: string
+                                type: array
+                            type: object
+                          name:
+                            description: Name of the notification rule
+                            type: string
+                          notify:
+                            description: Notification settings
+                            properties:
+                              email:
+                                description: Email notification settings
+                                nullable: true
+                                properties:
+                                  bcc:
+                                    description: Email BCC
+                                    items:
+                                      type: string
+                                    type: array
+                                  cc:
+                                    description: Email CC
+                                    items:
+                                      type: string
+                                    minItems: 1
+                                    type: array
+                                  content:
+                                    description: Email content
+                                    type: string
+                                  status:
+                                    enum:
+                                    - ACTIVE
+                                    - INACTIVE
+                                    title: Notifications.Notification.Rule.Status
+                                    type: string
+                                  subject:
+                                    description: Email subject
+                                    type: string
+                                required:
+                                - cc
+                                type: object
+                              slack:
+                                description: Slack notification settings
+                                nullable: true
+                                properties:
+                                  channels:
+                                    description: Slack channels
+                                    items:
+                                      type: string
+                                    type: array
+                                  endpoint:
+                                    description: Slack endpoint
+                                    type: string
+                                  message:
+                                    description: Slack message
+                                    type: string
+                                  status:
+                                    enum:
+                                    - ACTIVE
+                                    - INACTIVE
+                                    title: Notifications.Notification.Rule.Status
+                                    type: string
+                                required:
+                                - endpoint
+                                type: object
+                              webhook:
+                                description: Webhook notification settings
+                                nullable: true
+                                properties:
+                                  method:
+                                    default: POST
+                                    description: Webhook http verb
+                                    type: string
+                                  retries:
+                                    default: 3
+                                    description: Number of times to retry delivery.
+                                    maximum: 3
+                                    minimum: 1
+                                    type: integer
+                                  secret:
+                                    description: Name of a Semaphore secret, which will be used to sign the payload.
+                                    type: string
+                                  status:
+                                    enum:
+                                    - ACTIVE
+                                    - INACTIVE
+                                    title: Notifications.Notification.Rule.Status
+                                    type: string
+                                  timeout:
+                                    default: 500
+                                    description: Webhook delivery timeout in ms
+                                    type: integer
+                                  url:
+                                    description: Webhook HTTP endpoint to hit.
+                                    type: string
+                                required:
+                                - url
+                                type: object
+                            type: object
+                        title: Notifications.Notification.Rule
+                        type: object
+                      maxLength: 20
+                      minLength: 1
+                      type: array
+                  required:
+                  - name
+                  type: object
+              required:
+              - apiVersion
+              - kind
+              - metadata
+              - spec
+              title: Notifications.Notification
+              type: object
+        description: Notification to be created
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  apiVersion:
+                    default: v2
+                    description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                    example: v2
+                    readOnly: true
+                    title: ApiVersion
+                    type: string
+                  kind:
+                    default: Notification
+                    description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                    example: Notification
+                    readOnly: true
+                    title: Kind
+                    type: string
+                  metadata:
+                    description: Metadata of the notification, all fields are read only
+                    properties:
+                      created_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      id:
+                        description: ID of a Notification
+                        example: ee251df7-6946-4544-840d-b8ac7c02c3e3
+                        format: uuid
+                        title: Notification.ID
+                        type: string
+                      name:
+                        description: Name of the notification
+                        type: string
+                      org_id:
+                        description: ID of a Organization
+                        example: 83293713-b759-46ba-8432-f4c641e3bf14
+                        format: uuid
+                        title: Organization.ID
+                        type: string
+                      status:
+                        properties:
+                          failures:
+                            description: A failure contains a timestamp and a description of a failure
+                            items:
+                              properties:
+                                description:
+                                  description: Description of the failure
+                                  type: string
+                                timestamp:
+                                  description: Timestamp in ISO 8601 format
+                                  format: date-time
+                                  title: Timestamp
+                                  type: string
+                              type: object
+                            type: array
+                        title: Notifications.Notification.Status
+                        type: object
+                      updated_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        nullable: true
+                        title: Timestamp
+                        type: string
+                    readOnly: true
+                    required:
+                    - id
+                    - name
+                    type: object
+                  spec:
+                    description: Specification of the notification
+                    properties:
+                      name:
+                        description: Name of the notification
+                        type: string
+                      rules:
+                        description: 'Rules must have at least one element. Maximal number of rules: 20.'
+                        items:
+                          properties:
+                            filter:
+                              description: Filter for the notification rule
+                              properties:
+                                branches:
+                                  description: "List of branch names to trigger this rule. Default: all branches.\n             Examples:\n               - \"master\" - strictly match the master branch\n               - \"/^release-*/\" - regex matches branches that start with 'release-' prefix"
+                                  items:
+                                    type: string
+                                  type: array
+                                pipelines:
+                                  default: semaphore.yml
+                                  description: "List of pipeline names to trigger this rule. The rule matches pipeline file name disregarding the path.\n            Examples:\n              - \"semaphore.yml\" - will match `semaphore.yml` pipeline\n              - \"/^stg-*/\" - regex matches pipelines that start with 'stg-' prefix"
+                                  items:
+                                    type: string
+                                  type: array
+                                projects:
+                                  description: "List of project names to trigger this rule. Default no projects.\n             Examples:\n              - \"cli\" - strictly match the CLI project\n              - \"/^s2-*/\" - regex mathes projects that start with 's2-' prefix"
+                                  items:
+                                    type: string
+                                  type: array
+                                results:
+                                  description: 'List of results to trigger this rule. Default: every result.'
+                                  items:
+                                    description: 'Either a string or a regex, possible values: `PASSED`, `STOPPED`, `CANCELED`, `FAILED`.'
+                                    enum:
+                                    - PASSED
+                                    - STOPPED
+                                    - CANCELED
+                                    - FAILED
+                                    type: string
+                                  type: array
+                              type: object
+                            name:
+                              description: Name of the notification rule
+                              type: string
+                            notify:
+                              description: Notification settings
+                              properties:
+                                email:
+                                  description: Email notification settings
+                                  nullable: true
+                                  properties:
+                                    bcc:
+                                      description: Email BCC
+                                      items:
+                                        type: string
+                                      type: array
+                                    cc:
+                                      description: Email CC
+                                      items:
+                                        type: string
+                                      minItems: 1
+                                      type: array
+                                    content:
+                                      description: Email content
+                                      type: string
+                                    status:
+                                      enum:
+                                      - ACTIVE
+                                      - INACTIVE
+                                      title: Notifications.Notification.Rule.Status
+                                      type: string
+                                    subject:
+                                      description: Email subject
+                                      type: string
+                                  required:
+                                  - cc
+                                  type: object
+                                slack:
+                                  description: Slack notification settings
+                                  nullable: true
+                                  properties:
+                                    channels:
+                                      description: Slack channels
+                                      items:
+                                        type: string
+                                      type: array
+                                    endpoint:
+                                      description: Slack endpoint
+                                      type: string
+                                    message:
+                                      description: Slack message
+                                      type: string
+                                    status:
+                                      enum:
+                                      - ACTIVE
+                                      - INACTIVE
+                                      title: Notifications.Notification.Rule.Status
+                                      type: string
+                                  required:
+                                  - endpoint
+                                  type: object
+                                webhook:
+                                  description: Webhook notification settings
+                                  nullable: true
+                                  properties:
+                                    method:
+                                      default: POST
+                                      description: Webhook http verb
+                                      type: string
+                                    retries:
+                                      default: 3
+                                      description: Number of times to retry delivery.
+                                      maximum: 3
+                                      minimum: 1
+                                      type: integer
+                                    secret:
+                                      description: Name of a Semaphore secret, which will be used to sign the payload.
+                                      type: string
+                                    status:
+                                      enum:
+                                      - ACTIVE
+                                      - INACTIVE
+                                      title: Notifications.Notification.Rule.Status
+                                      type: string
+                                    timeout:
+                                      default: 500
+                                      description: Webhook delivery timeout in ms
+                                      type: integer
+                                    url:
+                                      description: Webhook HTTP endpoint to hit.
+                                      type: string
+                                  required:
+                                  - url
+                                  type: object
+                              type: object
+                          title: Notifications.Notification.Rule
+                          type: object
+                        maxLength: 20
+                        minLength: 1
+                        type: array
+                    required:
+                    - name
+                    type: object
+                required:
+                - apiVersion
+                - kind
+                - metadata
+                - spec
+                title: Notifications.Notification
+                type: object
+          description: Notification
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+    get:
+      operationId: Notifications.List
+      description: List notifications in organization.
+      tags:
+      - Notifications
+      parameters:
+      - description: Starting point for listing, if you are fetching first page leave it empty
+        in: query
+        name: page_token
+        required: false
+        schema:
+          default: ''
+          type: string
+      - description: Page size
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 20
+          maximum: 100
+          minimum: 1
+          title: PageSize
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    apiVersion:
+                      default: v2
+                      description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                      example: v2
+                      readOnly: true
+                      title: ApiVersion
+                      type: string
+                    kind:
+                      default: Notification
+                      description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                      example: Notification
+                      readOnly: true
+                      title: Kind
+                      type: string
+                    metadata:
+                      description: Metadata of the notification, all fields are read only
+                      properties:
+                        created_at:
+                          description: Timestamp in ISO 8601 format
+                          format: date-time
+                          title: Timestamp
+                          type: string
+                        id:
+                          description: ID of a Notification
+                          example: ee251df7-6946-4544-840d-b8ac7c02c3e3
+                          format: uuid
+                          title: Notification.ID
+                          type: string
+                        name:
+                          description: Name of the notification
+                          type: string
+                        org_id:
+                          description: ID of a Organization
+                          example: 83293713-b759-46ba-8432-f4c641e3bf14
+                          format: uuid
+                          title: Organization.ID
+                          type: string
+                        status:
+                          properties:
+                            failures:
+                              description: A failure contains a timestamp and a description of a failure
+                              items:
+                                properties:
+                                  description:
+                                    description: Description of the failure
+                                    type: string
+                                  timestamp:
+                                    description: Timestamp in ISO 8601 format
+                                    format: date-time
+                                    title: Timestamp
+                                    type: string
+                                type: object
+                              type: array
+                          title: Notifications.Notification.Status
+                          type: object
+                        updated_at:
+                          description: Timestamp in ISO 8601 format
+                          format: date-time
+                          nullable: true
+                          title: Timestamp
+                          type: string
+                      readOnly: true
+                      required:
+                      - id
+                      - name
+                      type: object
+                    spec:
+                      description: Specification of the notification
+                      properties:
+                        name:
+                          description: Name of the notification
+                          type: string
+                        rules:
+                          description: 'Rules must have at least one element. Maximal number of rules: 20.'
+                          items:
+                            properties:
+                              filter:
+                                description: Filter for the notification rule
+                                properties:
+                                  branches:
+                                    description: "List of branch names to trigger this rule. Default: all branches.\n             Examples:\n               - \"master\" - strictly match the master branch\n               - \"/^release-*/\" - regex matches branches that start with 'release-' prefix"
+                                    items:
+                                      type: string
+                                    type: array
+                                  pipelines:
+                                    default: semaphore.yml
+                                    description: "List of pipeline names to trigger this rule. The rule matches pipeline file name disregarding the path.\n            Examples:\n              - \"semaphore.yml\" - will match `semaphore.yml` pipeline\n              - \"/^stg-*/\" - regex matches pipelines that start with 'stg-' prefix"
+                                    items:
+                                      type: string
+                                    type: array
+                                  projects:
+                                    description: "List of project names to trigger this rule. Default no projects.\n             Examples:\n              - \"cli\" - strictly match the CLI project\n              - \"/^s2-*/\" - regex mathes projects that start with 's2-' prefix"
+                                    items:
+                                      type: string
+                                    type: array
+                                  results:
+                                    description: 'List of results to trigger this rule. Default: every result.'
+                                    items:
+                                      description: 'Either a string or a regex, possible values: `PASSED`, `STOPPED`, `CANCELED`, `FAILED`.'
+                                      enum:
+                                      - PASSED
+                                      - STOPPED
+                                      - CANCELED
+                                      - FAILED
+                                      type: string
+                                    type: array
+                                type: object
+                              name:
+                                description: Name of the notification rule
+                                type: string
+                              notify:
+                                description: Notification settings
+                                properties:
+                                  email:
+                                    description: Email notification settings
+                                    nullable: true
+                                    properties:
+                                      bcc:
+                                        description: Email BCC
+                                        items:
+                                          type: string
+                                        type: array
+                                      cc:
+                                        description: Email CC
+                                        items:
+                                          type: string
+                                        minItems: 1
+                                        type: array
+                                      content:
+                                        description: Email content
+                                        type: string
+                                      status:
+                                        enum:
+                                        - ACTIVE
+                                        - INACTIVE
+                                        title: Notifications.Notification.Rule.Status
+                                        type: string
+                                      subject:
+                                        description: Email subject
+                                        type: string
+                                    required:
+                                    - cc
+                                    type: object
+                                  slack:
+                                    description: Slack notification settings
+                                    nullable: true
+                                    properties:
+                                      channels:
+                                        description: Slack channels
+                                        items:
+                                          type: string
+                                        type: array
+                                      endpoint:
+                                        description: Slack endpoint
+                                        type: string
+                                      message:
+                                        description: Slack message
+                                        type: string
+                                      status:
+                                        enum:
+                                        - ACTIVE
+                                        - INACTIVE
+                                        title: Notifications.Notification.Rule.Status
+                                        type: string
+                                    required:
+                                    - endpoint
+                                    type: object
+                                  webhook:
+                                    description: Webhook notification settings
+                                    nullable: true
+                                    properties:
+                                      method:
+                                        default: POST
+                                        description: Webhook http verb
+                                        type: string
+                                      retries:
+                                        default: 3
+                                        description: Number of times to retry delivery.
+                                        maximum: 3
+                                        minimum: 1
+                                        type: integer
+                                      secret:
+                                        description: Name of a Semaphore secret, which will be used to sign the payload.
+                                        type: string
+                                      status:
+                                        enum:
+                                        - ACTIVE
+                                        - INACTIVE
+                                        title: Notifications.Notification.Rule.Status
+                                        type: string
+                                      timeout:
+                                        default: 500
+                                        description: Webhook delivery timeout in ms
+                                        type: integer
+                                      url:
+                                        description: Webhook HTTP endpoint to hit.
+                                        type: string
+                                    required:
+                                    - url
+                                    type: object
+                                type: object
+                            title: Notifications.Notification.Rule
+                            type: object
+                          maxLength: 20
+                          minLength: 1
+                          type: array
+                      required:
+                      - name
+                      type: object
+                  required:
+                  - apiVersion
+                  - kind
+                  - metadata
+                  - spec
+                  title: Notifications.Notification
+                  type: object
+                title: Notifications.ListResponse
+                type: array
+          description: List of notifications in organization
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+  /notifications/{id_or_name}:
+    delete:
+      operationId: Notifications.Delete
+      description: Delete a notification.
+      tags:
+      - Notifications
+      parameters:
+      - description: Id or name of the notification
+        in: path
+        name: id_or_name
+        required: true
+        schema:
+          anyOf:
+          - description: ID of a Notification
+            example: 93d63136-65d8-46fa-82b8-ba1f5c19e973
+            format: uuid
+            title: Notification.ID
+            type: string
+          - description: Name of the notification
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    description: ID of a Notification
+                    example: 8dc3d483-7095-4782-8dc0-4194862ae27c
+                    format: uuid
+                    title: Notification.ID
+                    type: string
+                title: Notifications.DeleteResponse
+                type: object
+          description: Notification
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+    get:
+      operationId: Notifications.Describe
+      description: Describe a notification.
+      tags:
+      - Notifications
+      parameters:
+      - description: Id or name of the notification
+        in: path
+        name: id_or_name
+        required: true
+        schema:
+          anyOf:
+          - description: ID of a Notification
+            example: 416c8945-f2d7-4fdf-b884-b94d89f4edad
+            format: uuid
+            title: Notification.ID
+            type: string
+          - description: Name of the notification
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  apiVersion:
+                    default: v2
+                    description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                    example: v2
+                    readOnly: true
+                    title: ApiVersion
+                    type: string
+                  kind:
+                    default: Notification
+                    description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                    example: Notification
+                    readOnly: true
+                    title: Kind
+                    type: string
+                  metadata:
+                    description: Metadata of the notification, all fields are read only
+                    properties:
+                      created_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      id:
+                        description: ID of a Notification
+                        example: ee251df7-6946-4544-840d-b8ac7c02c3e3
+                        format: uuid
+                        title: Notification.ID
+                        type: string
+                      name:
+                        description: Name of the notification
+                        type: string
+                      org_id:
+                        description: ID of a Organization
+                        example: 83293713-b759-46ba-8432-f4c641e3bf14
+                        format: uuid
+                        title: Organization.ID
+                        type: string
+                      status:
+                        properties:
+                          failures:
+                            description: A failure contains a timestamp and a description of a failure
+                            items:
+                              properties:
+                                description:
+                                  description: Description of the failure
+                                  type: string
+                                timestamp:
+                                  description: Timestamp in ISO 8601 format
+                                  format: date-time
+                                  title: Timestamp
+                                  type: string
+                              type: object
+                            type: array
+                        title: Notifications.Notification.Status
+                        type: object
+                      updated_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        nullable: true
+                        title: Timestamp
+                        type: string
+                    readOnly: true
+                    required:
+                    - id
+                    - name
+                    type: object
+                  spec:
+                    description: Specification of the notification
+                    properties:
+                      name:
+                        description: Name of the notification
+                        type: string
+                      rules:
+                        description: 'Rules must have at least one element. Maximal number of rules: 20.'
+                        items:
+                          properties:
+                            filter:
+                              description: Filter for the notification rule
+                              properties:
+                                branches:
+                                  description: "List of branch names to trigger this rule. Default: all branches.\n             Examples:\n               - \"master\" - strictly match the master branch\n               - \"/^release-*/\" - regex matches branches that start with 'release-' prefix"
+                                  items:
+                                    type: string
+                                  type: array
+                                pipelines:
+                                  default: semaphore.yml
+                                  description: "List of pipeline names to trigger this rule. The rule matches pipeline file name disregarding the path.\n            Examples:\n              - \"semaphore.yml\" - will match `semaphore.yml` pipeline\n              - \"/^stg-*/\" - regex matches pipelines that start with 'stg-' prefix"
+                                  items:
+                                    type: string
+                                  type: array
+                                projects:
+                                  description: "List of project names to trigger this rule. Default no projects.\n             Examples:\n              - \"cli\" - strictly match the CLI project\n              - \"/^s2-*/\" - regex mathes projects that start with 's2-' prefix"
+                                  items:
+                                    type: string
+                                  type: array
+                                results:
+                                  description: 'List of results to trigger this rule. Default: every result.'
+                                  items:
+                                    description: 'Either a string or a regex, possible values: `PASSED`, `STOPPED`, `CANCELED`, `FAILED`.'
+                                    enum:
+                                    - PASSED
+                                    - STOPPED
+                                    - CANCELED
+                                    - FAILED
+                                    type: string
+                                  type: array
+                              type: object
+                            name:
+                              description: Name of the notification rule
+                              type: string
+                            notify:
+                              description: Notification settings
+                              properties:
+                                email:
+                                  description: Email notification settings
+                                  nullable: true
+                                  properties:
+                                    bcc:
+                                      description: Email BCC
+                                      items:
+                                        type: string
+                                      type: array
+                                    cc:
+                                      description: Email CC
+                                      items:
+                                        type: string
+                                      minItems: 1
+                                      type: array
+                                    content:
+                                      description: Email content
+                                      type: string
+                                    status:
+                                      enum:
+                                      - ACTIVE
+                                      - INACTIVE
+                                      title: Notifications.Notification.Rule.Status
+                                      type: string
+                                    subject:
+                                      description: Email subject
+                                      type: string
+                                  required:
+                                  - cc
+                                  type: object
+                                slack:
+                                  description: Slack notification settings
+                                  nullable: true
+                                  properties:
+                                    channels:
+                                      description: Slack channels
+                                      items:
+                                        type: string
+                                      type: array
+                                    endpoint:
+                                      description: Slack endpoint
+                                      type: string
+                                    message:
+                                      description: Slack message
+                                      type: string
+                                    status:
+                                      enum:
+                                      - ACTIVE
+                                      - INACTIVE
+                                      title: Notifications.Notification.Rule.Status
+                                      type: string
+                                  required:
+                                  - endpoint
+                                  type: object
+                                webhook:
+                                  description: Webhook notification settings
+                                  nullable: true
+                                  properties:
+                                    method:
+                                      default: POST
+                                      description: Webhook http verb
+                                      type: string
+                                    retries:
+                                      default: 3
+                                      description: Number of times to retry delivery.
+                                      maximum: 3
+                                      minimum: 1
+                                      type: integer
+                                    secret:
+                                      description: Name of a Semaphore secret, which will be used to sign the payload.
+                                      type: string
+                                    status:
+                                      enum:
+                                      - ACTIVE
+                                      - INACTIVE
+                                      title: Notifications.Notification.Rule.Status
+                                      type: string
+                                    timeout:
+                                      default: 500
+                                      description: Webhook delivery timeout in ms
+                                      type: integer
+                                    url:
+                                      description: Webhook HTTP endpoint to hit.
+                                      type: string
+                                  required:
+                                  - url
+                                  type: object
+                              type: object
+                          title: Notifications.Notification.Rule
+                          type: object
+                        maxLength: 20
+                        minLength: 1
+                        type: array
+                    required:
+                    - name
+                    type: object
+                required:
+                - apiVersion
+                - kind
+                - metadata
+                - spec
+                title: Notifications.Notification
+                type: object
+          description: Notification
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+    put:
+      operationId: Notifications.Update
+      description: Update a notification.
+      tags:
+      - Notifications
+      parameters:
+      - description: Id or name of the notification to update
+        in: path
+        name: id_or_name
+        required: true
+        schema:
+          anyOf:
+          - description: ID of a Notification
+            example: 0618c238-3830-4a02-8c8e-e1c3fbd730ae
+            format: uuid
+            title: Notification.ID
+            type: string
+          - description: Name of the notification
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                apiVersion:
+                  default: v2
+                  description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                  example: v2
+                  readOnly: true
+                  title: ApiVersion
+                  type: string
+                kind:
+                  default: Notification
+                  description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                  example: Notification
+                  readOnly: true
+                  title: Kind
+                  type: string
+                metadata:
+                  description: Metadata of the notification, all fields are read only
+                  properties:
+                    created_at:
+                      description: Timestamp in ISO 8601 format
+                      format: date-time
+                      title: Timestamp
+                      type: string
+                    id:
+                      description: ID of a Notification
+                      example: ee251df7-6946-4544-840d-b8ac7c02c3e3
+                      format: uuid
+                      title: Notification.ID
+                      type: string
+                    name:
+                      description: Name of the notification
+                      type: string
+                    org_id:
+                      description: ID of a Organization
+                      example: 83293713-b759-46ba-8432-f4c641e3bf14
+                      format: uuid
+                      title: Organization.ID
+                      type: string
+                    status:
+                      properties:
+                        failures:
+                          description: A failure contains a timestamp and a description of a failure
+                          items:
+                            properties:
+                              description:
+                                description: Description of the failure
+                                type: string
+                              timestamp:
+                                description: Timestamp in ISO 8601 format
+                                format: date-time
+                                title: Timestamp
+                                type: string
+                            type: object
+                          type: array
+                      title: Notifications.Notification.Status
+                      type: object
+                    updated_at:
+                      description: Timestamp in ISO 8601 format
+                      format: date-time
+                      nullable: true
+                      title: Timestamp
+                      type: string
+                  readOnly: true
+                  required:
+                  - id
+                  - name
+                  type: object
+                spec:
+                  description: Specification of the notification
+                  properties:
+                    name:
+                      description: Name of the notification
+                      type: string
+                    rules:
+                      description: 'Rules must have at least one element. Maximal number of rules: 20.'
+                      items:
+                        properties:
+                          filter:
+                            description: Filter for the notification rule
+                            properties:
+                              branches:
+                                description: "List of branch names to trigger this rule. Default: all branches.\n             Examples:\n               - \"master\" - strictly match the master branch\n               - \"/^release-*/\" - regex matches branches that start with 'release-' prefix"
+                                items:
+                                  type: string
+                                type: array
+                              pipelines:
+                                default: semaphore.yml
+                                description: "List of pipeline names to trigger this rule. The rule matches pipeline file name disregarding the path.\n            Examples:\n              - \"semaphore.yml\" - will match `semaphore.yml` pipeline\n              - \"/^stg-*/\" - regex matches pipelines that start with 'stg-' prefix"
+                                items:
+                                  type: string
+                                type: array
+                              projects:
+                                description: "List of project names to trigger this rule. Default no projects.\n             Examples:\n              - \"cli\" - strictly match the CLI project\n              - \"/^s2-*/\" - regex mathes projects that start with 's2-' prefix"
+                                items:
+                                  type: string
+                                type: array
+                              results:
+                                description: 'List of results to trigger this rule. Default: every result.'
+                                items:
+                                  description: 'Either a string or a regex, possible values: `PASSED`, `STOPPED`, `CANCELED`, `FAILED`.'
+                                  enum:
+                                  - PASSED
+                                  - STOPPED
+                                  - CANCELED
+                                  - FAILED
+                                  type: string
+                                type: array
+                            type: object
+                          name:
+                            description: Name of the notification rule
+                            type: string
+                          notify:
+                            description: Notification settings
+                            properties:
+                              email:
+                                description: Email notification settings
+                                nullable: true
+                                properties:
+                                  bcc:
+                                    description: Email BCC
+                                    items:
+                                      type: string
+                                    type: array
+                                  cc:
+                                    description: Email CC
+                                    items:
+                                      type: string
+                                    minItems: 1
+                                    type: array
+                                  content:
+                                    description: Email content
+                                    type: string
+                                  status:
+                                    enum:
+                                    - ACTIVE
+                                    - INACTIVE
+                                    title: Notifications.Notification.Rule.Status
+                                    type: string
+                                  subject:
+                                    description: Email subject
+                                    type: string
+                                required:
+                                - cc
+                                type: object
+                              slack:
+                                description: Slack notification settings
+                                nullable: true
+                                properties:
+                                  channels:
+                                    description: Slack channels
+                                    items:
+                                      type: string
+                                    type: array
+                                  endpoint:
+                                    description: Slack endpoint
+                                    type: string
+                                  message:
+                                    description: Slack message
+                                    type: string
+                                  status:
+                                    enum:
+                                    - ACTIVE
+                                    - INACTIVE
+                                    title: Notifications.Notification.Rule.Status
+                                    type: string
+                                required:
+                                - endpoint
+                                type: object
+                              webhook:
+                                description: Webhook notification settings
+                                nullable: true
+                                properties:
+                                  method:
+                                    default: POST
+                                    description: Webhook http verb
+                                    type: string
+                                  retries:
+                                    default: 3
+                                    description: Number of times to retry delivery.
+                                    maximum: 3
+                                    minimum: 1
+                                    type: integer
+                                  secret:
+                                    description: Name of a Semaphore secret, which will be used to sign the payload.
+                                    type: string
+                                  status:
+                                    enum:
+                                    - ACTIVE
+                                    - INACTIVE
+                                    title: Notifications.Notification.Rule.Status
+                                    type: string
+                                  timeout:
+                                    default: 500
+                                    description: Webhook delivery timeout in ms
+                                    type: integer
+                                  url:
+                                    description: Webhook HTTP endpoint to hit.
+                                    type: string
+                                required:
+                                - url
+                                type: object
+                            type: object
+                        title: Notifications.Notification.Rule
+                        type: object
+                      maxLength: 20
+                      minLength: 1
+                      type: array
+                  required:
+                  - name
+                  type: object
+              required:
+              - apiVersion
+              - kind
+              - metadata
+              - spec
+              title: Notifications.Notification
+              type: object
+        description: Notification
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  apiVersion:
+                    default: v2
+                    description: "ApiVersion defines the versioned schema of this representation of an object.\n        Servers should convert recognized schemas to the latest internal value, and may reject\n        unrecognized values."
+                    example: v2
+                    readOnly: true
+                    title: ApiVersion
+                    type: string
+                  kind:
+                    default: Notification
+                    description: "Kind is a string value representing the REST resource this object represents.\n        Servers may infer this from the endpoint the client submits requests to. Cannot be\n        updated. In CamelCase."
+                    example: Notification
+                    readOnly: true
+                    title: Kind
+                    type: string
+                  metadata:
+                    description: Metadata of the notification, all fields are read only
+                    properties:
+                      created_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        title: Timestamp
+                        type: string
+                      id:
+                        description: ID of a Notification
+                        example: ee251df7-6946-4544-840d-b8ac7c02c3e3
+                        format: uuid
+                        title: Notification.ID
+                        type: string
+                      name:
+                        description: Name of the notification
+                        type: string
+                      org_id:
+                        description: ID of a Organization
+                        example: 83293713-b759-46ba-8432-f4c641e3bf14
+                        format: uuid
+                        title: Organization.ID
+                        type: string
+                      status:
+                        properties:
+                          failures:
+                            description: A failure contains a timestamp and a description of a failure
+                            items:
+                              properties:
+                                description:
+                                  description: Description of the failure
+                                  type: string
+                                timestamp:
+                                  description: Timestamp in ISO 8601 format
+                                  format: date-time
+                                  title: Timestamp
+                                  type: string
+                              type: object
+                            type: array
+                        title: Notifications.Notification.Status
+                        type: object
+                      updated_at:
+                        description: Timestamp in ISO 8601 format
+                        format: date-time
+                        nullable: true
+                        title: Timestamp
+                        type: string
+                    readOnly: true
+                    required:
+                    - id
+                    - name
+                    type: object
+                  spec:
+                    description: Specification of the notification
+                    properties:
+                      name:
+                        description: Name of the notification
+                        type: string
+                      rules:
+                        description: 'Rules must have at least one element. Maximal number of rules: 20.'
+                        items:
+                          properties:
+                            filter:
+                              description: Filter for the notification rule
+                              properties:
+                                branches:
+                                  description: "List of branch names to trigger this rule. Default: all branches.\n             Examples:\n               - \"master\" - strictly match the master branch\n               - \"/^release-*/\" - regex matches branches that start with 'release-' prefix"
+                                  items:
+                                    type: string
+                                  type: array
+                                pipelines:
+                                  default: semaphore.yml
+                                  description: "List of pipeline names to trigger this rule. The rule matches pipeline file name disregarding the path.\n            Examples:\n              - \"semaphore.yml\" - will match `semaphore.yml` pipeline\n              - \"/^stg-*/\" - regex matches pipelines that start with 'stg-' prefix"
+                                  items:
+                                    type: string
+                                  type: array
+                                projects:
+                                  description: "List of project names to trigger this rule. Default no projects.\n             Examples:\n              - \"cli\" - strictly match the CLI project\n              - \"/^s2-*/\" - regex mathes projects that start with 's2-' prefix"
+                                  items:
+                                    type: string
+                                  type: array
+                                results:
+                                  description: 'List of results to trigger this rule. Default: every result.'
+                                  items:
+                                    description: 'Either a string or a regex, possible values: `PASSED`, `STOPPED`, `CANCELED`, `FAILED`.'
+                                    enum:
+                                    - PASSED
+                                    - STOPPED
+                                    - CANCELED
+                                    - FAILED
+                                    type: string
+                                  type: array
+                              type: object
+                            name:
+                              description: Name of the notification rule
+                              type: string
+                            notify:
+                              description: Notification settings
+                              properties:
+                                email:
+                                  description: Email notification settings
+                                  nullable: true
+                                  properties:
+                                    bcc:
+                                      description: Email BCC
+                                      items:
+                                        type: string
+                                      type: array
+                                    cc:
+                                      description: Email CC
+                                      items:
+                                        type: string
+                                      minItems: 1
+                                      type: array
+                                    content:
+                                      description: Email content
+                                      type: string
+                                    status:
+                                      enum:
+                                      - ACTIVE
+                                      - INACTIVE
+                                      title: Notifications.Notification.Rule.Status
+                                      type: string
+                                    subject:
+                                      description: Email subject
+                                      type: string
+                                  required:
+                                  - cc
+                                  type: object
+                                slack:
+                                  description: Slack notification settings
+                                  nullable: true
+                                  properties:
+                                    channels:
+                                      description: Slack channels
+                                      items:
+                                        type: string
+                                      type: array
+                                    endpoint:
+                                      description: Slack endpoint
+                                      type: string
+                                    message:
+                                      description: Slack message
+                                      type: string
+                                    status:
+                                      enum:
+                                      - ACTIVE
+                                      - INACTIVE
+                                      title: Notifications.Notification.Rule.Status
+                                      type: string
+                                  required:
+                                  - endpoint
+                                  type: object
+                                webhook:
+                                  description: Webhook notification settings
+                                  nullable: true
+                                  properties:
+                                    method:
+                                      default: POST
+                                      description: Webhook http verb
+                                      type: string
+                                    retries:
+                                      default: 3
+                                      description: Number of times to retry delivery.
+                                      maximum: 3
+                                      minimum: 1
+                                      type: integer
+                                    secret:
+                                      description: Name of a Semaphore secret, which will be used to sign the payload.
+                                      type: string
+                                    status:
+                                      enum:
+                                      - ACTIVE
+                                      - INACTIVE
+                                      title: Notifications.Notification.Rule.Status
+                                      type: string
+                                    timeout:
+                                      default: 500
+                                      description: Webhook delivery timeout in ms
+                                      type: integer
+                                    url:
+                                      description: Webhook HTTP endpoint to hit.
+                                      type: string
+                                  required:
+                                  - url
+                                  type: object
+                              type: object
+                          title: Notifications.Notification.Rule
+                          type: object
+                        maxLength: 20
+                        minLength: 1
+                        type: array
+                    required:
+                    - name
+                    type: object
+                required:
+                - apiVersion
+                - kind
+                - metadata
+                - spec
+                title: Notifications.Notification
+                type: object
+          description: Notification
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                description: Resource validation failed
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  errors:
+                    items:
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: Error.Validation
+                type: object
+          description: Validation Failed
+        '500':
+          content:
+            application/json:
+              schema:
+                properties:
+                  documentation_url:
+                    example: https://docs.semaphoreci.com/api/error-codes/bad-request
+                    format: uri
+                    type: string
+                  message:
+                    type: string
+                title: Error
+                type: object
+          description: Internal Server Error
+      security:
+      - authorization: []
+components:
+  securitySchemes:
+    authorization:
+      description: Token that you get from semaphore [account settings](https://me.semaphoreci.com/account).
+      name: authorization
+      scheme: bearer
+      type: http
