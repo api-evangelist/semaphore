@@ -12,7 +12,20 @@ description: >-
   custom interfaces, trigger promotions, and automate their entire software
   delivery lifecycle.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/semaphore.png
 url: https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/apis.yml
 created: "2026-06-12"
 modified: "2026-06-12"
@@ -29,37 +42,204 @@ tags:
   - Deployment
   - Artifacts
 apis:
-  - aid: semaphore:semaphore-api
-    name: Semaphore API
-    description: >-
-      The Semaphore REST API provides programmatic access to all platform
-      resources including workflows, pipelines, jobs, promotions, deployment
-      targets, self-hosted agents, artifacts, and test results. The API follows
-      RESTful principles with OAS 3.0 compliance, uses token-based
-      authentication, and returns JSON responses. It supports operations for
-      managing CI/CD pipelines and build artifacts at the organization level.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://semaphore.io/product/api
-    baseURL: https://{organization}.semaphoreci.com/api/v1alpha
-    tags:
-      - CI/CD
-      - Pipelines
-      - Workflows
-      - Jobs
-      - Deployment
-      - Artifacts
-    properties:
-      - type: Documentation
-        url: https://docs.semaphore.io/reference/api
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/openapi/semaphore-semaphore-api-openapi.yml
-      - type: Vocabulary
-        url: https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/vocabulary/semaphore-vocabulary.yml
-      - type: JSONLDContext
-        url: https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/json-ld/semaphore-context.jsonld
-    contact:
-      - FN: Semaphore Support
-        url: https://semaphore.io/contact
+- aid: semaphore:semaphore-dashboards-api
+  name: Semaphore Dashboards API
+  description: Dashboard management
+  humanURL: https://semaphore.io/product/api
+  baseURL: https://{organization}.semaphoreci.com/api/v1alpha
+  tags:
+  - Dashboards
+  properties:
+  - type: OpenAPI
+    url: openapi/semaphore-dashboards-api-openapi.yml
+  - type: Documentation
+    url: https://docs.semaphore.io/reference/api
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/vocabulary/semaphore-vocabulary.yml
+  - type: JSONLDContext
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/json-ld/semaphore-context.jsonld
+- aid: semaphore:semaphore-deploymenttargets-api
+  name: Semaphore DeploymentTargets API
+  description: Deployment target management
+  humanURL: https://semaphore.io/product/api
+  baseURL: https://{organization}.semaphoreci.com/api/v1alpha
+  tags:
+  - DeploymentTargets
+  properties:
+  - type: OpenAPI
+    url: openapi/semaphore-deploymenttargets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.semaphore.io/reference/api
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/vocabulary/semaphore-vocabulary.yml
+  - type: JSONLDContext
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/json-ld/semaphore-context.jsonld
+- aid: semaphore:semaphore-notifications-api
+  name: Semaphore Notifications API
+  description: Notification management
+  humanURL: https://semaphore.io/product/api
+  baseURL: https://{organization}.semaphoreci.com/api/v1alpha
+  tags:
+  - Notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/semaphore-notifications-api-openapi.yml
+  - type: Documentation
+    url: https://docs.semaphore.io/reference/api
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/vocabulary/semaphore-vocabulary.yml
+  - type: JSONLDContext
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/json-ld/semaphore-context.jsonld
+- aid: semaphore:semaphore-pipelines-api
+  name: Semaphore Pipelines API
+  description: Pipeline management
+  humanURL: https://semaphore.io/product/api
+  baseURL: https://{organization}.semaphoreci.com/api/v1alpha
+  tags:
+  - Pipelines
+  properties:
+  - type: OpenAPI
+    url: openapi/semaphore-pipelines-api-openapi.yml
+  - type: Documentation
+    url: https://docs.semaphore.io/reference/api
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/vocabulary/semaphore-vocabulary.yml
+  - type: JSONLDContext
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/json-ld/semaphore-context.jsonld
+- aid: semaphore:semaphore-projects-api
+  name: Semaphore Projects API
+  description: Project management
+  humanURL: https://semaphore.io/product/api
+  baseURL: https://{organization}.semaphoreci.com/api/v1alpha
+  tags:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/semaphore-projects-api-openapi.yml
+  - type: Documentation
+    url: https://docs.semaphore.io/reference/api
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/vocabulary/semaphore-vocabulary.yml
+  - type: JSONLDContext
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/json-ld/semaphore-context.jsonld
+- aid: semaphore:semaphore-projectsecrets-api
+  name: Semaphore ProjectSecrets API
+  description: Project-level secrets
+  humanURL: https://semaphore.io/product/api
+  baseURL: https://{organization}.semaphoreci.com/api/v1alpha
+  tags:
+  - ProjectSecrets
+  properties:
+  - type: OpenAPI
+    url: openapi/semaphore-projectsecrets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.semaphore.io/reference/api
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/vocabulary/semaphore-vocabulary.yml
+  - type: JSONLDContext
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/json-ld/semaphore-context.jsonld
+- aid: semaphore:semaphore-secrets-api
+  name: Semaphore Secrets API
+  description: Organization-level secrets
+  humanURL: https://semaphore.io/product/api
+  baseURL: https://{organization}.semaphoreci.com/api/v1alpha
+  tags:
+  - Secrets
+  properties:
+  - type: OpenAPI
+    url: openapi/semaphore-secrets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.semaphore.io/reference/api
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/vocabulary/semaphore-vocabulary.yml
+  - type: JSONLDContext
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/json-ld/semaphore-context.jsonld
+- aid: semaphore:semaphore-selfhostedagents-api
+  name: Semaphore SelfHostedAgents API
+  description: Self-hosted agent management
+  humanURL: https://semaphore.io/product/api
+  baseURL: https://{organization}.semaphoreci.com/api/v1alpha
+  tags:
+  - SelfHostedAgents
+  properties:
+  - type: OpenAPI
+    url: openapi/semaphore-selfhostedagents-api-openapi.yml
+  - type: Documentation
+    url: https://docs.semaphore.io/reference/api
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/vocabulary/semaphore-vocabulary.yml
+  - type: JSONLDContext
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/json-ld/semaphore-context.jsonld
+- aid: semaphore:semaphore-selfhostedagenttypes-api
+  name: Semaphore SelfHostedAgentTypes API
+  description: Self-hosted agent type management
+  humanURL: https://semaphore.io/product/api
+  baseURL: https://{organization}.semaphoreci.com/api/v1alpha
+  tags:
+  - SelfHostedAgentTypes
+  properties:
+  - type: OpenAPI
+    url: openapi/semaphore-selfhostedagenttypes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.semaphore.io/reference/api
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/vocabulary/semaphore-vocabulary.yml
+  - type: JSONLDContext
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/json-ld/semaphore-context.jsonld
+- aid: semaphore:semaphore-tasks-api
+  name: Semaphore Tasks API
+  description: Task management
+  humanURL: https://semaphore.io/product/api
+  baseURL: https://{organization}.semaphoreci.com/api/v1alpha
+  tags:
+  - Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/semaphore-tasks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.semaphore.io/reference/api
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/vocabulary/semaphore-vocabulary.yml
+  - type: JSONLDContext
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/json-ld/semaphore-context.jsonld
+- aid: semaphore:semaphore-workflows-api
+  name: Semaphore Workflows API
+  description: Workflow management
+  humanURL: https://semaphore.io/product/api
+  baseURL: https://{organization}.semaphoreci.com/api/v1alpha
+  tags:
+  - Workflows
+  properties:
+  - type: OpenAPI
+    url: openapi/semaphore-workflows-api-openapi.yml
+  - type: Documentation
+    url: https://docs.semaphore.io/reference/api
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/vocabulary/semaphore-vocabulary.yml
+  - type: JSONLDContext
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/json-ld/semaphore-context.jsonld
 common:
   - type: AgenticAccess
     url: agentic-access/semaphore-agentic-access.yml
