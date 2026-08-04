@@ -1,0 +1,34 @@
+{
+  "provider": "semaphore",
+  "sources": [
+    "semaphore-dashboards-api-openapi.yml",
+    "semaphore-deploymenttargets-api-openapi.yml",
+    "semaphore-notifications-api-openapi.yml",
+    "semaphore-pipelines-api-openapi.yml",
+    "semaphore-projects-api-openapi.yml",
+    "semaphore-projectsecrets-api-openapi.yml",
+    "semaphore-secrets-api-openapi.yml",
+    "semaphore-selfhostedagents-api-openapi.yml",
+    "semaphore-selfhostedagenttypes-api-openapi.yml",
+    "semaphore-tasks-api-openapi.yml",
+    "semaphore-workflows-api-openapi.yml"
+  ],
+  "outputs": [
+    "semaphore-dashboards-api-openapi.yml",
+    "semaphore-deploymenttargets-api-openapi.yml",
+    "semaphore-notifications-api-openapi.yml",
+    "semaphore-pipelines-api-openapi.yml",
+    "semaphore-projects-api-openapi.yml",
+    "semaphore-projectsecrets-api-openapi.yml",
+    "semaphore-secrets-api-openapi.yml",
+    "semaphore-selfhostedagents-api-openapi.yml",
+    "semaphore-selfhostedagenttypes-api-openapi.yml",
+    "semaphore-tasks-api-openapi.yml",
+    "semaphore-workflows-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
