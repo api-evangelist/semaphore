@@ -1,0 +1,255 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Semaphore Public Dashboards Tasks API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Tasks.List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/projects/:project_id_or_name/tasks",
+            "params": [
+              {
+                "name": "project_id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the project"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Search string for task name"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "Direction of the list from the provided token"
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Starting point for listing, if you are fetching first page leave it empty"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Page size"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List tasks for organization and/or project ID"
+        },
+        {
+          "info": {
+            "name": "Tasks.Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/projects/:project_id_or_name/tasks",
+            "params": [
+              {
+                "name": "project_id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the project"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a task from given params"
+        },
+        {
+          "info": {
+            "name": "Tasks.Describe",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/projects/:project_id_or_name/tasks/:task_id",
+            "params": [
+              {
+                "name": "project_id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the project"
+              },
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "Task ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Describe a task by given ID"
+        },
+        {
+          "info": {
+            "name": "Tasks.Replace",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/projects/:project_id_or_name/tasks/:task_id",
+            "params": [
+              {
+                "name": "project_id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the project"
+              },
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "Task ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Replace tasks with new data"
+        },
+        {
+          "info": {
+            "name": "Tasks.Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/projects/:project_id_or_name/tasks/:task_id",
+            "params": [
+              {
+                "name": "project_id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the project"
+              },
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "Task ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update (patch) task with given params"
+        },
+        {
+          "info": {
+            "name": "Tasks.Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/projects/:project_id_or_name/tasks/:task_id",
+            "params": [
+              {
+                "name": "project_id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the project"
+              },
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "Task ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a task by given ID"
+        },
+        {
+          "info": {
+            "name": "Tasks.Trigger",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/projects/:project_id_or_name/tasks/:task_id/triggers",
+            "params": [
+              {
+                "name": "project_id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the project"
+              },
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "Task ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a workflow originating from task"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

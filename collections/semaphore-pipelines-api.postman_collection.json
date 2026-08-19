@@ -1,0 +1,2949 @@
+{
+  "item": [
+    {
+      "id": "5d1011d7-07ae-469b-86c4-d0ee610d7136",
+      "name": "Pipelines",
+      "description": {
+        "content": "Pipeline management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b28694e8-1a10-4584-b1fd-243afd6c6cc4",
+          "name": "Pipelines.List",
+          "request": {
+            "name": "Pipelines.List",
+            "description": {
+              "content": "List pipelines using project id or workflow id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pipelines"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "project_id",
+                  "value": "<uuid>",
+                  "description": "(Required) The id of a project or workflow to list the pipeliens for. Either project_id or wf_id is required.\n            The required_id parameter is just a placeholder"
+                },
+                {
+                  "disabled": false,
+                  "key": "wf_id",
+                  "value": "<uuid>",
+                  "description": "(Required) The id of a project or workflow to list the pipeliens for. Either project_id or wf_id is required.\n            The required_id parameter is just a placeholder"
+                },
+                {
+                  "disabled": false,
+                  "key": "label",
+                  "value": "<string>",
+                  "description": "Label of the branch/pr/tag"
+                },
+                {
+                  "disabled": false,
+                  "key": "yml_file_path",
+                  "value": "<string>",
+                  "description": "Yaml file path"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_before",
+                  "value": "<dateTime>",
+                  "description": "(Required) Return only pipelines created before this timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_after",
+                  "value": "<dateTime>",
+                  "description": "(Required) Return only pipelines created after this timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "done_before",
+                  "value": "<dateTime>",
+                  "description": "Return only pipelines that finished before this timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "done_after",
+                  "value": "<dateTime>",
+                  "description": "Return only pipelines that finished after this timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "NEXT",
+                  "description": "Direction of the list from the provided token"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "",
+                  "description": "Starting point for listing, if you are fetching first page leave it empty"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "20",
+                  "description": "Page size"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Organization name",
+                  "type": "any",
+                  "value": "{{org_name}}",
+                  "key": "org_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a18ca2f0-eb26-474e-a9f3-a51de3830e20",
+              "name": "List of pipelines in a project or workflow",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project_id",
+                      "value": "294bb313-5f37-4b23-a088-e177d6d67890"
+                    },
+                    {
+                      "key": "wf_id",
+                      "value": "a896d216-51b7-4898-bc6b-d9a2e792b31c"
+                    },
+                    {
+                      "key": "label",
+                      "value": "main"
+                    },
+                    {
+                      "key": "yml_file_path",
+                      "value": ".semaphore/semaphore.yml"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "created_after",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "done_before",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "done_after",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "NEXT"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"branch_id\": \"a79557f2-dc4e-4807-ba89-601401eb3b1e\",\n    \"branch_name\": \"main\",\n    \"commit_sha\": \"ac3f9796df42db976814e3fee670e11e3fd4b98a\",\n    \"created_at\": \"1963-07-06T14:38:14.230Z\",\n    \"done_at\": \"1989-07-10T02:14:20.836Z\",\n    \"error_description\": \"\",\n    \"hook_id\": \"cd7f6162-9b6e-435a-89a7-3968b542e9c7\",\n    \"name\": \"Pipeline\",\n    \"org_id\": \"36b2481c-55a4-4ace-9f8a-ac4f7d9549be\",\n    \"pending_at\": \"1994-12-02T01:03:28.958Z\",\n    \"ppl_id\": \"4f49eb59-148b-41bd-90be-20d4f67653f6\",\n    \"project_id\": \"77cd0b15-d7af-410c-b462-d3611b0ef1a0\",\n    \"queuing_at\": \"2020-10-15T00:32:51.982Z\",\n    \"result\": \"FAILED\",\n    \"result_reason\": \"FAST_FAILING\",\n    \"running_at\": \"1985-05-15T07:27:07.044Z\",\n    \"state\": \"STOPPING\",\n    \"stopping_at\": \"2003-03-23T23:22:20.402Z\",\n    \"terminate_request\": \"stop\",\n    \"terminated_by\": {\n      \"id\": \"18b40eaf-ce10-49c3-93f2-e4fe72d5160b\"\n    },\n    \"wf_id\": \"52f2847c-1817-48f2-95a8-b7e6b98c65e0\",\n    \"working_directory\": \".semaphore\",\n    \"yaml_file_name\": \"semaphore.yml\"\n  },\n  {\n    \"branch_id\": \"a79557f2-dc4e-4807-ba89-601401eb3b1e\",\n    \"branch_name\": \"main\",\n    \"commit_sha\": \"ac3f9796df42db976814e3fee670e11e3fd4b98a\",\n    \"created_at\": \"1988-09-15T20:47:57.898Z\",\n    \"done_at\": \"2012-05-25T03:21:52.602Z\",\n    \"error_description\": \"\",\n    \"hook_id\": \"cd7f6162-9b6e-435a-89a7-3968b542e9c7\",\n    \"name\": \"Pipeline\",\n    \"org_id\": \"36b2481c-55a4-4ace-9f8a-ac4f7d9549be\",\n    \"pending_at\": \"1969-05-11T17:07:18.459Z\",\n    \"ppl_id\": \"4f49eb59-148b-41bd-90be-20d4f67653f6\",\n    \"project_id\": \"77cd0b15-d7af-410c-b462-d3611b0ef1a0\",\n    \"queuing_at\": \"1950-09-15T18:48:29.279Z\",\n    \"result\": \"CANCELED\",\n    \"result_reason\": \"STRATEGY\",\n    \"running_at\": \"2013-05-18T15:50:56.308Z\",\n    \"state\": \"PENDING\",\n    \"stopping_at\": \"2002-01-19T11:21:45.158Z\",\n    \"terminate_request\": \"stop\",\n    \"terminated_by\": {\n      \"id\": \"18b40eaf-ce10-49c3-93f2-e4fe72d5160b\"\n    },\n    \"wf_id\": \"52f2847c-1817-48f2-95a8-b7e6b98c65e0\",\n    \"working_directory\": \".semaphore\",\n    \"yaml_file_name\": \"semaphore.yml\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3185aaef-b2ea-45f3-aa32-36a556b26df7",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project_id",
+                      "value": "294bb313-5f37-4b23-a088-e177d6d67890"
+                    },
+                    {
+                      "key": "wf_id",
+                      "value": "a896d216-51b7-4898-bc6b-d9a2e792b31c"
+                    },
+                    {
+                      "key": "label",
+                      "value": "main"
+                    },
+                    {
+                      "key": "yml_file_path",
+                      "value": ".semaphore/semaphore.yml"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "created_after",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "done_before",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "done_after",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "NEXT"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7f03ca0-be47-4386-a9ac-979567a80e46",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project_id",
+                      "value": "294bb313-5f37-4b23-a088-e177d6d67890"
+                    },
+                    {
+                      "key": "wf_id",
+                      "value": "a896d216-51b7-4898-bc6b-d9a2e792b31c"
+                    },
+                    {
+                      "key": "label",
+                      "value": "main"
+                    },
+                    {
+                      "key": "yml_file_path",
+                      "value": ".semaphore/semaphore.yml"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "created_after",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "done_before",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "done_after",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "NEXT"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce245252-1d27-44f3-bda4-4c08ad43a790",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project_id",
+                      "value": "294bb313-5f37-4b23-a088-e177d6d67890"
+                    },
+                    {
+                      "key": "wf_id",
+                      "value": "a896d216-51b7-4898-bc6b-d9a2e792b31c"
+                    },
+                    {
+                      "key": "label",
+                      "value": "main"
+                    },
+                    {
+                      "key": "yml_file_path",
+                      "value": ".semaphore/semaphore.yml"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "created_after",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "done_before",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "done_after",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "NEXT"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05309d5d-6cc4-464a-89f0-2f9847773f18",
+              "name": "Validation Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project_id",
+                      "value": "294bb313-5f37-4b23-a088-e177d6d67890"
+                    },
+                    {
+                      "key": "wf_id",
+                      "value": "a896d216-51b7-4898-bc6b-d9a2e792b31c"
+                    },
+                    {
+                      "key": "label",
+                      "value": "main"
+                    },
+                    {
+                      "key": "yml_file_path",
+                      "value": ".semaphore/semaphore.yml"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "created_after",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "done_before",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "done_after",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "NEXT"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b28b8e5-da83-4884-ae31-2a930bb3547a",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project_id",
+                      "value": "294bb313-5f37-4b23-a088-e177d6d67890"
+                    },
+                    {
+                      "key": "wf_id",
+                      "value": "a896d216-51b7-4898-bc6b-d9a2e792b31c"
+                    },
+                    {
+                      "key": "label",
+                      "value": "main"
+                    },
+                    {
+                      "key": "yml_file_path",
+                      "value": ".semaphore/semaphore.yml"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "created_after",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "done_before",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "done_after",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "NEXT"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d290c0e2-a5df-4564-af1c-12f0f1e2d7af",
+          "name": "Pipelines.Describe",
+          "request": {
+            "name": "Pipelines.Describe",
+            "description": {
+              "content": "Describe a pipeline using pipeline_id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pipelines",
+                ":pipeline_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "detailed",
+                  "value": "false",
+                  "description": "Option to include all information about all blocks and jobs.\n           This option is much more expensive--if you are only interested in the status of a pipeline, don't set detailed to true."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "pipeline_id",
+                  "description": "(Required) Id of the pipeline"
+                },
+                {
+                  "description": "Organization name",
+                  "type": "any",
+                  "value": "{{org_name}}",
+                  "key": "org_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "574b3110-082b-4d93-bbed-d7e066f648e8",
+              "name": "Pipeline status optionally containing information about all blocks and jobs in the pipeline.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipeline_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "detailed",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pipeline_id",
+                      "description": "(Required) Id of the pipeline"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"blocks\": [\n    {\n      \"block_id\": \"484e263a-424a-4820-bff0-bba436c54042\",\n      \"build_req_id\": \"98bc390e-abc5-0efc-7b0f-5cedf3bf6ad1\",\n      \"error_description\": \"string\",\n      \"jobs\": [\n        {\n          \"index\": 6084,\n          \"job_id\": \"671734c1-1812-41a7-ab86-6838a0ba2ef1\",\n          \"name\": \"string\",\n          \"result\": \"string\",\n          \"status\": \"string\"\n        },\n        {\n          \"index\": 222,\n          \"job_id\": \"46232467-0da3-8f10-cf7f-3f4acae96547\",\n          \"name\": \"string\",\n          \"result\": \"string\",\n          \"status\": \"string\"\n        }\n      ],\n      \"name\": \"string\",\n      \"result\": \"PASSED\",\n      \"result_reason\": \"TIMEOUT\",\n      \"state\": \"RUNNING\"\n    },\n    {\n      \"block_id\": \"484e263a-424a-4820-bff0-bba436c54042\",\n      \"build_req_id\": \"1264576d-fbb0-00d6-db89-214b9c77992f\",\n      \"error_description\": \"string\",\n      \"jobs\": [\n        {\n          \"index\": 8538,\n          \"job_id\": \"9b82970a-cb5c-fd8a-79d6-0bbc1da0bf66\",\n          \"name\": \"string\",\n          \"result\": \"string\",\n          \"status\": \"string\"\n        },\n        {\n          \"index\": 1151,\n          \"job_id\": \"beab7402-3a06-1613-8ee2-d7c2eff771e9\",\n          \"name\": \"string\",\n          \"result\": \"string\",\n          \"status\": \"string\"\n        }\n      ],\n      \"name\": \"string\",\n      \"result\": \"PASSED\",\n      \"result_reason\": \"TEST\",\n      \"state\": \"RUNNING\"\n    }\n  ],\n  \"pipeline\": {\n    \"branch_id\": \"a79557f2-dc4e-4807-ba89-601401eb3b1e\",\n    \"branch_name\": \"main\",\n    \"commit_sha\": \"ac3f9796df42db976814e3fee670e11e3fd4b98a\",\n    \"created_at\": \"1948-01-25T08:48:45.772Z\",\n    \"done_at\": \"1961-08-28T18:53:07.643Z\",\n    \"error_description\": \"\",\n    \"hook_id\": \"cd7f6162-9b6e-435a-89a7-3968b542e9c7\",\n    \"name\": \"Pipeline\",\n    \"org_id\": \"36b2481c-55a4-4ace-9f8a-ac4f7d9549be\",\n    \"pending_at\": \"1980-06-04T22:03:18.720Z\",\n    \"ppl_id\": \"4f49eb59-148b-41bd-90be-20d4f67653f6\",\n    \"project_id\": \"77cd0b15-d7af-410c-b462-d3611b0ef1a0\",\n    \"queuing_at\": \"1967-01-10T06:23:08.514Z\",\n    \"result\": \"PASSED\",\n    \"result_reason\": \"INTERNAL\",\n    \"running_at\": \"2013-06-26T23:07:57.349Z\",\n    \"state\": \"STOPPING\",\n    \"stopping_at\": \"1991-11-26T05:18:18.164Z\",\n    \"terminate_request\": \"stop\",\n    \"terminated_by\": {\n      \"id\": \"18b40eaf-ce10-49c3-93f2-e4fe72d5160b\"\n    },\n    \"wf_id\": \"52f2847c-1817-48f2-95a8-b7e6b98c65e0\",\n    \"working_directory\": \".semaphore\",\n    \"yaml_file_name\": \"semaphore.yml\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "268e2706-f682-4758-97b4-35f27c671124",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipeline_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "detailed",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pipeline_id",
+                      "description": "(Required) Id of the pipeline"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af10c17b-0c32-4ad0-94af-57b124986eb1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipeline_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "detailed",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pipeline_id",
+                      "description": "(Required) Id of the pipeline"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f465b32-1c5c-4bc7-b1e4-77c5977ecee4",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipeline_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "detailed",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pipeline_id",
+                      "description": "(Required) Id of the pipeline"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6910aef-2715-4b48-ae36-3ac013403335",
+              "name": "Validation Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipeline_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "detailed",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pipeline_id",
+                      "description": "(Required) Id of the pipeline"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2ae2c76-1c61-4cbc-8dfe-8a4155c05dbd",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipeline_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "detailed",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pipeline_id",
+                      "description": "(Required) Id of the pipeline"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fd868f28-4a0d-49f3-a8df-8820d1f78d62",
+          "name": "Pipelines.Describe Topology",
+          "request": {
+            "name": "Pipelines.Describe Topology",
+            "description": {
+              "content": "Describe pipeline topology using pipeline_id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pipelines",
+                ":pipeline_id",
+                "describe_topology"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "pipeline_id",
+                  "description": "(Required) Id of the pipeline"
+                },
+                {
+                  "description": "Organization name",
+                  "type": "any",
+                  "value": "{{org_name}}",
+                  "key": "org_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9a488d3e-7f1b-4b9d-87b2-8dea7b1629c2",
+              "name": "Pipeline topology",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipeline_id",
+                    "describe_topology"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pipeline_id",
+                      "description": "(Required) Id of the pipeline"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"after_pipeline\": {\n    \"jobs\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"blocks\": [\n    {\n      \"dependencies\": [\n        \"string\",\n        \"string\"\n      ],\n      \"jobs\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"string\"\n    },\n    {\n      \"dependencies\": [\n        \"string\",\n        \"string\"\n      ],\n      \"jobs\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e00e620-c251-4e60-be43-07898917e8ef",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipeline_id",
+                    "describe_topology"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pipeline_id",
+                      "description": "(Required) Id of the pipeline"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42ca3c51-bada-4ec3-9396-1f4907b70e5d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipeline_id",
+                    "describe_topology"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pipeline_id",
+                      "description": "(Required) Id of the pipeline"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0203540-d49d-485d-aff6-7a470698aa63",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipeline_id",
+                    "describe_topology"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pipeline_id",
+                      "description": "(Required) Id of the pipeline"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "723340b6-7d28-4505-a34b-4b537bc453bb",
+              "name": "Validation Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipeline_id",
+                    "describe_topology"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pipeline_id",
+                      "description": "(Required) Id of the pipeline"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35b8611f-c1c1-4639-9683-e3a97731d28d",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipeline_id",
+                    "describe_topology"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pipeline_id",
+                      "description": "(Required) Id of the pipeline"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f31493aa-65fc-456e-9719-b1a49226f66e",
+          "name": "Pipelines.Partial Rebuild",
+          "request": {
+            "name": "Pipelines.Partial Rebuild",
+            "description": {
+              "content": "Schedule a new pipeline based on given one which will only run blocks which\n      execution failed in original pipeline.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pipelines",
+                ":pipeline_id",
+                "partial_rebuild"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "pipeline_id",
+                  "description": "(Required) Id of the pipeline"
+                },
+                {
+                  "description": "Organization name",
+                  "type": "any",
+                  "value": "{{org_name}}",
+                  "key": "org_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"request_token\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b58a6045-a245-47cd-a5f0-714f2b016b4a",
+              "name": "Message and created pipeline id",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipeline_id",
+                    "partial_rebuild"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pipeline_id",
+                      "description": "(Required) Id of the pipeline"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"request_token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"pipeline_id\": \"1606fac9-edf3-0ada-1031-41d8ca045dba\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48689cfe-d489-43f4-ab13-81182c043246",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipeline_id",
+                    "partial_rebuild"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pipeline_id",
+                      "description": "(Required) Id of the pipeline"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"request_token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2d7fa95-5952-44e3-a3c9-12bf9bec751f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipeline_id",
+                    "partial_rebuild"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pipeline_id",
+                      "description": "(Required) Id of the pipeline"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"request_token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7d803f2-ec8a-4722-aee4-e411825d8c94",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipeline_id",
+                    "partial_rebuild"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pipeline_id",
+                      "description": "(Required) Id of the pipeline"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"request_token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ae5d3f3-8412-4277-950b-ae90fb52b02c",
+              "name": "Validation Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipeline_id",
+                    "partial_rebuild"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pipeline_id",
+                      "description": "(Required) Id of the pipeline"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"request_token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68cbe699-be29-4c58-98e9-ba38e10ffdcc",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipeline_id",
+                    "partial_rebuild"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pipeline_id",
+                      "description": "(Required) Id of the pipeline"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"request_token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13e22569-4ce8-4906-b9c5-9fe32d44d9b8",
+          "name": "Pipelines.Terminate",
+          "request": {
+            "name": "Pipelines.Terminate",
+            "description": {
+              "content": "Terminate a pipeline using pipeline_id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pipelines",
+                ":pipeline_id",
+                "terminate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "pipeline_id",
+                  "description": "(Required) Id of the pipeline"
+                },
+                {
+                  "description": "Organization name",
+                  "type": "any",
+                  "value": "{{org_name}}",
+                  "key": "org_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"terminate_request\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "209dc49a-8d7a-4619-94a8-ff4f0f2ad8f9",
+              "name": "Pipeline topology",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipeline_id",
+                    "terminate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pipeline_id",
+                      "description": "(Required) Id of the pipeline"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"terminate_request\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Pipeline {id} terminated successfully.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b59b6fe-9a7d-41c2-b27d-759c3d5aeb62",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipeline_id",
+                    "terminate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pipeline_id",
+                      "description": "(Required) Id of the pipeline"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"terminate_request\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7aaff4dd-537f-4dbb-afbd-13834ed4356c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipeline_id",
+                    "terminate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pipeline_id",
+                      "description": "(Required) Id of the pipeline"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"terminate_request\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb376811-b6de-4cfb-92f6-b389f9d32816",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipeline_id",
+                    "terminate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pipeline_id",
+                      "description": "(Required) Id of the pipeline"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"terminate_request\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e7c5f1d-687c-4a52-9c3e-70f730027a8f",
+              "name": "Validation Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipeline_id",
+                    "terminate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pipeline_id",
+                      "description": "(Required) Id of the pipeline"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"terminate_request\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "78df978a-81cd-4427-bf38-8ea692f066ea",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipeline_id",
+                    "terminate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pipeline_id",
+                      "description": "(Required) Id of the pipeline"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"terminate_request\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6814dfca-c648-4189-b3fd-1208f4344316",
+          "name": "Pipelines.Validate Yaml",
+          "request": {
+            "name": "Pipelines.Validate Yaml",
+            "description": {},
+            "url": {
+              "path": [
+                "yaml"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Organization name",
+                  "type": "any",
+                  "value": "{{org_name}}",
+                  "key": "org_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"yml_definition\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "927c8da3-29e4-4320-bb53-98732c2a25d8",
+              "name": "Valid YAML response, check out 400 response as well.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "yaml"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"yml_definition\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"YAML definition is valid.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5013336b-8e56-4150-b3ce-12c06844e807",
+              "name": "Message explaining the errors in YAML",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "yaml"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"yml_definition\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d279813-8196-4e9e-afc4-43f7a5961aa0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "yaml"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"yml_definition\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "744b9f0c-5636-4b1a-8d63-acacaabeee10",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "yaml"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"yml_definition\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6800e13-9810-4ae4-9edb-63369c5b97ba",
+              "name": "Validation Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "yaml"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"yml_definition\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74b273c2-8318-4e53-a1ab-044c8489cf16",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "yaml"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"yml_definition\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Organization name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "me",
+      "key": "org_name"
+    },
+    {
+      "type": "string",
+      "value": "https://{{org_name}}.semaphoreci.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f489e2a3-9db1-43bd-a6b9-2a91a5dffcfe",
+    "name": "Semaphore Public Dashboards Pipelines API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Semaphore Public API is a RESTful API that allows you to interact with Semaphore CI/CD.\n## Authorization\nAuthorization is done via bearer token. You can obtain a token by visiting your [account settings](https://me.semaphoreci.com/account).\n\n## Pagination with link headers\nEach list request supports pagination. List responses include a [link header](https://datatracker.ietf.org/doc/html/rfc5988#section-5) with the pagination URLs.\nLink headers contain next, previous, first relative URLs.\n\n\nContact Support:\n Email: support@semaphoreci.com",
+      "type": "text/plain"
+    }
+  }
+}

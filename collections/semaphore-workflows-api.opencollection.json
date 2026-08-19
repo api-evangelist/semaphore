@@ -1,0 +1,187 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Semaphore Public Dashboards Workflows API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Workflows",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workflows.List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/workflows",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "query",
+                "description": "The id of the project to list the workflows for"
+              },
+              {
+                "name": "branch_name",
+                "value": "main",
+                "type": "query",
+                "description": "Branch name"
+              },
+              {
+                "name": "created_before",
+                "value": "2021-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Return only workflows created before this timestamp"
+              },
+              {
+                "name": "created_after",
+                "value": "2021-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Return only workflows created after this timestamp"
+              },
+              {
+                "name": "label",
+                "value": "v2",
+                "type": "query",
+                "description": "Return only workflows with given label (label is branch/tag name, PR number, snapshot generated label etc.)"
+              },
+              {
+                "name": "git_ref_type",
+                "value": "BRANCH",
+                "type": "query",
+                "description": "Type of git reference for which workflow is initiated."
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "Direction of the list from the provided token"
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Starting point for listing, if you are fetching first page leave it empty"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Page size"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List workflows using project id."
+        },
+        {
+          "info": {
+            "name": "Workflows.Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/workflows",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Schedule a workflow for running"
+        },
+        {
+          "info": {
+            "name": "Workflows.Describe",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/workflows/:wf_id",
+            "params": [
+              {
+                "name": "wf_id",
+                "value": "7b84a2e0-f0c4-4100-9aad-b77d2325f476",
+                "type": "path",
+                "description": "Workflow id"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Describe a workflow based on workflow id"
+        },
+        {
+          "info": {
+            "name": "Workflows.Reschedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/workflows/:wf_id/reschedule",
+            "params": [
+              {
+                "name": "wf_id",
+                "value": "5f3bba98-1d60-4a21-af09-2de1db0a5b8c",
+                "type": "path",
+                "description": "Workflow id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Schedule a workflow for re-running"
+        },
+        {
+          "info": {
+            "name": "Workflows.Terminate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/workflows/:wf_id/terminate",
+            "params": [
+              {
+                "name": "wf_id",
+                "value": "e78b0d2e-af4e-4a1a-85ba-4a7e9918db25",
+                "type": "path",
+                "description": "Workflow id"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Stop a scheduled workflow"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

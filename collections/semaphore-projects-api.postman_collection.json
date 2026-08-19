@@ -1,0 +1,2247 @@
+{
+  "item": [
+    {
+      "id": "75442515-1e39-44ca-8db4-2e5e2b8e9529",
+      "name": "Projects",
+      "description": {
+        "content": "Project management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ace5e110-1d2a-437a-a110-ef269dc66f05",
+          "name": "Projects.Create",
+          "request": {
+            "name": "Projects.Create",
+            "description": {
+              "content": "Create a project. When creating a project description is ignored.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Organization name",
+                  "type": "any",
+                  "value": "{{org_name}}",
+                  "key": "org_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"spec\": {\n    \"repository\": {\n      \"url\": \"<string>\",\n      \"integration_type\": \"<string>\",\n      \"run_on\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"forked_pull_requests\": {\n        \"allowed_contributors\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"allowed_secrets\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"pipeline_file\": \".semaphore/semaphore.yml\",\n      \"status\": {\n        \"pipeline_files\": [\n          {\n            \"level\": \"PIPELINE\",\n            \"path\": \".semaphore/semaphore.yml\"\n          }\n        ]\n      },\n      \"whitelist\": {\n        \"branches\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"visibility\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fb15a1fb-74dc-459f-ae10-e4e9ce82dc2a",
+              "name": "Created project",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"spec\": {\n    \"repository\": {\n      \"url\": \"git@github.com:semaphoreci/toolbox.git\",\n      \"integration_type\": \"<string>\",\n      \"run_on\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"forked_pull_requests\": {\n        \"allowed_secrets\": [\n          \"my-secret\",\n          \"my-secret\"\n        ]\n      },\n      \"pipeline_file\": \".semaphore/semaphore.yml\",\n      \"status\": {\n        \"pipeline_files\": [\n          {\n            \"level\": \"PIPELINE\",\n            \"path\": \".semaphore/semaphore.yml\"\n          }\n        ]\n      },\n      \"whitelist\": {\n        \"branches\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    \"name\": \"my-project\",\n    \"description\": \"<string>\",\n    \"visibility\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"v2\",\n  \"kind\": \"Project\",\n  \"metadata\": {\n    \"id\": \"ed12ab59-9224-45c8-82d6-79bf158aaae6\",\n    \"name\": \"my-secret\",\n    \"connected\": true,\n    \"created_at\": \"2025-04-28T11:48:17.496Z\",\n    \"created_by\": {\n      \"id\": \"18b40eaf-ce10-49c3-93f2-e4fe72d5160b\"\n    },\n    \"description\": \"string\",\n    \"org_id\": \"ff19729a-a8d5-4a62-8c5c-9bdbabf6607e\"\n  },\n  \"spec\": {\n    \"repository\": {\n      \"url\": \"git@github.com:semaphoreci/toolbox.git\",\n      \"integration_type\": \"BITBUCKET\",\n      \"run_on\": [\n        \"FORKED_PULL_REQUESTS\",\n        \"BRANCHES\"\n      ],\n      \"forked_pull_requests\": {\n        \"allowed_secrets\": [\n          \"my-secret\",\n          \"my-secret\"\n        ]\n      },\n      \"pipeline_file\": \".semaphore/semaphore.yml\",\n      \"status\": {\n        \"pipeline_files\": [\n          {\n            \"level\": \"PIPELINE\",\n            \"path\": \".semaphore/semaphore.yml\"\n          }\n        ]\n      },\n      \"whitelist\": {\n        \"branches\": [\n          \"string\",\n          \"string\"\n        ],\n        \"tags\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    \"name\": \"my-project\",\n    \"description\": \"string\",\n    \"visibility\": \"PUBLIC\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a660c62-1b0b-44fc-bc7b-e4cf69525349",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"spec\": {\n    \"repository\": {\n      \"url\": \"git@github.com:semaphoreci/toolbox.git\",\n      \"integration_type\": \"<string>\",\n      \"run_on\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"forked_pull_requests\": {\n        \"allowed_secrets\": [\n          \"my-secret\",\n          \"my-secret\"\n        ]\n      },\n      \"pipeline_file\": \".semaphore/semaphore.yml\",\n      \"status\": {\n        \"pipeline_files\": [\n          {\n            \"level\": \"PIPELINE\",\n            \"path\": \".semaphore/semaphore.yml\"\n          }\n        ]\n      },\n      \"whitelist\": {\n        \"branches\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    \"name\": \"my-project\",\n    \"description\": \"<string>\",\n    \"visibility\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "748548fa-f464-43e4-9b04-20a0c353133e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"spec\": {\n    \"repository\": {\n      \"url\": \"git@github.com:semaphoreci/toolbox.git\",\n      \"integration_type\": \"<string>\",\n      \"run_on\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"forked_pull_requests\": {\n        \"allowed_secrets\": [\n          \"my-secret\",\n          \"my-secret\"\n        ]\n      },\n      \"pipeline_file\": \".semaphore/semaphore.yml\",\n      \"status\": {\n        \"pipeline_files\": [\n          {\n            \"level\": \"PIPELINE\",\n            \"path\": \".semaphore/semaphore.yml\"\n          }\n        ]\n      },\n      \"whitelist\": {\n        \"branches\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    \"name\": \"my-project\",\n    \"description\": \"<string>\",\n    \"visibility\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1330e70f-87ba-4519-853a-8a1b7d73a0e4",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"spec\": {\n    \"repository\": {\n      \"url\": \"git@github.com:semaphoreci/toolbox.git\",\n      \"integration_type\": \"<string>\",\n      \"run_on\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"forked_pull_requests\": {\n        \"allowed_secrets\": [\n          \"my-secret\",\n          \"my-secret\"\n        ]\n      },\n      \"pipeline_file\": \".semaphore/semaphore.yml\",\n      \"status\": {\n        \"pipeline_files\": [\n          {\n            \"level\": \"PIPELINE\",\n            \"path\": \".semaphore/semaphore.yml\"\n          }\n        ]\n      },\n      \"whitelist\": {\n        \"branches\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    \"name\": \"my-project\",\n    \"description\": \"<string>\",\n    \"visibility\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40764e50-11f0-4a09-9fa0-c280029a6d46",
+              "name": "Validation Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"spec\": {\n    \"repository\": {\n      \"url\": \"git@github.com:semaphoreci/toolbox.git\",\n      \"integration_type\": \"<string>\",\n      \"run_on\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"forked_pull_requests\": {\n        \"allowed_secrets\": [\n          \"my-secret\",\n          \"my-secret\"\n        ]\n      },\n      \"pipeline_file\": \".semaphore/semaphore.yml\",\n      \"status\": {\n        \"pipeline_files\": [\n          {\n            \"level\": \"PIPELINE\",\n            \"path\": \".semaphore/semaphore.yml\"\n          }\n        ]\n      },\n      \"whitelist\": {\n        \"branches\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    \"name\": \"my-project\",\n    \"description\": \"<string>\",\n    \"visibility\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a0b5d60-f5c3-436a-91b2-414fd0ab8e11",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"spec\": {\n    \"repository\": {\n      \"url\": \"git@github.com:semaphoreci/toolbox.git\",\n      \"integration_type\": \"<string>\",\n      \"run_on\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"forked_pull_requests\": {\n        \"allowed_secrets\": [\n          \"my-secret\",\n          \"my-secret\"\n        ]\n      },\n      \"pipeline_file\": \".semaphore/semaphore.yml\",\n      \"status\": {\n        \"pipeline_files\": [\n          {\n            \"level\": \"PIPELINE\",\n            \"path\": \".semaphore/semaphore.yml\"\n          }\n        ]\n      },\n      \"whitelist\": {\n        \"branches\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    \"name\": \"my-project\",\n    \"description\": \"<string>\",\n    \"visibility\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c55b73b4-e69f-4e66-926e-c290ab4f1aa4",
+          "name": "Projects.List",
+          "request": {
+            "name": "Projects.List",
+            "description": {
+              "content": "List projects in organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "owner_uuid",
+                  "value": "<uuid>",
+                  "description": "UUID of the project owner"
+                },
+                {
+                  "disabled": false,
+                  "key": "repo_url",
+                  "value": "<string>",
+                  "description": "URL of the repository the project is associated with"
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "NEXT",
+                  "description": "Direction of the pagination.\n            `NEXT` will fetch projects after the provided token, `PREVIOUS` will fetch projects before the provided token"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "",
+                  "description": "Starting point for listing, if you are fetching first page leave it empty"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "20",
+                  "description": "Page size"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Organization name",
+                  "type": "any",
+                  "value": "{{org_name}}",
+                  "key": "org_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9ef55436-5c96-47bd-97aa-8098d2aa2c3e",
+              "name": "List of projects in organization",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "owner_uuid",
+                      "value": "7d36df70-6eab-4768-83d8-090f44f47235"
+                    },
+                    {
+                      "key": "repo_url",
+                      "value": "git@github.com:semaphoreci/toolbox.git"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "NEXT"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"apiVersion\": \"v2\",\n    \"kind\": \"Project\",\n    \"metadata\": {\n      \"id\": \"ed12ab59-9224-45c8-82d6-79bf158aaae6\",\n      \"name\": \"my-secret\",\n      \"connected\": true,\n      \"created_at\": \"2000-01-23T23:23:47.245Z\",\n      \"created_by\": {\n        \"id\": \"18b40eaf-ce10-49c3-93f2-e4fe72d5160b\"\n      },\n      \"description\": \"string\",\n      \"org_id\": \"ff19729a-a8d5-4a62-8c5c-9bdbabf6607e\"\n    },\n    \"spec\": {\n      \"repository\": {\n        \"url\": \"git@github.com:semaphoreci/toolbox.git\",\n        \"integration_type\": \"GITHUB_OAUTH_TOKEN\",\n        \"run_on\": [\n          \"BRANCHES\",\n          \"BRANCHES\"\n        ],\n        \"forked_pull_requests\": {\n          \"allowed_secrets\": [\n            \"my-secret\",\n            \"my-secret\"\n          ]\n        },\n        \"pipeline_file\": \".semaphore/semaphore.yml\",\n        \"status\": {\n          \"pipeline_files\": [\n            {\n              \"level\": \"PIPELINE\",\n              \"path\": \".semaphore/semaphore.yml\"\n            }\n          ]\n        },\n        \"whitelist\": {\n          \"branches\": [\n            \"string\",\n            \"string\"\n          ],\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      },\n      \"name\": \"my-project\",\n      \"description\": \"string\",\n      \"visibility\": \"PRIVATE\"\n    }\n  },\n  {\n    \"apiVersion\": \"v2\",\n    \"kind\": \"Project\",\n    \"metadata\": {\n      \"id\": \"ed12ab59-9224-45c8-82d6-79bf158aaae6\",\n      \"name\": \"my-secret\",\n      \"connected\": false,\n      \"created_at\": \"2005-09-11T18:55:10.984Z\",\n      \"created_by\": {\n        \"id\": \"18b40eaf-ce10-49c3-93f2-e4fe72d5160b\"\n      },\n      \"description\": \"string\",\n      \"org_id\": \"ff19729a-a8d5-4a62-8c5c-9bdbabf6607e\"\n    },\n    \"spec\": {\n      \"repository\": {\n        \"url\": \"git@github.com:semaphoreci/toolbox.git\",\n        \"integration_type\": \"GITHUB_OAUTH_TOKEN\",\n        \"run_on\": [\n          \"PULL_REQUESTS\",\n          \"BRANCHES\"\n        ],\n        \"forked_pull_requests\": {\n          \"allowed_secrets\": [\n            \"my-secret\",\n            \"my-secret\"\n          ]\n        },\n        \"pipeline_file\": \".semaphore/semaphore.yml\",\n        \"status\": {\n          \"pipeline_files\": [\n            {\n              \"level\": \"PIPELINE\",\n              \"path\": \".semaphore/semaphore.yml\"\n            }\n          ]\n        },\n        \"whitelist\": {\n          \"branches\": [\n            \"string\",\n            \"string\"\n          ],\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      },\n      \"name\": \"my-project\",\n      \"description\": \"string\",\n      \"visibility\": \"PUBLIC\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c7aca6f-eab0-4653-a4a0-381f7c37357d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "owner_uuid",
+                      "value": "7d36df70-6eab-4768-83d8-090f44f47235"
+                    },
+                    {
+                      "key": "repo_url",
+                      "value": "git@github.com:semaphoreci/toolbox.git"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "NEXT"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6be87f2-1f6c-4dc2-b159-f264d3e5abaa",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "owner_uuid",
+                      "value": "7d36df70-6eab-4768-83d8-090f44f47235"
+                    },
+                    {
+                      "key": "repo_url",
+                      "value": "git@github.com:semaphoreci/toolbox.git"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "NEXT"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19e2fed5-5e72-4188-a110-fccfe66791ee",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "owner_uuid",
+                      "value": "7d36df70-6eab-4768-83d8-090f44f47235"
+                    },
+                    {
+                      "key": "repo_url",
+                      "value": "git@github.com:semaphoreci/toolbox.git"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "NEXT"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b188e950-e83a-47f4-90ff-6706bc945179",
+              "name": "Validation Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "owner_uuid",
+                      "value": "7d36df70-6eab-4768-83d8-090f44f47235"
+                    },
+                    {
+                      "key": "repo_url",
+                      "value": "git@github.com:semaphoreci/toolbox.git"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "NEXT"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70eccc6b-7e00-496d-b0ec-dcee631e2779",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "owner_uuid",
+                      "value": "7d36df70-6eab-4768-83d8-090f44f47235"
+                    },
+                    {
+                      "key": "repo_url",
+                      "value": "git@github.com:semaphoreci/toolbox.git"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "NEXT"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "67833fce-3f79-4a6d-bc7c-ed936bc2b2e0",
+          "name": "Projects.Delete",
+          "request": {
+            "name": "Projects.Delete",
+            "description": {
+              "content": "Delete a project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":project_id_or_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "project_id_or_name",
+                  "description": "(Required) Id or name of the project"
+                },
+                {
+                  "description": "Organization name",
+                  "type": "any",
+                  "value": "{{org_name}}",
+                  "key": "org_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7aee805f-8461-44cf-8e5b-2de50dc2a92a",
+              "name": "ID of the deleted project",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"project_id\": \"bdc3abf1-6cd4-43cd-9f2f-5e9d83e1d16d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9e48bd4-1e10-4e5a-9204-e4d4f1781ab5",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55d7b6d0-2f92-4a2e-b3f5-6a6e0e770d9a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8bfc47d7-42bb-487e-accc-83e611961555",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "700f65b3-a9b8-4c32-bf88-4ce8859360d8",
+              "name": "Validation Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "768c6d79-ef22-4445-9bb6-75cc3f51e7bc",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "655909f3-f208-4fbc-87fd-e94e892c8ce6",
+          "name": "Projects.Describe",
+          "request": {
+            "name": "Projects.Describe",
+            "description": {
+              "content": "Describe project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":project_id_or_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "project_id_or_name",
+                  "description": "(Required) Id or name of the project"
+                },
+                {
+                  "description": "Organization name",
+                  "type": "any",
+                  "value": "{{org_name}}",
+                  "key": "org_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4b29ef3f-2dd3-4bc1-9641-81b4460add84",
+              "name": "Project",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"v2\",\n  \"kind\": \"Project\",\n  \"metadata\": {\n    \"id\": \"ed12ab59-9224-45c8-82d6-79bf158aaae6\",\n    \"name\": \"my-secret\",\n    \"connected\": true,\n    \"created_at\": \"2025-04-28T11:48:17.496Z\",\n    \"created_by\": {\n      \"id\": \"18b40eaf-ce10-49c3-93f2-e4fe72d5160b\"\n    },\n    \"description\": \"string\",\n    \"org_id\": \"ff19729a-a8d5-4a62-8c5c-9bdbabf6607e\"\n  },\n  \"spec\": {\n    \"repository\": {\n      \"url\": \"git@github.com:semaphoreci/toolbox.git\",\n      \"integration_type\": \"BITBUCKET\",\n      \"run_on\": [\n        \"FORKED_PULL_REQUESTS\",\n        \"BRANCHES\"\n      ],\n      \"forked_pull_requests\": {\n        \"allowed_secrets\": [\n          \"my-secret\",\n          \"my-secret\"\n        ]\n      },\n      \"pipeline_file\": \".semaphore/semaphore.yml\",\n      \"status\": {\n        \"pipeline_files\": [\n          {\n            \"level\": \"PIPELINE\",\n            \"path\": \".semaphore/semaphore.yml\"\n          }\n        ]\n      },\n      \"whitelist\": {\n        \"branches\": [\n          \"string\",\n          \"string\"\n        ],\n        \"tags\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    \"name\": \"my-project\",\n    \"description\": \"string\",\n    \"visibility\": \"PUBLIC\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "112da312-7302-4b4a-9899-6aec2ca3286c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c088f73c-e82e-45ae-9f4e-82d20d22ca8d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b08dd9f3-24d1-4de8-bce0-b51a6678361f",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98685c87-3443-4f98-b73b-390b4b481697",
+              "name": "Validation Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "559c9656-de92-4d64-afa6-2286227974ed",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c5b3e116-a505-46b8-9006-9984314ce65a",
+          "name": "Projects.Update",
+          "request": {
+            "name": "Projects.Update",
+            "description": {
+              "content": "Update a project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":project_id_or_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "project_id_or_name",
+                  "description": "(Required) Id or name of the project"
+                },
+                {
+                  "description": "Organization name",
+                  "type": "any",
+                  "value": "{{org_name}}",
+                  "key": "org_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"spec\": {\n    \"repository\": {\n      \"url\": \"<string>\",\n      \"integration_type\": \"<string>\",\n      \"run_on\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"forked_pull_requests\": {\n        \"allowed_contributors\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"allowed_secrets\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"pipeline_file\": \".semaphore/semaphore.yml\",\n      \"status\": {\n        \"pipeline_files\": [\n          {\n            \"level\": \"PIPELINE\",\n            \"path\": \".semaphore/semaphore.yml\"\n          }\n        ]\n      },\n      \"whitelist\": {\n        \"branches\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"visibility\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5f3e1197-d02c-42b0-a9a2-95be40713c9f",
+              "name": "Updated secret",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"spec\": {\n    \"repository\": {\n      \"url\": \"git@github.com:semaphoreci/toolbox.git\",\n      \"integration_type\": \"<string>\",\n      \"run_on\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"forked_pull_requests\": {\n        \"allowed_secrets\": [\n          \"my-secret\",\n          \"my-secret\"\n        ]\n      },\n      \"pipeline_file\": \".semaphore/semaphore.yml\",\n      \"status\": {\n        \"pipeline_files\": [\n          {\n            \"level\": \"PIPELINE\",\n            \"path\": \".semaphore/semaphore.yml\"\n          }\n        ]\n      },\n      \"whitelist\": {\n        \"branches\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    \"name\": \"my-project\",\n    \"description\": \"<string>\",\n    \"visibility\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"v2\",\n  \"kind\": \"Project\",\n  \"metadata\": {\n    \"id\": \"ed12ab59-9224-45c8-82d6-79bf158aaae6\",\n    \"name\": \"my-secret\",\n    \"connected\": true,\n    \"created_at\": \"2025-04-28T11:48:17.496Z\",\n    \"created_by\": {\n      \"id\": \"18b40eaf-ce10-49c3-93f2-e4fe72d5160b\"\n    },\n    \"description\": \"string\",\n    \"org_id\": \"ff19729a-a8d5-4a62-8c5c-9bdbabf6607e\"\n  },\n  \"spec\": {\n    \"repository\": {\n      \"url\": \"git@github.com:semaphoreci/toolbox.git\",\n      \"integration_type\": \"BITBUCKET\",\n      \"run_on\": [\n        \"FORKED_PULL_REQUESTS\",\n        \"BRANCHES\"\n      ],\n      \"forked_pull_requests\": {\n        \"allowed_secrets\": [\n          \"my-secret\",\n          \"my-secret\"\n        ]\n      },\n      \"pipeline_file\": \".semaphore/semaphore.yml\",\n      \"status\": {\n        \"pipeline_files\": [\n          {\n            \"level\": \"PIPELINE\",\n            \"path\": \".semaphore/semaphore.yml\"\n          }\n        ]\n      },\n      \"whitelist\": {\n        \"branches\": [\n          \"string\",\n          \"string\"\n        ],\n        \"tags\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    \"name\": \"my-project\",\n    \"description\": \"string\",\n    \"visibility\": \"PUBLIC\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c38a2f40-eb2c-45d5-bc0c-d914d270e724",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"spec\": {\n    \"repository\": {\n      \"url\": \"git@github.com:semaphoreci/toolbox.git\",\n      \"integration_type\": \"<string>\",\n      \"run_on\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"forked_pull_requests\": {\n        \"allowed_secrets\": [\n          \"my-secret\",\n          \"my-secret\"\n        ]\n      },\n      \"pipeline_file\": \".semaphore/semaphore.yml\",\n      \"status\": {\n        \"pipeline_files\": [\n          {\n            \"level\": \"PIPELINE\",\n            \"path\": \".semaphore/semaphore.yml\"\n          }\n        ]\n      },\n      \"whitelist\": {\n        \"branches\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    \"name\": \"my-project\",\n    \"description\": \"<string>\",\n    \"visibility\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c43895f-5235-4814-af2c-5779467df4fc",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"spec\": {\n    \"repository\": {\n      \"url\": \"git@github.com:semaphoreci/toolbox.git\",\n      \"integration_type\": \"<string>\",\n      \"run_on\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"forked_pull_requests\": {\n        \"allowed_secrets\": [\n          \"my-secret\",\n          \"my-secret\"\n        ]\n      },\n      \"pipeline_file\": \".semaphore/semaphore.yml\",\n      \"status\": {\n        \"pipeline_files\": [\n          {\n            \"level\": \"PIPELINE\",\n            \"path\": \".semaphore/semaphore.yml\"\n          }\n        ]\n      },\n      \"whitelist\": {\n        \"branches\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    \"name\": \"my-project\",\n    \"description\": \"<string>\",\n    \"visibility\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e94ef858-a774-400d-abd7-fe8e7a06a3fc",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"spec\": {\n    \"repository\": {\n      \"url\": \"git@github.com:semaphoreci/toolbox.git\",\n      \"integration_type\": \"<string>\",\n      \"run_on\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"forked_pull_requests\": {\n        \"allowed_secrets\": [\n          \"my-secret\",\n          \"my-secret\"\n        ]\n      },\n      \"pipeline_file\": \".semaphore/semaphore.yml\",\n      \"status\": {\n        \"pipeline_files\": [\n          {\n            \"level\": \"PIPELINE\",\n            \"path\": \".semaphore/semaphore.yml\"\n          }\n        ]\n      },\n      \"whitelist\": {\n        \"branches\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    \"name\": \"my-project\",\n    \"description\": \"<string>\",\n    \"visibility\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2a82253-27b6-4df6-813b-babc0b4aa216",
+              "name": "Validation Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"spec\": {\n    \"repository\": {\n      \"url\": \"git@github.com:semaphoreci/toolbox.git\",\n      \"integration_type\": \"<string>\",\n      \"run_on\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"forked_pull_requests\": {\n        \"allowed_secrets\": [\n          \"my-secret\",\n          \"my-secret\"\n        ]\n      },\n      \"pipeline_file\": \".semaphore/semaphore.yml\",\n      \"status\": {\n        \"pipeline_files\": [\n          {\n            \"level\": \"PIPELINE\",\n            \"path\": \".semaphore/semaphore.yml\"\n          }\n        ]\n      },\n      \"whitelist\": {\n        \"branches\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    \"name\": \"my-project\",\n    \"description\": \"<string>\",\n    \"visibility\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76fedc29-633e-403b-bc9b-67a63786d42a",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"spec\": {\n    \"repository\": {\n      \"url\": \"git@github.com:semaphoreci/toolbox.git\",\n      \"integration_type\": \"<string>\",\n      \"run_on\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"forked_pull_requests\": {\n        \"allowed_secrets\": [\n          \"my-secret\",\n          \"my-secret\"\n        ]\n      },\n      \"pipeline_file\": \".semaphore/semaphore.yml\",\n      \"status\": {\n        \"pipeline_files\": [\n          {\n            \"level\": \"PIPELINE\",\n            \"path\": \".semaphore/semaphore.yml\"\n          }\n        ]\n      },\n      \"whitelist\": {\n        \"branches\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    \"name\": \"my-project\",\n    \"description\": \"<string>\",\n    \"visibility\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Organization name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "me",
+      "key": "org_name"
+    },
+    {
+      "type": "string",
+      "value": "https://{{org_name}}.semaphoreci.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "722d94ee-1a94-40cb-92aa-cee16f394514",
+    "name": "Semaphore Public Dashboards Projects API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Semaphore Public API is a RESTful API that allows you to interact with Semaphore CI/CD.\n## Authorization\nAuthorization is done via bearer token. You can obtain a token by visiting your [account settings](https://me.semaphoreci.com/account).\n\n## Pagination with link headers\nEach list request supports pagination. List responses include a [link header](https://datatracker.ietf.org/doc/html/rfc5988#section-5) with the pagination URLs.\nLink headers contain next, previous, first relative URLs.\n\n\nContact Support:\n Email: support@semaphoreci.com",
+      "type": "text/plain"
+    }
+  }
+}

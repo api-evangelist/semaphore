@@ -1,0 +1,145 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Semaphore Public Dashboards Notifications API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Notifications.List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/notifications",
+            "params": [
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Starting point for listing, if you are fetching first page leave it empty"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Page size"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List notifications in organization."
+        },
+        {
+          "info": {
+            "name": "Notifications.Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/notifications",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a notification."
+        },
+        {
+          "info": {
+            "name": "Notifications.Describe",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/notifications/:id_or_name",
+            "params": [
+              {
+                "name": "id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the notification"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Describe a notification."
+        },
+        {
+          "info": {
+            "name": "Notifications.Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/notifications/:id_or_name",
+            "params": [
+              {
+                "name": "id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the notification to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a notification."
+        },
+        {
+          "info": {
+            "name": "Notifications.Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/notifications/:id_or_name",
+            "params": [
+              {
+                "name": "id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the notification"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a notification."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

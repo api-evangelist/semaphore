@@ -1,0 +1,151 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Semaphore Public Dashboards API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Dashboards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Dashboards.List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/dashboards",
+            "params": [
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Ordering of the dashboards"
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Starting point for listing, if you are fetching first page leave it empty"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Page size"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all organization level dashboards.\n      If the response does not fit all the dashboards refer to the link header to get next page url."
+        },
+        {
+          "info": {
+            "name": "Dashboards.Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/dashboards",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a dashboard."
+        },
+        {
+          "info": {
+            "name": "Dashboards.Describe",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/dashboards/:id_or_name",
+            "params": [
+              {
+                "name": "id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the dashboard"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Describe a dashboard by its id or name."
+        },
+        {
+          "info": {
+            "name": "Dashboards.Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/dashboards/:id_or_name",
+            "params": [
+              {
+                "name": "id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the dashboard"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a dashboard by its id or name."
+        },
+        {
+          "info": {
+            "name": "Dashboards.Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/dashboards/:id_or_name",
+            "params": [
+              {
+                "name": "id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the dashboard"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a dashboard by its id or name."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

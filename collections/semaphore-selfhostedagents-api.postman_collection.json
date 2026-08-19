@@ -1,0 +1,903 @@
+{
+  "item": [
+    {
+      "id": "6e29c4dd-dc95-47f1-985f-3465d3a88a7d",
+      "name": "SelfHostedAgents",
+      "description": {
+        "content": "Self-hosted agent management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e43fe57f-e29d-4088-a8f3-4d6b97a429f1",
+          "name": "Self Hosted Agents.List",
+          "request": {
+            "name": "Self Hosted Agents.List",
+            "description": {
+              "content": "List all registered self-hosted agents. Optionally filter by agent type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "agents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "agent_type",
+                  "value": "<string>",
+                  "description": "The name of the agent type to filter for. If not specified, agents for all agent types will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "",
+                  "description": "Starting point for listing, if you are fetching first page leave it empty"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "20",
+                  "description": "Page size"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Organization name",
+                  "type": "any",
+                  "value": "{{org_name}}",
+                  "key": "org_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a5144106-5ef8-49b1-a176-08dc85e08db0",
+              "name": "Self-hosted agent type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "agent_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"apiVersion\": \"v2\",\n    \"kind\": \"SelfHostedAgent\",\n    \"metadata\": {\n      \"arch\": \"string\",\n      \"connected_at\": \"1963-01-27T14:17:37.355Z\",\n      \"disabled_at\": \"2000-10-15T08:03:00.815Z\",\n      \"hostname\": \"string\",\n      \"ip_address\": \"string\",\n      \"name\": \"string\",\n      \"org_id\": \"c9746a87-aa53-48dd-96c6-737e27bee4f7\",\n      \"os\": \"Ubuntu 20.04.6 LTS\",\n      \"pid\": 7865,\n      \"status\": \"RUNNING_JOB\",\n      \"type\": \"s1-my-type\",\n      \"version\": \"v2.2.6\"\n    }\n  },\n  {\n    \"apiVersion\": \"v2\",\n    \"kind\": \"SelfHostedAgent\",\n    \"metadata\": {\n      \"arch\": \"string\",\n      \"connected_at\": \"1987-01-27T19:24:57.640Z\",\n      \"disabled_at\": \"1984-02-14T13:13:06.372Z\",\n      \"hostname\": \"string\",\n      \"ip_address\": \"string\",\n      \"name\": \"string\",\n      \"org_id\": \"c9746a87-aa53-48dd-96c6-737e27bee4f7\",\n      \"os\": \"Ubuntu 20.04.6 LTS\",\n      \"pid\": 7030,\n      \"status\": \"RUNNING_JOB\",\n      \"type\": \"s1-my-type\",\n      \"version\": \"v2.2.6\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f96fd6e-7d99-4aed-a8a7-e3807d5028f6",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "agent_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5cbed57d-1ab2-4795-868e-d147e65d898e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "agent_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35c4fdcf-d76f-494a-8d14-e7a837849ee1",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "agent_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5352c4a9-b07b-466d-973e-6702c35b2add",
+              "name": "Validation Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "agent_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a962bc9-8993-4aa4-8f40-bc59fab81e02",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "agent_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c10063c6-292d-4be6-876b-9e262da94620",
+          "name": "Self Hosted Agents.Describe",
+          "request": {
+            "name": "Self Hosted Agents.Describe",
+            "description": {
+              "content": "Describe a single registered self-hosted agent by agent name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "agents",
+                ":agent_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "agent_name",
+                  "description": "(Required) Unique name of the self-hosted agent."
+                },
+                {
+                  "description": "Organization name",
+                  "type": "any",
+                  "value": "{{org_name}}",
+                  "key": "org_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "46c78989-97f9-4525-be61-7162e9100bd0",
+              "name": "Self-hosted agents",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agents",
+                    ":agent_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agent_name",
+                      "description": "(Required) Unique name of the self-hosted agent."
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"v2\",\n  \"kind\": \"SelfHostedAgent\",\n  \"metadata\": {\n    \"arch\": \"string\",\n    \"connected_at\": \"1966-09-10T08:26:04.673Z\",\n    \"disabled_at\": \"2009-05-14T03:22:23.663Z\",\n    \"hostname\": \"string\",\n    \"ip_address\": \"string\",\n    \"name\": \"string\",\n    \"org_id\": \"c9746a87-aa53-48dd-96c6-737e27bee4f7\",\n    \"os\": \"Ubuntu 20.04.6 LTS\",\n    \"pid\": 7070,\n    \"status\": \"WAITING_FOR_JOB\",\n    \"type\": \"s1-my-type\",\n    \"version\": \"v2.2.6\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9bc7ed08-d91b-4621-a886-024f763e1310",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agents",
+                    ":agent_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agent_name",
+                      "description": "(Required) Unique name of the self-hosted agent."
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9070d6e0-3420-450a-9b2b-89757ec3e422",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agents",
+                    ":agent_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agent_name",
+                      "description": "(Required) Unique name of the self-hosted agent."
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9bbce5f-b0e0-44f2-bbc7-2a0bbef01daf",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agents",
+                    ":agent_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agent_name",
+                      "description": "(Required) Unique name of the self-hosted agent."
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d8346a6-4acf-40ea-95dc-f13b843fc037",
+              "name": "Validation Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agents",
+                    ":agent_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agent_name",
+                      "description": "(Required) Unique name of the self-hosted agent."
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6cd4382a-a7a8-4ea5-a65c-673a02b1699d",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agents",
+                    ":agent_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agent_name",
+                      "description": "(Required) Unique name of the self-hosted agent."
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Organization name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "me",
+      "key": "org_name"
+    },
+    {
+      "type": "string",
+      "value": "https://{{org_name}}.semaphoreci.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "268615c2-60da-4bb4-a638-b6644f496ec2",
+    "name": "Semaphore Public Dashboards SelfHostedAgents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Semaphore Public API is a RESTful API that allows you to interact with Semaphore CI/CD.\n## Authorization\nAuthorization is done via bearer token. You can obtain a token by visiting your [account settings](https://me.semaphoreci.com/account).\n\n## Pagination with link headers\nEach list request supports pagination. List responses include a [link header](https://datatracker.ietf.org/doc/html/rfc5988#section-5) with the pagination URLs.\nLink headers contain next, previous, first relative URLs.\n\n\nContact Support:\n Email: support@semaphoreci.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,4184 @@
+{
+  "item": [
+    {
+      "id": "2d55322d-ac38-4f9d-90e7-051db40a1b11",
+      "name": "DeploymentTargets",
+      "description": {
+        "content": "Deployment target management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "da49a67f-b21b-40fd-8485-cd2aa6526e74",
+          "name": "Deployment Targets.Create",
+          "request": {
+            "name": "Deployment Targets.Create",
+            "description": {
+              "content": "Create a deployment target for the project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":project_id_or_name",
+                "deployment_targets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "project_id_or_name",
+                  "description": "(Required) Id or name of the project"
+                },
+                {
+                  "description": "Organization name",
+                  "type": "any",
+                  "value": "{{org_name}}",
+                  "key": "org_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"unique_token\": \"<string>\",\n  \"deployment_target\": {\n    \"spec\": {\n      \"name\": \"<string>\",\n      \"active\": \"<boolean>\",\n      \"bookmark_parameters\": [\n        \"<string>\",\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"description\": \"<string>\",\n      \"env_vars\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"files\": [\n        {\n          \"path\": \"<string>\",\n          \"content\": \"<string>\"\n        },\n        {\n          \"path\": \"<string>\",\n          \"content\": \"<string>\"\n        }\n      ],\n      \"object_rules\": {\n        \"branches\": \"<string>\",\n        \"prs\": \"NONE\",\n        \"tags\": \"<string>\"\n      },\n      \"subject_rules\": {\n        \"any\": false,\n        \"auto\": \"<boolean>\",\n        \"roles\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"users\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      },\n      \"url\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b845df36-0df4-445e-ace8-3af088519624",
+              "name": "Created deployment target",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"unique_token\": \"<string>\",\n  \"deployment_target\": {\n    \"spec\": {\n      \"name\": \"production\",\n      \"active\": \"<boolean>\",\n      \"bookmark_parameters\": [\n        \"<string>\",\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"description\": \"<string>\",\n      \"env_vars\": [\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        },\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        }\n      ],\n      \"files\": [\n        {\n          \"path\": \"/path/to/file\",\n          \"content\": \"<string>\"\n        },\n        {\n          \"path\": \"/path/to/file\",\n          \"content\": \"<string>\"\n        }\n      ],\n      \"object_rules\": {\n        \"branches\": \"<string>\",\n        \"prs\": \"NONE\",\n        \"tags\": \"<string>\"\n      },\n      \"subject_rules\": {\n        \"any\": false,\n        \"auto\": \"<boolean>\",\n        \"roles\": [\n          \"Contributor\",\n          \"Contributor\"\n        ],\n        \"users\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      },\n      \"url\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"v2\",\n  \"kind\": \"DeploymentTarget\",\n  \"spec\": {\n    \"name\": \"production\",\n    \"active\": false,\n    \"bookmark_parameters\": [\n      \"string\",\n      \"string\",\n      \"string\"\n    ],\n    \"description\": \"string\",\n    \"env_vars\": [\n      {\n        \"name\": \"MY_SECRET\",\n        \"value\": \"secret\"\n      },\n      {\n        \"name\": \"MY_SECRET\",\n        \"value\": \"secret\"\n      }\n    ],\n    \"files\": [\n      {\n        \"path\": \"/path/to/file\",\n        \"content\": \"string\"\n      },\n      {\n        \"path\": \"/path/to/file\",\n        \"content\": \"string\"\n      }\n    ],\n    \"object_rules\": {\n      \"branches\": \"ALL\",\n      \"prs\": \"NONE\",\n      \"tags\": \"ALL\"\n    },\n    \"subject_rules\": {\n      \"any\": false,\n      \"auto\": false,\n      \"roles\": [\n        \"Contributor\",\n        \"Contributor\"\n      ],\n      \"users\": [\n        \"cce87f74-e43f-3b82-1c5f-93429ef0b422\",\n        \"3aca9807-37a7-cb27-5990-c17b7ad455b3\"\n      ]\n    },\n    \"url\": \"string\"\n  },\n  \"metadata\": {\n    \"id\": \"9c777b65-213f-4fe1-bc6b-727d2cdde97d\",\n    \"name\": \"production\",\n    \"project_id\": \"726dbefd-b30c-4c80-bc9a-c0613968a2ca\",\n    \"created_at\": \"2016-06-03T00:30:07.213Z\",\n    \"created_by\": {\n      \"id\": \"18b40eaf-ce10-49c3-93f2-e4fe72d5160b\"\n    },\n    \"description\": \"string\",\n    \"last_deployment\": {\n      \"env_vars\": [\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        },\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        }\n      ],\n      \"id\": \"a0424427-ff28-4f77-a893-0fdf5f50c380\",\n      \"origin_pipeline_id\": \"97ba55d1-90d7-40b9-a2dd-bdbd02389b58\",\n      \"pipeline_id\": \"adc5a26f-4077-47bc-8d4f-cb4467f2c103\",\n      \"state\": \"STARTED\",\n      \"state_message\": \"string\",\n      \"target_id\": \"4a9e9001-6703-4815-9c19-ed2e9e8c87ea\",\n      \"target_name\": \"string\",\n      \"triggered_at\": \"1950-11-27T11:38:32.242Z\",\n      \"triggered_by\": {\n        \"id\": \"18b40eaf-ce10-49c3-93f2-e4fe72d5160b\"\n      }\n    },\n    \"org_id\": \"02b7c528-b0f1-4266-8e5e-10b7b984e76a\",\n    \"state\": \"SYNCING\",\n    \"updated_at\": \"2021-11-20T19:00:18.829Z\",\n    \"updated_by\": {\n      \"id\": \"18b40eaf-ce10-49c3-93f2-e4fe72d5160b\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8717ad0-8e9f-4b59-bf0f-dbf3a0543cbd",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"unique_token\": \"<string>\",\n  \"deployment_target\": {\n    \"spec\": {\n      \"name\": \"production\",\n      \"active\": \"<boolean>\",\n      \"bookmark_parameters\": [\n        \"<string>\",\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"description\": \"<string>\",\n      \"env_vars\": [\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        },\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        }\n      ],\n      \"files\": [\n        {\n          \"path\": \"/path/to/file\",\n          \"content\": \"<string>\"\n        },\n        {\n          \"path\": \"/path/to/file\",\n          \"content\": \"<string>\"\n        }\n      ],\n      \"object_rules\": {\n        \"branches\": \"<string>\",\n        \"prs\": \"NONE\",\n        \"tags\": \"<string>\"\n      },\n      \"subject_rules\": {\n        \"any\": false,\n        \"auto\": \"<boolean>\",\n        \"roles\": [\n          \"Contributor\",\n          \"Contributor\"\n        ],\n        \"users\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      },\n      \"url\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a74e72cd-c8d9-412a-a237-0274f64bc07c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"unique_token\": \"<string>\",\n  \"deployment_target\": {\n    \"spec\": {\n      \"name\": \"production\",\n      \"active\": \"<boolean>\",\n      \"bookmark_parameters\": [\n        \"<string>\",\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"description\": \"<string>\",\n      \"env_vars\": [\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        },\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        }\n      ],\n      \"files\": [\n        {\n          \"path\": \"/path/to/file\",\n          \"content\": \"<string>\"\n        },\n        {\n          \"path\": \"/path/to/file\",\n          \"content\": \"<string>\"\n        }\n      ],\n      \"object_rules\": {\n        \"branches\": \"<string>\",\n        \"prs\": \"NONE\",\n        \"tags\": \"<string>\"\n      },\n      \"subject_rules\": {\n        \"any\": false,\n        \"auto\": \"<boolean>\",\n        \"roles\": [\n          \"Contributor\",\n          \"Contributor\"\n        ],\n        \"users\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      },\n      \"url\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20b045d9-1fcd-45e6-b1c9-cb95a27e0a5c",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"unique_token\": \"<string>\",\n  \"deployment_target\": {\n    \"spec\": {\n      \"name\": \"production\",\n      \"active\": \"<boolean>\",\n      \"bookmark_parameters\": [\n        \"<string>\",\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"description\": \"<string>\",\n      \"env_vars\": [\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        },\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        }\n      ],\n      \"files\": [\n        {\n          \"path\": \"/path/to/file\",\n          \"content\": \"<string>\"\n        },\n        {\n          \"path\": \"/path/to/file\",\n          \"content\": \"<string>\"\n        }\n      ],\n      \"object_rules\": {\n        \"branches\": \"<string>\",\n        \"prs\": \"NONE\",\n        \"tags\": \"<string>\"\n      },\n      \"subject_rules\": {\n        \"any\": false,\n        \"auto\": \"<boolean>\",\n        \"roles\": [\n          \"Contributor\",\n          \"Contributor\"\n        ],\n        \"users\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      },\n      \"url\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3edccbbd-fc7a-4ff3-bc94-37c94cae95e9",
+              "name": "Validation Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"unique_token\": \"<string>\",\n  \"deployment_target\": {\n    \"spec\": {\n      \"name\": \"production\",\n      \"active\": \"<boolean>\",\n      \"bookmark_parameters\": [\n        \"<string>\",\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"description\": \"<string>\",\n      \"env_vars\": [\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        },\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        }\n      ],\n      \"files\": [\n        {\n          \"path\": \"/path/to/file\",\n          \"content\": \"<string>\"\n        },\n        {\n          \"path\": \"/path/to/file\",\n          \"content\": \"<string>\"\n        }\n      ],\n      \"object_rules\": {\n        \"branches\": \"<string>\",\n        \"prs\": \"NONE\",\n        \"tags\": \"<string>\"\n      },\n      \"subject_rules\": {\n        \"any\": false,\n        \"auto\": \"<boolean>\",\n        \"roles\": [\n          \"Contributor\",\n          \"Contributor\"\n        ],\n        \"users\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      },\n      \"url\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a3fee2f-7bab-4102-ba06-83e9d818370f",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"unique_token\": \"<string>\",\n  \"deployment_target\": {\n    \"spec\": {\n      \"name\": \"production\",\n      \"active\": \"<boolean>\",\n      \"bookmark_parameters\": [\n        \"<string>\",\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"description\": \"<string>\",\n      \"env_vars\": [\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        },\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        }\n      ],\n      \"files\": [\n        {\n          \"path\": \"/path/to/file\",\n          \"content\": \"<string>\"\n        },\n        {\n          \"path\": \"/path/to/file\",\n          \"content\": \"<string>\"\n        }\n      ],\n      \"object_rules\": {\n        \"branches\": \"<string>\",\n        \"prs\": \"NONE\",\n        \"tags\": \"<string>\"\n      },\n      \"subject_rules\": {\n        \"any\": false,\n        \"auto\": \"<boolean>\",\n        \"roles\": [\n          \"Contributor\",\n          \"Contributor\"\n        ],\n        \"users\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      },\n      \"url\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e94a57a8-5862-42ca-ba69-facb6a22940a",
+          "name": "Deployment Targets.List",
+          "request": {
+            "name": "Deployment Targets.List",
+            "description": {
+              "content": "List of deployment targets for the project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":project_id_or_name",
+                "deployment_targets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "project_id_or_name",
+                  "description": "(Required) Id or name of the project"
+                },
+                {
+                  "description": "Organization name",
+                  "type": "any",
+                  "value": "{{org_name}}",
+                  "key": "org_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a1587c18-97e3-421d-8059-e62134eb26ef",
+              "name": "List of deployment targets",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"apiVersion\": \"v2\",\n    \"kind\": \"DeploymentTarget\",\n    \"spec\": {\n      \"name\": \"production\",\n      \"active\": true,\n      \"bookmark_parameters\": [\n        \"string\",\n        \"string\",\n        \"string\"\n      ],\n      \"description\": \"string\",\n      \"env_vars\": [\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        },\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        }\n      ],\n      \"files\": [\n        {\n          \"path\": \"/path/to/file\",\n          \"content\": \"string\"\n        },\n        {\n          \"path\": \"/path/to/file\",\n          \"content\": \"string\"\n        }\n      ],\n      \"object_rules\": {\n        \"branches\": \"ALL\",\n        \"prs\": \"NONE\",\n        \"tags\": \"ALL\"\n      },\n      \"subject_rules\": {\n        \"any\": false,\n        \"auto\": true,\n        \"roles\": [\n          \"Contributor\",\n          \"Contributor\"\n        ],\n        \"users\": [\n          \"31bf6398-2df6-be37-4602-a38d847493cf\",\n          \"f4f2db90-6b09-0888-fbd6-c9fa83f5d373\"\n        ]\n      },\n      \"url\": \"string\"\n    },\n    \"metadata\": {\n      \"id\": \"9c777b65-213f-4fe1-bc6b-727d2cdde97d\",\n      \"name\": \"production\",\n      \"project_id\": \"726dbefd-b30c-4c80-bc9a-c0613968a2ca\",\n      \"created_at\": \"1988-07-07T21:40:39.293Z\",\n      \"created_by\": {\n        \"id\": \"18b40eaf-ce10-49c3-93f2-e4fe72d5160b\"\n      },\n      \"description\": \"string\",\n      \"last_deployment\": {\n        \"env_vars\": [\n          {\n            \"name\": \"MY_SECRET\",\n            \"value\": \"secret\"\n          },\n          {\n            \"name\": \"MY_SECRET\",\n            \"value\": \"secret\"\n          }\n        ],\n        \"id\": \"a0424427-ff28-4f77-a893-0fdf5f50c380\",\n        \"origin_pipeline_id\": \"97ba55d1-90d7-40b9-a2dd-bdbd02389b58\",\n        \"pipeline_id\": \"adc5a26f-4077-47bc-8d4f-cb4467f2c103\",\n        \"state\": \"PENDING\",\n        \"state_message\": \"string\",\n        \"target_id\": \"4a9e9001-6703-4815-9c19-ed2e9e8c87ea\",\n        \"target_name\": \"string\",\n        \"triggered_at\": \"2015-11-07T21:15:24.817Z\",\n        \"triggered_by\": {\n          \"id\": \"18b40eaf-ce10-49c3-93f2-e4fe72d5160b\"\n        }\n      },\n      \"org_id\": \"02b7c528-b0f1-4266-8e5e-10b7b984e76a\",\n      \"state\": \"USABLE\",\n      \"updated_at\": \"2001-12-06T06:33:08.237Z\",\n      \"updated_by\": {\n        \"id\": \"18b40eaf-ce10-49c3-93f2-e4fe72d5160b\"\n      }\n    }\n  },\n  {\n    \"apiVersion\": \"v2\",\n    \"kind\": \"DeploymentTarget\",\n    \"spec\": {\n      \"name\": \"production\",\n      \"active\": true,\n      \"bookmark_parameters\": [\n        \"string\",\n        \"string\",\n        \"string\"\n      ],\n      \"description\": \"string\",\n      \"env_vars\": [\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        },\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        }\n      ],\n      \"files\": [\n        {\n          \"path\": \"/path/to/file\",\n          \"content\": \"string\"\n        },\n        {\n          \"path\": \"/path/to/file\",\n          \"content\": \"string\"\n        }\n      ],\n      \"object_rules\": {\n        \"branches\": \"ALL\",\n        \"prs\": \"NONE\",\n        \"tags\": \"ALL\"\n      },\n      \"subject_rules\": {\n        \"any\": false,\n        \"auto\": true,\n        \"roles\": [\n          \"Contributor\",\n          \"Contributor\"\n        ],\n        \"users\": [\n          \"1f2cddce-7cc5-4145-9e10-6a4955136fac\",\n          \"4b3e3f64-0a8e-e573-a461-18d02f438a05\"\n        ]\n      },\n      \"url\": \"string\"\n    },\n    \"metadata\": {\n      \"id\": \"9c777b65-213f-4fe1-bc6b-727d2cdde97d\",\n      \"name\": \"production\",\n      \"project_id\": \"726dbefd-b30c-4c80-bc9a-c0613968a2ca\",\n      \"created_at\": \"2020-02-13T20:35:02.197Z\",\n      \"created_by\": {\n        \"id\": \"18b40eaf-ce10-49c3-93f2-e4fe72d5160b\"\n      },\n      \"description\": \"string\",\n      \"last_deployment\": {\n        \"env_vars\": [\n          {\n            \"name\": \"MY_SECRET\",\n            \"value\": \"secret\"\n          },\n          {\n            \"name\": \"MY_SECRET\",\n            \"value\": \"secret\"\n          }\n        ],\n        \"id\": \"a0424427-ff28-4f77-a893-0fdf5f50c380\",\n        \"origin_pipeline_id\": \"97ba55d1-90d7-40b9-a2dd-bdbd02389b58\",\n        \"pipeline_id\": \"adc5a26f-4077-47bc-8d4f-cb4467f2c103\",\n        \"state\": \"STARTED\",\n        \"state_message\": \"string\",\n        \"target_id\": \"4a9e9001-6703-4815-9c19-ed2e9e8c87ea\",\n        \"target_name\": \"string\",\n        \"triggered_at\": \"2006-04-16T13:10:42.821Z\",\n        \"triggered_by\": {\n          \"id\": \"18b40eaf-ce10-49c3-93f2-e4fe72d5160b\"\n        }\n      },\n      \"org_id\": \"02b7c528-b0f1-4266-8e5e-10b7b984e76a\",\n      \"state\": \"USABLE\",\n      \"updated_at\": \"1982-01-24T18:16:48.567Z\",\n      \"updated_by\": {\n        \"id\": \"18b40eaf-ce10-49c3-93f2-e4fe72d5160b\"\n      }\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4fc2cba5-0633-4108-89e8-858fa85075ad",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "242b2fc1-43aa-43f5-a115-186b49cb9029",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "952e81bd-b658-4d6b-854b-4e7c9061152d",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c87667fe-1ed7-4fec-8b62-b38c2d7e3d86",
+              "name": "Validation Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7bd5b32b-56bf-4c71-ab93-6ce6d59c9adf",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "34bb6bd0-ca25-41a5-9149-be6f2695334e",
+          "name": "Deployment Targets.Delete",
+          "request": {
+            "name": "Deployment Targets.Delete",
+            "description": {
+              "content": "Delete a deployment target for the project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":project_id_or_name",
+                "deployment_targets",
+                ":id_or_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "unique_token",
+                  "value": "<string>",
+                  "description": "(Required) Idempotency token for the delete operation"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "project_id_or_name",
+                  "description": "(Required) Id or name of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id_or_name",
+                  "description": "(Required) Id or name of the deployment target"
+                },
+                {
+                  "description": "Organization name",
+                  "type": "any",
+                  "value": "{{org_name}}",
+                  "key": "org_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2dc4b240-3f84-42b9-9cab-8d331ac9d578",
+              "name": "ID of the deleted deployment target",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "unique_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"ebcd9452-b3b1-40f4-885c-c5d43ea0b40a\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f6165e6-0884-4a24-8765-791d0727d9a0",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "unique_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac99a6be-f629-4a40-b47b-aa5f5411ad55",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "unique_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e354b82-0532-425d-bfbb-881396edabfe",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "unique_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48e3c514-854a-4030-be11-7953689b89cc",
+              "name": "Validation Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "unique_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46088a72-710f-47ec-b2c4-a480a385b557",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "unique_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e07e8031-3b44-42e3-a3ae-bb3f6d5710a4",
+          "name": "Deployment Targets.Describe",
+          "request": {
+            "name": "Deployment Targets.Describe",
+            "description": {
+              "content": "Describe a deployment target for the project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":project_id_or_name",
+                "deployment_targets",
+                ":id_or_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "with_credentials",
+                  "value": "false",
+                  "description": "If true, fetches the secret associated with the deployment target"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "project_id_or_name",
+                  "description": "(Required) Id or name of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id_or_name",
+                  "description": "(Required) Id or name of the deployment target"
+                },
+                {
+                  "description": "Organization name",
+                  "type": "any",
+                  "value": "{{org_name}}",
+                  "key": "org_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "192510c8-1f2a-4e5c-a116-e859c7b46411",
+              "name": "Described deployment target",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with_credentials",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"v2\",\n  \"kind\": \"DeploymentTarget\",\n  \"spec\": {\n    \"name\": \"production\",\n    \"active\": false,\n    \"bookmark_parameters\": [\n      \"string\",\n      \"string\",\n      \"string\"\n    ],\n    \"description\": \"string\",\n    \"env_vars\": [\n      {\n        \"name\": \"MY_SECRET\",\n        \"value\": \"secret\"\n      },\n      {\n        \"name\": \"MY_SECRET\",\n        \"value\": \"secret\"\n      }\n    ],\n    \"files\": [\n      {\n        \"path\": \"/path/to/file\",\n        \"content\": \"string\"\n      },\n      {\n        \"path\": \"/path/to/file\",\n        \"content\": \"string\"\n      }\n    ],\n    \"object_rules\": {\n      \"branches\": \"ALL\",\n      \"prs\": \"NONE\",\n      \"tags\": \"ALL\"\n    },\n    \"subject_rules\": {\n      \"any\": false,\n      \"auto\": false,\n      \"roles\": [\n        \"Contributor\",\n        \"Contributor\"\n      ],\n      \"users\": [\n        \"cce87f74-e43f-3b82-1c5f-93429ef0b422\",\n        \"3aca9807-37a7-cb27-5990-c17b7ad455b3\"\n      ]\n    },\n    \"url\": \"string\"\n  },\n  \"metadata\": {\n    \"id\": \"9c777b65-213f-4fe1-bc6b-727d2cdde97d\",\n    \"name\": \"production\",\n    \"project_id\": \"726dbefd-b30c-4c80-bc9a-c0613968a2ca\",\n    \"created_at\": \"2016-06-03T00:30:07.213Z\",\n    \"created_by\": {\n      \"id\": \"18b40eaf-ce10-49c3-93f2-e4fe72d5160b\"\n    },\n    \"description\": \"string\",\n    \"last_deployment\": {\n      \"env_vars\": [\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        },\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        }\n      ],\n      \"id\": \"a0424427-ff28-4f77-a893-0fdf5f50c380\",\n      \"origin_pipeline_id\": \"97ba55d1-90d7-40b9-a2dd-bdbd02389b58\",\n      \"pipeline_id\": \"adc5a26f-4077-47bc-8d4f-cb4467f2c103\",\n      \"state\": \"STARTED\",\n      \"state_message\": \"string\",\n      \"target_id\": \"4a9e9001-6703-4815-9c19-ed2e9e8c87ea\",\n      \"target_name\": \"string\",\n      \"triggered_at\": \"1950-11-27T11:38:32.242Z\",\n      \"triggered_by\": {\n        \"id\": \"18b40eaf-ce10-49c3-93f2-e4fe72d5160b\"\n      }\n    },\n    \"org_id\": \"02b7c528-b0f1-4266-8e5e-10b7b984e76a\",\n    \"state\": \"SYNCING\",\n    \"updated_at\": \"2021-11-20T19:00:18.829Z\",\n    \"updated_by\": {\n      \"id\": \"18b40eaf-ce10-49c3-93f2-e4fe72d5160b\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f3411bb8-2d4f-485c-8562-fe7d3b951938",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with_credentials",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ce85f4d-e381-4ad4-8cb0-d4689f8c02ba",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with_credentials",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ecc751bf-9f00-4f24-bc9b-03b99822297c",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with_credentials",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c30fc9c9-d855-45c6-bbc7-d24c57aac579",
+              "name": "Validation Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with_credentials",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "236fea09-088c-4d04-b0e4-2924b0114e50",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with_credentials",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2d578dbb-f1bd-4f4f-91e4-9f82ecde92c6",
+          "name": "Deployment Targets.Update",
+          "request": {
+            "name": "Deployment Targets.Update",
+            "description": {
+              "content": "Update a deployment target for the project. Fields that are not provided will not be updated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":project_id_or_name",
+                "deployment_targets",
+                ":id_or_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "project_id_or_name",
+                  "description": "(Required) Id or name of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id_or_name",
+                  "description": "(Required) Id or name of the deployment target"
+                },
+                {
+                  "description": "Organization name",
+                  "type": "any",
+                  "value": "{{org_name}}",
+                  "key": "org_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"unique_token\": \"<string>\",\n  \"deployment_target\": {\n    \"spec\": {\n      \"name\": \"<string>\",\n      \"active\": \"<boolean>\",\n      \"bookmark_parameters\": [\n        \"<string>\",\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"description\": \"<string>\",\n      \"env_vars\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"files\": [\n        {\n          \"path\": \"<string>\",\n          \"content\": \"<string>\"\n        },\n        {\n          \"path\": \"<string>\",\n          \"content\": \"<string>\"\n        }\n      ],\n      \"object_rules\": {\n        \"branches\": \"<string>\",\n        \"prs\": \"NONE\",\n        \"tags\": \"<string>\"\n      },\n      \"subject_rules\": {\n        \"any\": false,\n        \"auto\": \"<boolean>\",\n        \"roles\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"users\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      },\n      \"url\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cf7888ca-b85d-4ebf-b414-42dc5b881360",
+              "name": "Updated deployment target",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"unique_token\": \"<string>\",\n  \"deployment_target\": {\n    \"spec\": {\n      \"name\": \"production\",\n      \"active\": \"<boolean>\",\n      \"bookmark_parameters\": [\n        \"<string>\",\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"description\": \"<string>\",\n      \"env_vars\": [\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        },\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        }\n      ],\n      \"files\": [\n        {\n          \"path\": \"/path/to/file\",\n          \"content\": \"<string>\"\n        },\n        {\n          \"path\": \"/path/to/file\",\n          \"content\": \"<string>\"\n        }\n      ],\n      \"object_rules\": {\n        \"branches\": \"<string>\",\n        \"prs\": \"NONE\",\n        \"tags\": \"<string>\"\n      },\n      \"subject_rules\": {\n        \"any\": false,\n        \"auto\": \"<boolean>\",\n        \"roles\": [\n          \"Contributor\",\n          \"Contributor\"\n        ],\n        \"users\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      },\n      \"url\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"v2\",\n  \"kind\": \"DeploymentTarget\",\n  \"spec\": {\n    \"name\": \"production\",\n    \"active\": false,\n    \"bookmark_parameters\": [\n      \"string\",\n      \"string\",\n      \"string\"\n    ],\n    \"description\": \"string\",\n    \"env_vars\": [\n      {\n        \"name\": \"MY_SECRET\",\n        \"value\": \"secret\"\n      },\n      {\n        \"name\": \"MY_SECRET\",\n        \"value\": \"secret\"\n      }\n    ],\n    \"files\": [\n      {\n        \"path\": \"/path/to/file\",\n        \"content\": \"string\"\n      },\n      {\n        \"path\": \"/path/to/file\",\n        \"content\": \"string\"\n      }\n    ],\n    \"object_rules\": {\n      \"branches\": \"ALL\",\n      \"prs\": \"NONE\",\n      \"tags\": \"ALL\"\n    },\n    \"subject_rules\": {\n      \"any\": false,\n      \"auto\": false,\n      \"roles\": [\n        \"Contributor\",\n        \"Contributor\"\n      ],\n      \"users\": [\n        \"cce87f74-e43f-3b82-1c5f-93429ef0b422\",\n        \"3aca9807-37a7-cb27-5990-c17b7ad455b3\"\n      ]\n    },\n    \"url\": \"string\"\n  },\n  \"metadata\": {\n    \"id\": \"9c777b65-213f-4fe1-bc6b-727d2cdde97d\",\n    \"name\": \"production\",\n    \"project_id\": \"726dbefd-b30c-4c80-bc9a-c0613968a2ca\",\n    \"created_at\": \"2016-06-03T00:30:07.213Z\",\n    \"created_by\": {\n      \"id\": \"18b40eaf-ce10-49c3-93f2-e4fe72d5160b\"\n    },\n    \"description\": \"string\",\n    \"last_deployment\": {\n      \"env_vars\": [\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        },\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        }\n      ],\n      \"id\": \"a0424427-ff28-4f77-a893-0fdf5f50c380\",\n      \"origin_pipeline_id\": \"97ba55d1-90d7-40b9-a2dd-bdbd02389b58\",\n      \"pipeline_id\": \"adc5a26f-4077-47bc-8d4f-cb4467f2c103\",\n      \"state\": \"STARTED\",\n      \"state_message\": \"string\",\n      \"target_id\": \"4a9e9001-6703-4815-9c19-ed2e9e8c87ea\",\n      \"target_name\": \"string\",\n      \"triggered_at\": \"1950-11-27T11:38:32.242Z\",\n      \"triggered_by\": {\n        \"id\": \"18b40eaf-ce10-49c3-93f2-e4fe72d5160b\"\n      }\n    },\n    \"org_id\": \"02b7c528-b0f1-4266-8e5e-10b7b984e76a\",\n    \"state\": \"SYNCING\",\n    \"updated_at\": \"2021-11-20T19:00:18.829Z\",\n    \"updated_by\": {\n      \"id\": \"18b40eaf-ce10-49c3-93f2-e4fe72d5160b\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9940308-2ea8-4674-9f76-af41a601f924",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"unique_token\": \"<string>\",\n  \"deployment_target\": {\n    \"spec\": {\n      \"name\": \"production\",\n      \"active\": \"<boolean>\",\n      \"bookmark_parameters\": [\n        \"<string>\",\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"description\": \"<string>\",\n      \"env_vars\": [\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        },\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        }\n      ],\n      \"files\": [\n        {\n          \"path\": \"/path/to/file\",\n          \"content\": \"<string>\"\n        },\n        {\n          \"path\": \"/path/to/file\",\n          \"content\": \"<string>\"\n        }\n      ],\n      \"object_rules\": {\n        \"branches\": \"<string>\",\n        \"prs\": \"NONE\",\n        \"tags\": \"<string>\"\n      },\n      \"subject_rules\": {\n        \"any\": false,\n        \"auto\": \"<boolean>\",\n        \"roles\": [\n          \"Contributor\",\n          \"Contributor\"\n        ],\n        \"users\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      },\n      \"url\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "190c3b9d-af4c-45ab-a62a-0e98e6580b33",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"unique_token\": \"<string>\",\n  \"deployment_target\": {\n    \"spec\": {\n      \"name\": \"production\",\n      \"active\": \"<boolean>\",\n      \"bookmark_parameters\": [\n        \"<string>\",\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"description\": \"<string>\",\n      \"env_vars\": [\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        },\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        }\n      ],\n      \"files\": [\n        {\n          \"path\": \"/path/to/file\",\n          \"content\": \"<string>\"\n        },\n        {\n          \"path\": \"/path/to/file\",\n          \"content\": \"<string>\"\n        }\n      ],\n      \"object_rules\": {\n        \"branches\": \"<string>\",\n        \"prs\": \"NONE\",\n        \"tags\": \"<string>\"\n      },\n      \"subject_rules\": {\n        \"any\": false,\n        \"auto\": \"<boolean>\",\n        \"roles\": [\n          \"Contributor\",\n          \"Contributor\"\n        ],\n        \"users\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      },\n      \"url\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "381cbb93-4a84-43bd-b408-96427c496443",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"unique_token\": \"<string>\",\n  \"deployment_target\": {\n    \"spec\": {\n      \"name\": \"production\",\n      \"active\": \"<boolean>\",\n      \"bookmark_parameters\": [\n        \"<string>\",\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"description\": \"<string>\",\n      \"env_vars\": [\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        },\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        }\n      ],\n      \"files\": [\n        {\n          \"path\": \"/path/to/file\",\n          \"content\": \"<string>\"\n        },\n        {\n          \"path\": \"/path/to/file\",\n          \"content\": \"<string>\"\n        }\n      ],\n      \"object_rules\": {\n        \"branches\": \"<string>\",\n        \"prs\": \"NONE\",\n        \"tags\": \"<string>\"\n      },\n      \"subject_rules\": {\n        \"any\": false,\n        \"auto\": \"<boolean>\",\n        \"roles\": [\n          \"Contributor\",\n          \"Contributor\"\n        ],\n        \"users\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      },\n      \"url\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2280386e-ba84-439f-879c-d6d9c31e3133",
+              "name": "Validation Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"unique_token\": \"<string>\",\n  \"deployment_target\": {\n    \"spec\": {\n      \"name\": \"production\",\n      \"active\": \"<boolean>\",\n      \"bookmark_parameters\": [\n        \"<string>\",\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"description\": \"<string>\",\n      \"env_vars\": [\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        },\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        }\n      ],\n      \"files\": [\n        {\n          \"path\": \"/path/to/file\",\n          \"content\": \"<string>\"\n        },\n        {\n          \"path\": \"/path/to/file\",\n          \"content\": \"<string>\"\n        }\n      ],\n      \"object_rules\": {\n        \"branches\": \"<string>\",\n        \"prs\": \"NONE\",\n        \"tags\": \"<string>\"\n      },\n      \"subject_rules\": {\n        \"any\": false,\n        \"auto\": \"<boolean>\",\n        \"roles\": [\n          \"Contributor\",\n          \"Contributor\"\n        ],\n        \"users\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      },\n      \"url\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "893c8a4d-f6bf-4dbe-965a-fcc701dac8ca",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"unique_token\": \"<string>\",\n  \"deployment_target\": {\n    \"spec\": {\n      \"name\": \"production\",\n      \"active\": \"<boolean>\",\n      \"bookmark_parameters\": [\n        \"<string>\",\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"description\": \"<string>\",\n      \"env_vars\": [\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        },\n        {\n          \"name\": \"MY_SECRET\",\n          \"value\": \"secret\"\n        }\n      ],\n      \"files\": [\n        {\n          \"path\": \"/path/to/file\",\n          \"content\": \"<string>\"\n        },\n        {\n          \"path\": \"/path/to/file\",\n          \"content\": \"<string>\"\n        }\n      ],\n      \"object_rules\": {\n        \"branches\": \"<string>\",\n        \"prs\": \"NONE\",\n        \"tags\": \"<string>\"\n      },\n      \"subject_rules\": {\n        \"any\": false,\n        \"auto\": \"<boolean>\",\n        \"roles\": [\n          \"Contributor\",\n          \"Contributor\"\n        ],\n        \"users\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      },\n      \"url\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c9ed6714-48c5-47fe-8f5f-3cebbb49e9a0",
+          "name": "Deployment Targets.Activate",
+          "request": {
+            "name": "Deployment Targets.Activate",
+            "description": {
+              "content": "Activate a deployment target for the project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":project_id_or_name",
+                "deployment_targets",
+                ":id_or_name",
+                "activate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "project_id_or_name",
+                  "description": "(Required) Id or name of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id_or_name",
+                  "description": "(Required) Id or name of the deployment target"
+                },
+                {
+                  "description": "Organization name",
+                  "type": "any",
+                  "value": "{{org_name}}",
+                  "key": "org_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a281806a-b0b2-4800-a515-e85344992c40",
+              "name": "Activated deployment target",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"2bc0207c-155f-4824-be69-6136bd5e0a1d\",\n  \"state\": \"CORDONED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e52ac3c9-8ac9-459a-88ad-e835b869ba80",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d9cb5fe-741a-41f2-badd-7d6b2f2bfa57",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f079970-f70a-4a88-9f8e-a104484deb24",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "adc9af38-c6c0-4edc-8961-2fb8e7eace82",
+              "name": "Validation Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b365dff-4917-47dd-bdbc-c3290aff9970",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9082186f-7114-40a4-9fb0-7b1b283b199b",
+          "name": "Deployment Targets.Deactivate",
+          "request": {
+            "name": "Deployment Targets.Deactivate",
+            "description": {
+              "content": "Deactivate a deployment target for the project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":project_id_or_name",
+                "deployment_targets",
+                ":id_or_name",
+                "deactivate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "project_id_or_name",
+                  "description": "(Required) Id or name of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id_or_name",
+                  "description": "(Required) Id or name of the deployment target"
+                },
+                {
+                  "description": "Organization name",
+                  "type": "any",
+                  "value": "{{org_name}}",
+                  "key": "org_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "07d98700-2051-495a-969e-ec0ce0247de6",
+              "name": "Deactivated deployment target",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name",
+                    "deactivate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"2bc0207c-155f-4824-be69-6136bd5e0a1d\",\n  \"state\": \"CORDONED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74776375-67fe-4a46-8a5b-77cce0003be6",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name",
+                    "deactivate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b550afb-1406-41a2-9a62-cfdeec4f4386",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name",
+                    "deactivate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54476737-5ec0-4ebd-84ff-abb836e37e6a",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name",
+                    "deactivate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5b82c5a-868b-4ea7-862e-b1e3cd28f134",
+              "name": "Validation Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name",
+                    "deactivate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ef123a1-00dc-4df4-8784-555aff7ff84b",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name",
+                    "deactivate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ebdadd17-9c72-440e-ad7f-143c01721210",
+          "name": "Deployment Targets.History",
+          "request": {
+            "name": "Deployment Targets.History",
+            "description": {
+              "content": "This endpoint provides the deployment history for a specific deployment target.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":project_id_or_name",
+                "deployment_targets",
+                ":id_or_name",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "git_ref_type",
+                  "value": "<string>",
+                  "description": "Git reference type"
+                },
+                {
+                  "disabled": false,
+                  "key": "git_ref_label",
+                  "value": "<string>",
+                  "description": "Git reference label"
+                },
+                {
+                  "disabled": false,
+                  "key": "triggered_by",
+                  "value": "<string>",
+                  "description": "Triggerer ID or value"
+                },
+                {
+                  "disabled": false,
+                  "key": "parameter1",
+                  "value": "<string>",
+                  "description": "Value of promotion parameter with the name from bookmark slot #1"
+                },
+                {
+                  "disabled": false,
+                  "key": "parameter2",
+                  "value": "<string>",
+                  "description": "Value of promotion parameter with the name from bookmark slot #2"
+                },
+                {
+                  "disabled": false,
+                  "key": "parameter3",
+                  "value": "<string>",
+                  "description": "Value of promotion parameter with the name from bookmark slot #3"
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "NEXT",
+                  "description": "Direction of the list from the provided token"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "",
+                  "description": "Starting point for listing, if you are fetching first page leave it empty"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "20",
+                  "description": "Page size"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "project_id_or_name",
+                  "description": "(Required) Id or name of the project"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id_or_name",
+                  "description": "(Required) Id or name of the deployment target"
+                },
+                {
+                  "description": "Organization name",
+                  "type": "any",
+                  "value": "{{org_name}}",
+                  "key": "org_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6bc9b0a0-2a3e-4d10-b978-2c82faf00d64",
+              "name": "History of deployment target",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "git_ref_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "git_ref_label",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "triggered_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parameter1",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parameter2",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parameter3",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "NEXT"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"env_vars\": [\n      {\n        \"name\": \"MY_SECRET\",\n        \"value\": \"secret\"\n      },\n      {\n        \"name\": \"MY_SECRET\",\n        \"value\": \"secret\"\n      }\n    ],\n    \"id\": \"a0424427-ff28-4f77-a893-0fdf5f50c380\",\n    \"origin_pipeline_id\": \"97ba55d1-90d7-40b9-a2dd-bdbd02389b58\",\n    \"pipeline_id\": \"adc5a26f-4077-47bc-8d4f-cb4467f2c103\",\n    \"state\": \"FAILED\",\n    \"state_message\": \"string\",\n    \"target_id\": \"4a9e9001-6703-4815-9c19-ed2e9e8c87ea\",\n    \"target_name\": \"string\",\n    \"triggered_at\": \"1991-08-19T18:47:24.671Z\",\n    \"triggered_by\": {\n      \"id\": \"18b40eaf-ce10-49c3-93f2-e4fe72d5160b\"\n    }\n  },\n  {\n    \"env_vars\": [\n      {\n        \"name\": \"MY_SECRET\",\n        \"value\": \"secret\"\n      },\n      {\n        \"name\": \"MY_SECRET\",\n        \"value\": \"secret\"\n      }\n    ],\n    \"id\": \"a0424427-ff28-4f77-a893-0fdf5f50c380\",\n    \"origin_pipeline_id\": \"97ba55d1-90d7-40b9-a2dd-bdbd02389b58\",\n    \"pipeline_id\": \"adc5a26f-4077-47bc-8d4f-cb4467f2c103\",\n    \"state\": \"FAILED\",\n    \"state_message\": \"string\",\n    \"target_id\": \"4a9e9001-6703-4815-9c19-ed2e9e8c87ea\",\n    \"target_name\": \"string\",\n    \"triggered_at\": \"1957-03-03T06:58:19.380Z\",\n    \"triggered_by\": {\n      \"id\": \"18b40eaf-ce10-49c3-93f2-e4fe72d5160b\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95ec2c1f-70ff-42e8-b18a-c3c0a2e811c4",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "git_ref_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "git_ref_label",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "triggered_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parameter1",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parameter2",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parameter3",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "NEXT"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77f22f42-fde5-49df-9816-e38faef195d2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "git_ref_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "git_ref_label",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "triggered_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parameter1",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parameter2",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parameter3",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "NEXT"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0de5b6fa-6894-4ab5-b868-6bf035666ef8",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "git_ref_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "git_ref_label",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "triggered_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parameter1",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parameter2",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parameter3",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "NEXT"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7fe5eda-74df-41d2-a4a7-5e6c3042fc61",
+              "name": "Validation Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "git_ref_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "git_ref_label",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "triggered_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parameter1",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parameter2",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parameter3",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "NEXT"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6655926-4a50-4514-bcde-511610f89be5",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":project_id_or_name",
+                    "deployment_targets",
+                    ":id_or_name",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "git_ref_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "git_ref_label",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "triggered_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parameter1",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parameter2",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parameter3",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "NEXT"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id_or_name",
+                      "description": "(Required) Id or name of the project"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the deployment target"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Organization name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "me",
+      "key": "org_name"
+    },
+    {
+      "type": "string",
+      "value": "https://{{org_name}}.semaphoreci.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "90ee113e-803f-4fde-b75f-d690384b7450",
+    "name": "Semaphore Public Dashboards DeploymentTargets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Semaphore Public API is a RESTful API that allows you to interact with Semaphore CI/CD.\n## Authorization\nAuthorization is done via bearer token. You can obtain a token by visiting your [account settings](https://me.semaphoreci.com/account).\n\n## Pagination with link headers\nEach list request supports pagination. List responses include a [link header](https://datatracker.ietf.org/doc/html/rfc5988#section-5) with the pagination URLs.\nLink headers contain next, previous, first relative URLs.\n\n\nContact Support:\n Email: support@semaphoreci.com",
+      "type": "text/plain"
+    }
+  }
+}

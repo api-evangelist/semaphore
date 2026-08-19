@@ -1,0 +1,225 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Semaphore Public Dashboards Pipelines API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pipelines",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Pipelines.List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/pipelines",
+            "params": [
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "The id of a project or workflow to list the pipeliens for. Either project_id or wf_id is required.\n            The required_id parameter is just a placeholder"
+              },
+              {
+                "name": "label",
+                "value": "main",
+                "type": "query",
+                "description": "Label of the branch/pr/tag"
+              },
+              {
+                "name": "yml_file_path",
+                "value": ".semaphore/semaphore.yml",
+                "type": "query",
+                "description": "Yaml file path"
+              },
+              {
+                "name": "created_before",
+                "value": "2021-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Return only pipelines created before this timestamp"
+              },
+              {
+                "name": "created_after",
+                "value": "2021-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Return only pipelines created after this timestamp"
+              },
+              {
+                "name": "done_before",
+                "value": "2021-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Return only pipelines that finished before this timestamp"
+              },
+              {
+                "name": "done_after",
+                "value": "2021-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Return only pipelines that finished after this timestamp"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "Direction of the list from the provided token"
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Starting point for listing, if you are fetching first page leave it empty"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Page size"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List pipelines using project id or workflow id."
+        },
+        {
+          "info": {
+            "name": "Pipelines.Describe",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/pipelines/:pipeline_id",
+            "params": [
+              {
+                "name": "pipeline_id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the pipeline"
+              },
+              {
+                "name": "detailed",
+                "value": "",
+                "type": "query",
+                "description": "Option to include all information about all blocks and jobs.\n           This option is much more expensive--if you are only interested in the status of a pipeline, don't set detailed to true."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Describe a pipeline using pipeline_id"
+        },
+        {
+          "info": {
+            "name": "Pipelines.DescribeTopology",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/pipelines/:pipeline_id/describe_topology",
+            "params": [
+              {
+                "name": "pipeline_id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the pipeline"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Describe pipeline topology using pipeline_id"
+        },
+        {
+          "info": {
+            "name": "Pipelines.PartialRebuild",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/pipelines/:pipeline_id/partial_rebuild",
+            "params": [
+              {
+                "name": "pipeline_id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the pipeline"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Schedule a new pipeline based on given one which will only run blocks which\n      execution failed in original pipeline."
+        },
+        {
+          "info": {
+            "name": "Pipelines.Terminate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/pipelines/:pipeline_id/terminate",
+            "params": [
+              {
+                "name": "pipeline_id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the pipeline"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Terminate a pipeline using pipeline_id"
+        },
+        {
+          "info": {
+            "name": "Pipelines.ValidateYaml",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/yaml",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

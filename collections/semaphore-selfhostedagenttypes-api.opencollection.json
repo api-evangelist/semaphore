@@ -1,0 +1,172 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Semaphore Public Dashboards SelfHostedAgentTypes API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SelfHostedAgentTypes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SelfHostedAgentTypes.List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/self_hosted_agent_types",
+            "params": [
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Starting point for listing, if you are fetching first page leave it empty"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Page size"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List self-hosted agent types"
+        },
+        {
+          "info": {
+            "name": "SelfHostedAgentTypes.Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/self_hosted_agent_types",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a self-hosted agent type"
+        },
+        {
+          "info": {
+            "name": "SelfHostedAgentTypes.Describe",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/self_hosted_agent_types/:agent_type_name",
+            "params": [
+              {
+                "name": "agent_type_name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the agent type"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Describe a self-hosted agent type"
+        },
+        {
+          "info": {
+            "name": "SelfHostedAgentTypes.Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/self_hosted_agent_types/:agent_type_name",
+            "params": [
+              {
+                "name": "agent_type_name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the agent type"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a self-hosted agent type"
+        },
+        {
+          "info": {
+            "name": "SelfHostedAgentTypes.Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/self_hosted_agent_types/:agent_type_name",
+            "params": [
+              {
+                "name": "agent_type_name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the agent type to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a self-hosted agent type"
+        },
+        {
+          "info": {
+            "name": "SelfHostedAgentTypes.DisableAll",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/self_hosted_agent_types/:agent_type_name/disable_all",
+            "params": [
+              {
+                "name": "agent_type_name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the agent type to disable"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Disable agents for an agent type"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,163 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Semaphore Public Dashboards Projects API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Projects.List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/projects",
+            "params": [
+              {
+                "name": "owner_uuid",
+                "value": "7d36df70-6eab-4768-83d8-090f44f47235",
+                "type": "query",
+                "description": "UUID of the project owner"
+              },
+              {
+                "name": "repo_url",
+                "value": "git@github.com:semaphoreci/toolbox.git",
+                "type": "query",
+                "description": "URL of the repository the project is associated with"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "Direction of the pagination.\n            `NEXT` will fetch projects after the provided token, `PREVIOUS` will fetch projects before the provided token"
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Starting point for listing, if you are fetching first page leave it empty"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Page size"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List projects in organization."
+        },
+        {
+          "info": {
+            "name": "Projects.Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/projects",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a project. When creating a project description is ignored."
+        },
+        {
+          "info": {
+            "name": "Projects.Describe",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/projects/:project_id_or_name",
+            "params": [
+              {
+                "name": "project_id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the project"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Describe project."
+        },
+        {
+          "info": {
+            "name": "Projects.Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/projects/:project_id_or_name",
+            "params": [
+              {
+                "name": "project_id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the project"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a project."
+        },
+        {
+          "info": {
+            "name": "Projects.Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/projects/:project_id_or_name",
+            "params": [
+              {
+                "name": "project_id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the project"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a project."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

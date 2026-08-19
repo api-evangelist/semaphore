@@ -1,0 +1,2157 @@
+{
+  "item": [
+    {
+      "id": "14618b7a-1598-4992-b049-89fcc1e56319",
+      "name": "Notifications",
+      "description": {
+        "content": "Notification management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0052dcd2-af7f-444c-9678-30d6b55a5a4b",
+          "name": "Notifications.Create",
+          "request": {
+            "name": "Notifications.Create",
+            "description": {
+              "content": "Create a notification.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "notifications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Organization name",
+                  "type": "any",
+                  "value": "{{org_name}}",
+                  "key": "org_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"spec\": {\n    \"name\": \"<string>\",\n    \"rules\": [\n      {\n        \"filter\": {\n          \"branches\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"results\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"name\": \"<string>\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"<string>\"\n            ],\n            \"bcc\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"content\": \"<string>\",\n            \"status\": \"<string>\",\n            \"subject\": \"<string>\"\n          },\n          \"slack\": {\n            \"endpoint\": \"<string>\",\n            \"channels\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"message\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          \"webhook\": {\n            \"url\": \"<string>\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"<string>\",\n            \"status\": \"<string>\",\n            \"timeout\": 500\n          }\n        }\n      },\n      {\n        \"filter\": {\n          \"branches\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"results\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"name\": \"<string>\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"<string>\"\n            ],\n            \"bcc\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"content\": \"<string>\",\n            \"status\": \"<string>\",\n            \"subject\": \"<string>\"\n          },\n          \"slack\": {\n            \"endpoint\": \"<string>\",\n            \"channels\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"message\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          \"webhook\": {\n            \"url\": \"<string>\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"<string>\",\n            \"status\": \"<string>\",\n            \"timeout\": 500\n          }\n        }\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b496df92-cde9-4794-add8-948d8926c61c",
+              "name": "Notification",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"spec\": {\n    \"name\": \"<string>\",\n    \"rules\": [\n      {\n        \"filter\": {\n          \"branches\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"results\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"name\": \"<string>\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"<string>\"\n            ],\n            \"bcc\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"content\": \"<string>\",\n            \"status\": \"<string>\",\n            \"subject\": \"<string>\"\n          },\n          \"slack\": {\n            \"endpoint\": \"<string>\",\n            \"channels\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"message\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          \"webhook\": {\n            \"url\": \"<string>\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"<string>\",\n            \"status\": \"<string>\",\n            \"timeout\": 500\n          }\n        }\n      },\n      {\n        \"filter\": {\n          \"branches\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"results\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"name\": \"<string>\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"<string>\"\n            ],\n            \"bcc\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"content\": \"<string>\",\n            \"status\": \"<string>\",\n            \"subject\": \"<string>\"\n          },\n          \"slack\": {\n            \"endpoint\": \"<string>\",\n            \"channels\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"message\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          \"webhook\": {\n            \"url\": \"<string>\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"<string>\",\n            \"status\": \"<string>\",\n            \"timeout\": 500\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"v2\",\n  \"kind\": \"Notification\",\n  \"metadata\": {\n    \"id\": \"ee251df7-6946-4544-840d-b8ac7c02c3e3\",\n    \"name\": \"string\",\n    \"created_at\": \"1980-03-15T19:51:58.177Z\",\n    \"org_id\": \"83293713-b759-46ba-8432-f4c641e3bf14\",\n    \"status\": {\n      \"failures\": [\n        {\n          \"description\": \"string\",\n          \"timestamp\": \"1985-10-02T18:43:12.952Z\"\n        },\n        {\n          \"description\": \"string\",\n          \"timestamp\": \"1963-08-13T18:11:49.085Z\"\n        }\n      ]\n    },\n    \"updated_at\": \"2016-01-28T07:17:13.388Z\"\n  },\n  \"spec\": {\n    \"name\": \"string\",\n    \"rules\": [\n      {\n        \"filter\": {\n          \"branches\": [\n            \"string\",\n            \"string\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"string\",\n            \"string\"\n          ],\n          \"results\": [\n            \"PASSED\",\n            \"PASSED\"\n          ]\n        },\n        \"name\": \"string\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"string\"\n            ],\n            \"bcc\": [\n              \"string\",\n              \"string\"\n            ],\n            \"content\": \"string\",\n            \"status\": \"INACTIVE\",\n            \"subject\": \"string\"\n          },\n          \"slack\": {\n            \"endpoint\": \"string\",\n            \"channels\": [\n              \"string\",\n              \"string\"\n            ],\n            \"message\": \"string\",\n            \"status\": \"ACTIVE\"\n          },\n          \"webhook\": {\n            \"url\": \"string\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"string\",\n            \"status\": \"INACTIVE\",\n            \"timeout\": 500\n          }\n        }\n      },\n      {\n        \"filter\": {\n          \"branches\": [\n            \"string\",\n            \"string\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"string\",\n            \"string\"\n          ],\n          \"results\": [\n            \"STOPPED\",\n            \"PASSED\"\n          ]\n        },\n        \"name\": \"string\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"string\"\n            ],\n            \"bcc\": [\n              \"string\",\n              \"string\"\n            ],\n            \"content\": \"string\",\n            \"status\": \"ACTIVE\",\n            \"subject\": \"string\"\n          },\n          \"slack\": {\n            \"endpoint\": \"string\",\n            \"channels\": [\n              \"string\",\n              \"string\"\n            ],\n            \"message\": \"string\",\n            \"status\": \"ACTIVE\"\n          },\n          \"webhook\": {\n            \"url\": \"string\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"string\",\n            \"status\": \"ACTIVE\",\n            \"timeout\": 500\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0aa8e968-8265-4aea-9d73-206c95db17ba",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"spec\": {\n    \"name\": \"<string>\",\n    \"rules\": [\n      {\n        \"filter\": {\n          \"branches\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"results\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"name\": \"<string>\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"<string>\"\n            ],\n            \"bcc\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"content\": \"<string>\",\n            \"status\": \"<string>\",\n            \"subject\": \"<string>\"\n          },\n          \"slack\": {\n            \"endpoint\": \"<string>\",\n            \"channels\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"message\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          \"webhook\": {\n            \"url\": \"<string>\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"<string>\",\n            \"status\": \"<string>\",\n            \"timeout\": 500\n          }\n        }\n      },\n      {\n        \"filter\": {\n          \"branches\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"results\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"name\": \"<string>\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"<string>\"\n            ],\n            \"bcc\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"content\": \"<string>\",\n            \"status\": \"<string>\",\n            \"subject\": \"<string>\"\n          },\n          \"slack\": {\n            \"endpoint\": \"<string>\",\n            \"channels\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"message\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          \"webhook\": {\n            \"url\": \"<string>\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"<string>\",\n            \"status\": \"<string>\",\n            \"timeout\": 500\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3870cc7f-5113-4715-ad03-8ef319eedc2d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"spec\": {\n    \"name\": \"<string>\",\n    \"rules\": [\n      {\n        \"filter\": {\n          \"branches\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"results\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"name\": \"<string>\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"<string>\"\n            ],\n            \"bcc\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"content\": \"<string>\",\n            \"status\": \"<string>\",\n            \"subject\": \"<string>\"\n          },\n          \"slack\": {\n            \"endpoint\": \"<string>\",\n            \"channels\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"message\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          \"webhook\": {\n            \"url\": \"<string>\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"<string>\",\n            \"status\": \"<string>\",\n            \"timeout\": 500\n          }\n        }\n      },\n      {\n        \"filter\": {\n          \"branches\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"results\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"name\": \"<string>\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"<string>\"\n            ],\n            \"bcc\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"content\": \"<string>\",\n            \"status\": \"<string>\",\n            \"subject\": \"<string>\"\n          },\n          \"slack\": {\n            \"endpoint\": \"<string>\",\n            \"channels\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"message\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          \"webhook\": {\n            \"url\": \"<string>\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"<string>\",\n            \"status\": \"<string>\",\n            \"timeout\": 500\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46e44e38-3381-461c-9584-ac5c99f48d7c",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"spec\": {\n    \"name\": \"<string>\",\n    \"rules\": [\n      {\n        \"filter\": {\n          \"branches\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"results\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"name\": \"<string>\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"<string>\"\n            ],\n            \"bcc\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"content\": \"<string>\",\n            \"status\": \"<string>\",\n            \"subject\": \"<string>\"\n          },\n          \"slack\": {\n            \"endpoint\": \"<string>\",\n            \"channels\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"message\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          \"webhook\": {\n            \"url\": \"<string>\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"<string>\",\n            \"status\": \"<string>\",\n            \"timeout\": 500\n          }\n        }\n      },\n      {\n        \"filter\": {\n          \"branches\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"results\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"name\": \"<string>\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"<string>\"\n            ],\n            \"bcc\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"content\": \"<string>\",\n            \"status\": \"<string>\",\n            \"subject\": \"<string>\"\n          },\n          \"slack\": {\n            \"endpoint\": \"<string>\",\n            \"channels\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"message\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          \"webhook\": {\n            \"url\": \"<string>\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"<string>\",\n            \"status\": \"<string>\",\n            \"timeout\": 500\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd950e80-6d6f-4b2f-8138-7f5770084e59",
+              "name": "Validation Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"spec\": {\n    \"name\": \"<string>\",\n    \"rules\": [\n      {\n        \"filter\": {\n          \"branches\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"results\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"name\": \"<string>\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"<string>\"\n            ],\n            \"bcc\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"content\": \"<string>\",\n            \"status\": \"<string>\",\n            \"subject\": \"<string>\"\n          },\n          \"slack\": {\n            \"endpoint\": \"<string>\",\n            \"channels\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"message\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          \"webhook\": {\n            \"url\": \"<string>\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"<string>\",\n            \"status\": \"<string>\",\n            \"timeout\": 500\n          }\n        }\n      },\n      {\n        \"filter\": {\n          \"branches\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"results\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"name\": \"<string>\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"<string>\"\n            ],\n            \"bcc\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"content\": \"<string>\",\n            \"status\": \"<string>\",\n            \"subject\": \"<string>\"\n          },\n          \"slack\": {\n            \"endpoint\": \"<string>\",\n            \"channels\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"message\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          \"webhook\": {\n            \"url\": \"<string>\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"<string>\",\n            \"status\": \"<string>\",\n            \"timeout\": 500\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a17c9bd0-23fb-47d8-8616-c854b987dc8b",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"spec\": {\n    \"name\": \"<string>\",\n    \"rules\": [\n      {\n        \"filter\": {\n          \"branches\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"results\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"name\": \"<string>\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"<string>\"\n            ],\n            \"bcc\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"content\": \"<string>\",\n            \"status\": \"<string>\",\n            \"subject\": \"<string>\"\n          },\n          \"slack\": {\n            \"endpoint\": \"<string>\",\n            \"channels\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"message\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          \"webhook\": {\n            \"url\": \"<string>\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"<string>\",\n            \"status\": \"<string>\",\n            \"timeout\": 500\n          }\n        }\n      },\n      {\n        \"filter\": {\n          \"branches\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"results\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"name\": \"<string>\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"<string>\"\n            ],\n            \"bcc\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"content\": \"<string>\",\n            \"status\": \"<string>\",\n            \"subject\": \"<string>\"\n          },\n          \"slack\": {\n            \"endpoint\": \"<string>\",\n            \"channels\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"message\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          \"webhook\": {\n            \"url\": \"<string>\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"<string>\",\n            \"status\": \"<string>\",\n            \"timeout\": 500\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "067969de-c134-4d6d-8404-d9416e12dd5d",
+          "name": "Notifications.List",
+          "request": {
+            "name": "Notifications.List",
+            "description": {
+              "content": "List notifications in organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "notifications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "",
+                  "description": "Starting point for listing, if you are fetching first page leave it empty"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "20",
+                  "description": "Page size"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Organization name",
+                  "type": "any",
+                  "value": "{{org_name}}",
+                  "key": "org_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0d0f79a3-f63b-4816-bc8c-5bda6527e963",
+              "name": "List of notifications in organization",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"apiVersion\": \"v2\",\n    \"kind\": \"Notification\",\n    \"metadata\": {\n      \"id\": \"ee251df7-6946-4544-840d-b8ac7c02c3e3\",\n      \"name\": \"string\",\n      \"created_at\": \"1980-04-13T03:08:12.555Z\",\n      \"org_id\": \"83293713-b759-46ba-8432-f4c641e3bf14\",\n      \"status\": {\n        \"failures\": [\n          {\n            \"description\": \"string\",\n            \"timestamp\": \"1960-11-02T02:21:59.291Z\"\n          },\n          {\n            \"description\": \"string\",\n            \"timestamp\": \"1951-04-15T23:21:15.928Z\"\n          }\n        ]\n      },\n      \"updated_at\": \"1982-11-17T15:29:50.085Z\"\n    },\n    \"spec\": {\n      \"name\": \"string\",\n      \"rules\": [\n        {\n          \"filter\": {\n            \"branches\": [\n              \"string\",\n              \"string\"\n            ],\n            \"pipelines\": \"semaphore.yml\",\n            \"projects\": [\n              \"string\",\n              \"string\"\n            ],\n            \"results\": [\n              \"PASSED\",\n              \"STOPPED\"\n            ]\n          },\n          \"name\": \"string\",\n          \"notify\": {\n            \"email\": {\n              \"cc\": [\n                \"string\"\n              ],\n              \"bcc\": [\n                \"string\",\n                \"string\"\n              ],\n              \"content\": \"string\",\n              \"status\": \"INACTIVE\",\n              \"subject\": \"string\"\n            },\n            \"slack\": {\n              \"endpoint\": \"string\",\n              \"channels\": [\n                \"string\",\n                \"string\"\n              ],\n              \"message\": \"string\",\n              \"status\": \"ACTIVE\"\n            },\n            \"webhook\": {\n              \"url\": \"string\",\n              \"method\": \"POST\",\n              \"retries\": 3,\n              \"secret\": \"string\",\n              \"status\": \"INACTIVE\",\n              \"timeout\": 500\n            }\n          }\n        },\n        {\n          \"filter\": {\n            \"branches\": [\n              \"string\",\n              \"string\"\n            ],\n            \"pipelines\": \"semaphore.yml\",\n            \"projects\": [\n              \"string\",\n              \"string\"\n            ],\n            \"results\": [\n              \"PASSED\",\n              \"STOPPED\"\n            ]\n          },\n          \"name\": \"string\",\n          \"notify\": {\n            \"email\": {\n              \"cc\": [\n                \"string\"\n              ],\n              \"bcc\": [\n                \"string\",\n                \"string\"\n              ],\n              \"content\": \"string\",\n              \"status\": \"INACTIVE\",\n              \"subject\": \"string\"\n            },\n            \"slack\": {\n              \"endpoint\": \"string\",\n              \"channels\": [\n                \"string\",\n                \"string\"\n              ],\n              \"message\": \"string\",\n              \"status\": \"INACTIVE\"\n            },\n            \"webhook\": {\n              \"url\": \"string\",\n              \"method\": \"POST\",\n              \"retries\": 3,\n              \"secret\": \"string\",\n              \"status\": \"ACTIVE\",\n              \"timeout\": 500\n            }\n          }\n        }\n      ]\n    }\n  },\n  {\n    \"apiVersion\": \"v2\",\n    \"kind\": \"Notification\",\n    \"metadata\": {\n      \"id\": \"ee251df7-6946-4544-840d-b8ac7c02c3e3\",\n      \"name\": \"string\",\n      \"created_at\": \"2003-11-22T04:37:24.010Z\",\n      \"org_id\": \"83293713-b759-46ba-8432-f4c641e3bf14\",\n      \"status\": {\n        \"failures\": [\n          {\n            \"description\": \"string\",\n            \"timestamp\": \"1955-12-05T20:43:45.294Z\"\n          },\n          {\n            \"description\": \"string\",\n            \"timestamp\": \"2003-07-08T15:05:36.821Z\"\n          }\n        ]\n      },\n      \"updated_at\": \"1993-12-28T02:36:45.585Z\"\n    },\n    \"spec\": {\n      \"name\": \"string\",\n      \"rules\": [\n        {\n          \"filter\": {\n            \"branches\": [\n              \"string\",\n              \"string\"\n            ],\n            \"pipelines\": \"semaphore.yml\",\n            \"projects\": [\n              \"string\",\n              \"string\"\n            ],\n            \"results\": [\n              \"STOPPED\",\n              \"FAILED\"\n            ]\n          },\n          \"name\": \"string\",\n          \"notify\": {\n            \"email\": {\n              \"cc\": [\n                \"string\"\n              ],\n              \"bcc\": [\n                \"string\",\n                \"string\"\n              ],\n              \"content\": \"string\",\n              \"status\": \"INACTIVE\",\n              \"subject\": \"string\"\n            },\n            \"slack\": {\n              \"endpoint\": \"string\",\n              \"channels\": [\n                \"string\",\n                \"string\"\n              ],\n              \"message\": \"string\",\n              \"status\": \"ACTIVE\"\n            },\n            \"webhook\": {\n              \"url\": \"string\",\n              \"method\": \"POST\",\n              \"retries\": 3,\n              \"secret\": \"string\",\n              \"status\": \"INACTIVE\",\n              \"timeout\": 500\n            }\n          }\n        },\n        {\n          \"filter\": {\n            \"branches\": [\n              \"string\",\n              \"string\"\n            ],\n            \"pipelines\": \"semaphore.yml\",\n            \"projects\": [\n              \"string\",\n              \"string\"\n            ],\n            \"results\": [\n              \"STOPPED\",\n              \"CANCELED\"\n            ]\n          },\n          \"name\": \"string\",\n          \"notify\": {\n            \"email\": {\n              \"cc\": [\n                \"string\"\n              ],\n              \"bcc\": [\n                \"string\",\n                \"string\"\n              ],\n              \"content\": \"string\",\n              \"status\": \"ACTIVE\",\n              \"subject\": \"string\"\n            },\n            \"slack\": {\n              \"endpoint\": \"string\",\n              \"channels\": [\n                \"string\",\n                \"string\"\n              ],\n              \"message\": \"string\",\n              \"status\": \"ACTIVE\"\n            },\n            \"webhook\": {\n              \"url\": \"string\",\n              \"method\": \"POST\",\n              \"retries\": 3,\n              \"secret\": \"string\",\n              \"status\": \"INACTIVE\",\n              \"timeout\": 500\n            }\n          }\n        }\n      ]\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2787d24-296a-46c1-96c4-5e2d3ecd7471",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "252f12f2-0983-4bf2-9714-7d4174186196",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "095c4b63-8b36-4c36-88ed-a3fa6f2e0ef8",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8db075bf-f722-4138-8049-394037bb88e9",
+              "name": "Validation Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6600dc8f-4939-49b9-9c94-977a21b49c1f",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_token",
+                      "value": ""
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1ae0fd3a-8e37-4b32-9485-b8ccc9f67c65",
+          "name": "Notifications.Delete",
+          "request": {
+            "name": "Notifications.Delete",
+            "description": {
+              "content": "Delete a notification.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "notifications",
+                ":id_or_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id_or_name",
+                  "description": "(Required) Id or name of the notification"
+                },
+                {
+                  "description": "Organization name",
+                  "type": "any",
+                  "value": "{{org_name}}",
+                  "key": "org_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "59f68597-04f7-4228-80c6-4fe7fc3a3a15",
+              "name": "Notification",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the notification"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"8dc3d483-7095-4782-8dc0-4194862ae27c\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6cb2312-993d-48de-b247-8cf9ed21ae99",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the notification"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "23901b68-61a7-44df-a0c9-beebacd1a512",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the notification"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09435138-fef1-471d-89ce-96ec469e141f",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the notification"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2ae7943-7bac-45c3-81e6-7f97c3dee0ab",
+              "name": "Validation Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the notification"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5e3aa8f-7c0e-45b4-ae21-0a224bbd47de",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the notification"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "015fe88d-0238-4f4e-9022-90496ad2c0f3",
+          "name": "Notifications.Describe",
+          "request": {
+            "name": "Notifications.Describe",
+            "description": {
+              "content": "Describe a notification.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "notifications",
+                ":id_or_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id_or_name",
+                  "description": "(Required) Id or name of the notification"
+                },
+                {
+                  "description": "Organization name",
+                  "type": "any",
+                  "value": "{{org_name}}",
+                  "key": "org_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8a357f8b-95d8-4370-a9b1-1e3fd0a7396a",
+              "name": "Notification",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the notification"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"v2\",\n  \"kind\": \"Notification\",\n  \"metadata\": {\n    \"id\": \"ee251df7-6946-4544-840d-b8ac7c02c3e3\",\n    \"name\": \"string\",\n    \"created_at\": \"1980-03-15T19:51:58.177Z\",\n    \"org_id\": \"83293713-b759-46ba-8432-f4c641e3bf14\",\n    \"status\": {\n      \"failures\": [\n        {\n          \"description\": \"string\",\n          \"timestamp\": \"1985-10-02T18:43:12.952Z\"\n        },\n        {\n          \"description\": \"string\",\n          \"timestamp\": \"1963-08-13T18:11:49.085Z\"\n        }\n      ]\n    },\n    \"updated_at\": \"2016-01-28T07:17:13.388Z\"\n  },\n  \"spec\": {\n    \"name\": \"string\",\n    \"rules\": [\n      {\n        \"filter\": {\n          \"branches\": [\n            \"string\",\n            \"string\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"string\",\n            \"string\"\n          ],\n          \"results\": [\n            \"PASSED\",\n            \"PASSED\"\n          ]\n        },\n        \"name\": \"string\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"string\"\n            ],\n            \"bcc\": [\n              \"string\",\n              \"string\"\n            ],\n            \"content\": \"string\",\n            \"status\": \"INACTIVE\",\n            \"subject\": \"string\"\n          },\n          \"slack\": {\n            \"endpoint\": \"string\",\n            \"channels\": [\n              \"string\",\n              \"string\"\n            ],\n            \"message\": \"string\",\n            \"status\": \"ACTIVE\"\n          },\n          \"webhook\": {\n            \"url\": \"string\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"string\",\n            \"status\": \"INACTIVE\",\n            \"timeout\": 500\n          }\n        }\n      },\n      {\n        \"filter\": {\n          \"branches\": [\n            \"string\",\n            \"string\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"string\",\n            \"string\"\n          ],\n          \"results\": [\n            \"STOPPED\",\n            \"PASSED\"\n          ]\n        },\n        \"name\": \"string\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"string\"\n            ],\n            \"bcc\": [\n              \"string\",\n              \"string\"\n            ],\n            \"content\": \"string\",\n            \"status\": \"ACTIVE\",\n            \"subject\": \"string\"\n          },\n          \"slack\": {\n            \"endpoint\": \"string\",\n            \"channels\": [\n              \"string\",\n              \"string\"\n            ],\n            \"message\": \"string\",\n            \"status\": \"ACTIVE\"\n          },\n          \"webhook\": {\n            \"url\": \"string\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"string\",\n            \"status\": \"ACTIVE\",\n            \"timeout\": 500\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e87f7a5f-2067-40d8-9057-a3256de36be7",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the notification"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e86a78a8-896b-41f9-ad26-c1e2106ebefa",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the notification"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "afb29223-48eb-45af-a13d-791a8b4cd263",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the notification"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "32c2eb33-43e8-4925-87c0-5a2b55517e53",
+              "name": "Validation Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the notification"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90ba3229-1f38-4fcc-b75d-0ecbbc500fdb",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the notification"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae3184b7-da72-4545-b529-23cc43bb3795",
+          "name": "Notifications.Update",
+          "request": {
+            "name": "Notifications.Update",
+            "description": {
+              "content": "Update a notification.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "notifications",
+                ":id_or_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id_or_name",
+                  "description": "(Required) Id or name of the notification to update"
+                },
+                {
+                  "description": "Organization name",
+                  "type": "any",
+                  "value": "{{org_name}}",
+                  "key": "org_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"spec\": {\n    \"name\": \"<string>\",\n    \"rules\": [\n      {\n        \"filter\": {\n          \"branches\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"results\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"name\": \"<string>\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"<string>\"\n            ],\n            \"bcc\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"content\": \"<string>\",\n            \"status\": \"<string>\",\n            \"subject\": \"<string>\"\n          },\n          \"slack\": {\n            \"endpoint\": \"<string>\",\n            \"channels\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"message\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          \"webhook\": {\n            \"url\": \"<string>\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"<string>\",\n            \"status\": \"<string>\",\n            \"timeout\": 500\n          }\n        }\n      },\n      {\n        \"filter\": {\n          \"branches\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"results\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"name\": \"<string>\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"<string>\"\n            ],\n            \"bcc\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"content\": \"<string>\",\n            \"status\": \"<string>\",\n            \"subject\": \"<string>\"\n          },\n          \"slack\": {\n            \"endpoint\": \"<string>\",\n            \"channels\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"message\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          \"webhook\": {\n            \"url\": \"<string>\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"<string>\",\n            \"status\": \"<string>\",\n            \"timeout\": 500\n          }\n        }\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "75c5d6ad-ada5-4368-88c5-3b9ee3d09190",
+              "name": "Notification",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the notification to update"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"spec\": {\n    \"name\": \"<string>\",\n    \"rules\": [\n      {\n        \"filter\": {\n          \"branches\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"results\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"name\": \"<string>\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"<string>\"\n            ],\n            \"bcc\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"content\": \"<string>\",\n            \"status\": \"<string>\",\n            \"subject\": \"<string>\"\n          },\n          \"slack\": {\n            \"endpoint\": \"<string>\",\n            \"channels\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"message\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          \"webhook\": {\n            \"url\": \"<string>\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"<string>\",\n            \"status\": \"<string>\",\n            \"timeout\": 500\n          }\n        }\n      },\n      {\n        \"filter\": {\n          \"branches\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"results\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"name\": \"<string>\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"<string>\"\n            ],\n            \"bcc\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"content\": \"<string>\",\n            \"status\": \"<string>\",\n            \"subject\": \"<string>\"\n          },\n          \"slack\": {\n            \"endpoint\": \"<string>\",\n            \"channels\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"message\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          \"webhook\": {\n            \"url\": \"<string>\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"<string>\",\n            \"status\": \"<string>\",\n            \"timeout\": 500\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"v2\",\n  \"kind\": \"Notification\",\n  \"metadata\": {\n    \"id\": \"ee251df7-6946-4544-840d-b8ac7c02c3e3\",\n    \"name\": \"string\",\n    \"created_at\": \"1980-03-15T19:51:58.177Z\",\n    \"org_id\": \"83293713-b759-46ba-8432-f4c641e3bf14\",\n    \"status\": {\n      \"failures\": [\n        {\n          \"description\": \"string\",\n          \"timestamp\": \"1985-10-02T18:43:12.952Z\"\n        },\n        {\n          \"description\": \"string\",\n          \"timestamp\": \"1963-08-13T18:11:49.085Z\"\n        }\n      ]\n    },\n    \"updated_at\": \"2016-01-28T07:17:13.388Z\"\n  },\n  \"spec\": {\n    \"name\": \"string\",\n    \"rules\": [\n      {\n        \"filter\": {\n          \"branches\": [\n            \"string\",\n            \"string\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"string\",\n            \"string\"\n          ],\n          \"results\": [\n            \"PASSED\",\n            \"PASSED\"\n          ]\n        },\n        \"name\": \"string\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"string\"\n            ],\n            \"bcc\": [\n              \"string\",\n              \"string\"\n            ],\n            \"content\": \"string\",\n            \"status\": \"INACTIVE\",\n            \"subject\": \"string\"\n          },\n          \"slack\": {\n            \"endpoint\": \"string\",\n            \"channels\": [\n              \"string\",\n              \"string\"\n            ],\n            \"message\": \"string\",\n            \"status\": \"ACTIVE\"\n          },\n          \"webhook\": {\n            \"url\": \"string\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"string\",\n            \"status\": \"INACTIVE\",\n            \"timeout\": 500\n          }\n        }\n      },\n      {\n        \"filter\": {\n          \"branches\": [\n            \"string\",\n            \"string\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"string\",\n            \"string\"\n          ],\n          \"results\": [\n            \"STOPPED\",\n            \"PASSED\"\n          ]\n        },\n        \"name\": \"string\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"string\"\n            ],\n            \"bcc\": [\n              \"string\",\n              \"string\"\n            ],\n            \"content\": \"string\",\n            \"status\": \"ACTIVE\",\n            \"subject\": \"string\"\n          },\n          \"slack\": {\n            \"endpoint\": \"string\",\n            \"channels\": [\n              \"string\",\n              \"string\"\n            ],\n            \"message\": \"string\",\n            \"status\": \"ACTIVE\"\n          },\n          \"webhook\": {\n            \"url\": \"string\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"string\",\n            \"status\": \"ACTIVE\",\n            \"timeout\": 500\n          }\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "633f06cd-cd12-453d-bcd1-e5887cbb27cd",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the notification to update"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"spec\": {\n    \"name\": \"<string>\",\n    \"rules\": [\n      {\n        \"filter\": {\n          \"branches\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"results\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"name\": \"<string>\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"<string>\"\n            ],\n            \"bcc\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"content\": \"<string>\",\n            \"status\": \"<string>\",\n            \"subject\": \"<string>\"\n          },\n          \"slack\": {\n            \"endpoint\": \"<string>\",\n            \"channels\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"message\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          \"webhook\": {\n            \"url\": \"<string>\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"<string>\",\n            \"status\": \"<string>\",\n            \"timeout\": 500\n          }\n        }\n      },\n      {\n        \"filter\": {\n          \"branches\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"results\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"name\": \"<string>\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"<string>\"\n            ],\n            \"bcc\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"content\": \"<string>\",\n            \"status\": \"<string>\",\n            \"subject\": \"<string>\"\n          },\n          \"slack\": {\n            \"endpoint\": \"<string>\",\n            \"channels\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"message\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          \"webhook\": {\n            \"url\": \"<string>\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"<string>\",\n            \"status\": \"<string>\",\n            \"timeout\": 500\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd59e599-4462-42fa-a57f-e03490795719",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the notification to update"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"spec\": {\n    \"name\": \"<string>\",\n    \"rules\": [\n      {\n        \"filter\": {\n          \"branches\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"results\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"name\": \"<string>\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"<string>\"\n            ],\n            \"bcc\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"content\": \"<string>\",\n            \"status\": \"<string>\",\n            \"subject\": \"<string>\"\n          },\n          \"slack\": {\n            \"endpoint\": \"<string>\",\n            \"channels\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"message\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          \"webhook\": {\n            \"url\": \"<string>\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"<string>\",\n            \"status\": \"<string>\",\n            \"timeout\": 500\n          }\n        }\n      },\n      {\n        \"filter\": {\n          \"branches\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"results\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"name\": \"<string>\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"<string>\"\n            ],\n            \"bcc\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"content\": \"<string>\",\n            \"status\": \"<string>\",\n            \"subject\": \"<string>\"\n          },\n          \"slack\": {\n            \"endpoint\": \"<string>\",\n            \"channels\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"message\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          \"webhook\": {\n            \"url\": \"<string>\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"<string>\",\n            \"status\": \"<string>\",\n            \"timeout\": 500\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0c08d44-f804-4379-8a2d-7138a4218586",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the notification to update"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"spec\": {\n    \"name\": \"<string>\",\n    \"rules\": [\n      {\n        \"filter\": {\n          \"branches\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"results\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"name\": \"<string>\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"<string>\"\n            ],\n            \"bcc\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"content\": \"<string>\",\n            \"status\": \"<string>\",\n            \"subject\": \"<string>\"\n          },\n          \"slack\": {\n            \"endpoint\": \"<string>\",\n            \"channels\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"message\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          \"webhook\": {\n            \"url\": \"<string>\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"<string>\",\n            \"status\": \"<string>\",\n            \"timeout\": 500\n          }\n        }\n      },\n      {\n        \"filter\": {\n          \"branches\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"results\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"name\": \"<string>\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"<string>\"\n            ],\n            \"bcc\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"content\": \"<string>\",\n            \"status\": \"<string>\",\n            \"subject\": \"<string>\"\n          },\n          \"slack\": {\n            \"endpoint\": \"<string>\",\n            \"channels\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"message\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          \"webhook\": {\n            \"url\": \"<string>\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"<string>\",\n            \"status\": \"<string>\",\n            \"timeout\": 500\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5d9e5cf-cd39-4ead-b0b4-9ed909aaeee0",
+              "name": "Validation Failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the notification to update"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"spec\": {\n    \"name\": \"<string>\",\n    \"rules\": [\n      {\n        \"filter\": {\n          \"branches\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"results\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"name\": \"<string>\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"<string>\"\n            ],\n            \"bcc\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"content\": \"<string>\",\n            \"status\": \"<string>\",\n            \"subject\": \"<string>\"\n          },\n          \"slack\": {\n            \"endpoint\": \"<string>\",\n            \"channels\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"message\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          \"webhook\": {\n            \"url\": \"<string>\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"<string>\",\n            \"status\": \"<string>\",\n            \"timeout\": 500\n          }\n        }\n      },\n      {\n        \"filter\": {\n          \"branches\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"results\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"name\": \"<string>\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"<string>\"\n            ],\n            \"bcc\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"content\": \"<string>\",\n            \"status\": \"<string>\",\n            \"subject\": \"<string>\"\n          },\n          \"slack\": {\n            \"endpoint\": \"<string>\",\n            \"channels\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"message\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          \"webhook\": {\n            \"url\": \"<string>\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"<string>\",\n            \"status\": \"<string>\",\n            \"timeout\": 500\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70ca0ad3-ed22-45f8-8bb7-bde93853b1df",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":id_or_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id_or_name",
+                      "description": "(Required) Id or name of the notification to update"
+                    },
+                    {
+                      "description": "Organization name",
+                      "type": "any",
+                      "value": "{{org_name}}",
+                      "key": "org_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"spec\": {\n    \"name\": \"<string>\",\n    \"rules\": [\n      {\n        \"filter\": {\n          \"branches\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"results\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"name\": \"<string>\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"<string>\"\n            ],\n            \"bcc\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"content\": \"<string>\",\n            \"status\": \"<string>\",\n            \"subject\": \"<string>\"\n          },\n          \"slack\": {\n            \"endpoint\": \"<string>\",\n            \"channels\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"message\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          \"webhook\": {\n            \"url\": \"<string>\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"<string>\",\n            \"status\": \"<string>\",\n            \"timeout\": 500\n          }\n        }\n      },\n      {\n        \"filter\": {\n          \"branches\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"pipelines\": \"semaphore.yml\",\n          \"projects\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"results\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"name\": \"<string>\",\n        \"notify\": {\n          \"email\": {\n            \"cc\": [\n              \"<string>\"\n            ],\n            \"bcc\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"content\": \"<string>\",\n            \"status\": \"<string>\",\n            \"subject\": \"<string>\"\n          },\n          \"slack\": {\n            \"endpoint\": \"<string>\",\n            \"channels\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"message\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          \"webhook\": {\n            \"url\": \"<string>\",\n            \"method\": \"POST\",\n            \"retries\": 3,\n            \"secret\": \"<string>\",\n            \"status\": \"<string>\",\n            \"timeout\": 500\n          }\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentation_url\": \"https://docs.semaphoreci.com/api/error-codes/bad-request\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Organization name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "me",
+      "key": "org_name"
+    },
+    {
+      "type": "string",
+      "value": "https://{{org_name}}.semaphoreci.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ea324554-62ae-496d-93fb-4318a675dbeb",
+    "name": "Semaphore Public Dashboards Notifications API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Semaphore Public API is a RESTful API that allows you to interact with Semaphore CI/CD.\n## Authorization\nAuthorization is done via bearer token. You can obtain a token by visiting your [account settings](https://me.semaphoreci.com/account).\n\n## Pagination with link headers\nEach list request supports pagination. List responses include a [link header](https://datatracker.ietf.org/doc/html/rfc5988#section-5) with the pagination URLs.\nLink headers contain next, previous, first relative URLs.\n\n\nContact Support:\n Email: support@semaphoreci.com",
+      "type": "text/plain"
+    }
+  }
+}

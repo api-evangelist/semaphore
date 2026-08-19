@@ -1,0 +1,318 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Semaphore Public Dashboards DeploymentTargets API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "DeploymentTargets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "DeploymentTargets.List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/projects/:project_id_or_name/deployment_targets",
+            "params": [
+              {
+                "name": "project_id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the project"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List of deployment targets for the project."
+        },
+        {
+          "info": {
+            "name": "DeploymentTargets.Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/projects/:project_id_or_name/deployment_targets",
+            "params": [
+              {
+                "name": "project_id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the project"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a deployment target for the project."
+        },
+        {
+          "info": {
+            "name": "DeploymentTargets.Describe",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/projects/:project_id_or_name/deployment_targets/:id_or_name",
+            "params": [
+              {
+                "name": "project_id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the project"
+              },
+              {
+                "name": "id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the deployment target"
+              },
+              {
+                "name": "with_credentials",
+                "value": "",
+                "type": "query",
+                "description": "If true, fetches the secret associated with the deployment target"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Describe a deployment target for the project."
+        },
+        {
+          "info": {
+            "name": "DeploymentTargets.Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/projects/:project_id_or_name/deployment_targets/:id_or_name",
+            "params": [
+              {
+                "name": "project_id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the project"
+              },
+              {
+                "name": "id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the deployment target"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a deployment target for the project. Fields that are not provided will not be updated."
+        },
+        {
+          "info": {
+            "name": "DeploymentTargets.Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/projects/:project_id_or_name/deployment_targets/:id_or_name",
+            "params": [
+              {
+                "name": "project_id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the project"
+              },
+              {
+                "name": "id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the deployment target"
+              },
+              {
+                "name": "unique_token",
+                "value": "",
+                "type": "query",
+                "description": "Idempotency token for the delete operation"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a deployment target for the project."
+        },
+        {
+          "info": {
+            "name": "DeploymentTargets.Activate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/projects/:project_id_or_name/deployment_targets/:id_or_name/activate",
+            "params": [
+              {
+                "name": "project_id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the project"
+              },
+              {
+                "name": "id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the deployment target"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Activate a deployment target for the project."
+        },
+        {
+          "info": {
+            "name": "DeploymentTargets.Deactivate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/projects/:project_id_or_name/deployment_targets/:id_or_name/deactivate",
+            "params": [
+              {
+                "name": "project_id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the project"
+              },
+              {
+                "name": "id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the deployment target"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deactivate a deployment target for the project."
+        },
+        {
+          "info": {
+            "name": "DeploymentTargets.History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org_name}.semaphoreci.com/api/v2/projects/:project_id_or_name/deployment_targets/:id_or_name/history",
+            "params": [
+              {
+                "name": "project_id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the project"
+              },
+              {
+                "name": "id_or_name",
+                "value": "",
+                "type": "path",
+                "description": "Id or name of the deployment target"
+              },
+              {
+                "name": "git_ref_type",
+                "value": "",
+                "type": "query",
+                "description": "Git reference type"
+              },
+              {
+                "name": "git_ref_label",
+                "value": "",
+                "type": "query",
+                "description": "Git reference label"
+              },
+              {
+                "name": "triggered_by",
+                "value": "",
+                "type": "query",
+                "description": "Triggerer ID or value"
+              },
+              {
+                "name": "parameter1",
+                "value": "",
+                "type": "query",
+                "description": "Value of promotion parameter with the name from bookmark slot #1"
+              },
+              {
+                "name": "parameter2",
+                "value": "",
+                "type": "query",
+                "description": "Value of promotion parameter with the name from bookmark slot #2"
+              },
+              {
+                "name": "parameter3",
+                "value": "",
+                "type": "query",
+                "description": "Value of promotion parameter with the name from bookmark slot #3"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "Direction of the list from the provided token"
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Starting point for listing, if you are fetching first page leave it empty"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Page size"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This endpoint provides the deployment history for a specific deployment target."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
