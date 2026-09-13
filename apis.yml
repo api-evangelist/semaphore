@@ -54,6 +54,7 @@ tags:
   - Software Delivery
   - Deployment
   - Artifacts
+  - Developer Tools
 apis:
 - aid: semaphore:semaphore-dashboards-api
   name: Semaphore Dashboards API
