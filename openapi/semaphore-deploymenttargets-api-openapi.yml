@@ -1,20 +1,18 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Semaphore Public Dashboards DeploymentTargets API
+  title: Semaphore Public Deployment Targets API
   description: 'The Semaphore Public API is a RESTful API that allows you to interact with Semaphore CI/CD.
 
     ## Authorization
 
-    Authorization is done via bearer token. You can obtain a token by visiting your [account settings](https://me.semaphoreci.com/account).
+    Authorization is done via bearer token. You can obtain a token by visiting your account settings.
 
 
     ## Pagination with link headers
 
-    Each list request supports pagination. List responses include a [link header](https://datatracker.ietf.org/doc/html/rfc5988#section-5) with the pagination URLs.
+    Each list request supports pagination. List responses include a link header with the pagination URLs.
 
-    Link headers contain next, previous, first relative URLs.
-
-    '
+    Link headers contain next, previous, first relative URLs.'
   version: v2
   contact:
     url: https://semaphore.io/contact
@@ -109,7 +107,6 @@ paths:
                           type: string
                         last_deployment:
                           description: A deployment history item contains relevant details about deployments triggered for a deployment target.
-                          nullable: true
                           properties:
                             env_vars:
                               description: Environment variables of the deployment target
@@ -142,16 +139,18 @@ paths:
                               description: ID of a Pipeline
                               example: 97ba55d1-90d7-40b9-a2dd-bdbd02389b58
                               format: uuid
-                              nullable: true
                               title: Pipeline.ID
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                             pipeline_id:
                               description: ID of a Pipeline
                               example: adc5a26f-4077-47bc-8d4f-cb4467f2c103
                               format: uuid
-                              nullable: true
                               title: Pipeline.ID
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                             state:
                               description: The state of the last deployment of the deployment target
                               enum:
@@ -187,7 +186,9 @@ paths:
                               title: User
                               type: object
                           title: DeploymentTargets.HistoryItem
-                          type: object
+                          type:
+                          - object
+                          - 'null'
                         name:
                           description: 'DeploymentTargets name must be unique on project level, must match the name regex: `^[A-Za-z0-9_.-]+$`'
                           example: production
@@ -439,7 +440,6 @@ paths:
                         type: string
                       last_deployment:
                         description: A deployment history item contains relevant details about deployments triggered for a deployment target.
-                        nullable: true
                         properties:
                           env_vars:
                             description: Environment variables of the deployment target
@@ -472,16 +472,18 @@ paths:
                             description: ID of a Pipeline
                             example: 97ba55d1-90d7-40b9-a2dd-bdbd02389b58
                             format: uuid
-                            nullable: true
                             title: Pipeline.ID
-                            type: string
+                            type:
+                            - string
+                            - 'null'
                           pipeline_id:
                             description: ID of a Pipeline
                             example: adc5a26f-4077-47bc-8d4f-cb4467f2c103
                             format: uuid
-                            nullable: true
                             title: Pipeline.ID
-                            type: string
+                            type:
+                            - string
+                            - 'null'
                           state:
                             description: The state of the last deployment of the deployment target
                             enum:
@@ -517,7 +519,9 @@ paths:
                             title: User
                             type: object
                         title: DeploymentTargets.HistoryItem
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                       name:
                         description: 'DeploymentTargets name must be unique on project level, must match the name regex: `^[A-Za-z0-9_.-]+$`'
                         example: production
@@ -793,6 +797,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Deployment targets create
+      x-summary-source: derived
     get:
       operationId: DeploymentTargets.List
       description: List of deployment targets for the project.
@@ -866,7 +872,6 @@ paths:
                           type: string
                         last_deployment:
                           description: A deployment history item contains relevant details about deployments triggered for a deployment target.
-                          nullable: true
                           properties:
                             env_vars:
                               description: Environment variables of the deployment target
@@ -899,16 +904,18 @@ paths:
                               description: ID of a Pipeline
                               example: 97ba55d1-90d7-40b9-a2dd-bdbd02389b58
                               format: uuid
-                              nullable: true
                               title: Pipeline.ID
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                             pipeline_id:
                               description: ID of a Pipeline
                               example: adc5a26f-4077-47bc-8d4f-cb4467f2c103
                               format: uuid
-                              nullable: true
                               title: Pipeline.ID
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                             state:
                               description: The state of the last deployment of the deployment target
                               enum:
@@ -944,7 +951,9 @@ paths:
                               title: User
                               type: object
                           title: DeploymentTargets.HistoryItem
-                          type: object
+                          type:
+                          - object
+                          - 'null'
                         name:
                           description: 'DeploymentTargets name must be unique on project level, must match the name regex: `^[A-Za-z0-9_.-]+$`'
                           example: production
@@ -1222,6 +1231,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Deployment targets list
+      x-summary-source: derived
   /projects/{project_id_or_name}/deployment_targets/{id_or_name}:
     delete:
       operationId: DeploymentTargets.Delete
@@ -1357,6 +1368,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Deployment targets delete
+      x-summary-source: derived
     get:
       operationId: DeploymentTargets.Describe
       description: Describe a deployment target for the project.
@@ -1444,7 +1457,6 @@ paths:
                         type: string
                       last_deployment:
                         description: A deployment history item contains relevant details about deployments triggered for a deployment target.
-                        nullable: true
                         properties:
                           env_vars:
                             description: Environment variables of the deployment target
@@ -1477,16 +1489,18 @@ paths:
                             description: ID of a Pipeline
                             example: 97ba55d1-90d7-40b9-a2dd-bdbd02389b58
                             format: uuid
-                            nullable: true
                             title: Pipeline.ID
-                            type: string
+                            type:
+                            - string
+                            - 'null'
                           pipeline_id:
                             description: ID of a Pipeline
                             example: adc5a26f-4077-47bc-8d4f-cb4467f2c103
                             format: uuid
-                            nullable: true
                             title: Pipeline.ID
-                            type: string
+                            type:
+                            - string
+                            - 'null'
                           state:
                             description: The state of the last deployment of the deployment target
                             enum:
@@ -1522,7 +1536,9 @@ paths:
                             title: User
                             type: object
                         title: DeploymentTargets.HistoryItem
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                       name:
                         description: 'DeploymentTargets name must be unique on project level, must match the name regex: `^[A-Za-z0-9_.-]+$`'
                         example: production
@@ -1798,6 +1814,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Deployment targets describe
+      x-summary-source: derived
     patch:
       operationId: DeploymentTargets.Update
       description: Update a deployment target for the project. Fields that are not provided will not be updated.
@@ -1878,7 +1896,6 @@ paths:
                           type: string
                         last_deployment:
                           description: A deployment history item contains relevant details about deployments triggered for a deployment target.
-                          nullable: true
                           properties:
                             env_vars:
                               description: Environment variables of the deployment target
@@ -1911,16 +1928,18 @@ paths:
                               description: ID of a Pipeline
                               example: 97ba55d1-90d7-40b9-a2dd-bdbd02389b58
                               format: uuid
-                              nullable: true
                               title: Pipeline.ID
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                             pipeline_id:
                               description: ID of a Pipeline
                               example: adc5a26f-4077-47bc-8d4f-cb4467f2c103
                               format: uuid
-                              nullable: true
                               title: Pipeline.ID
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                             state:
                               description: The state of the last deployment of the deployment target
                               enum:
@@ -1956,7 +1975,9 @@ paths:
                               title: User
                               type: object
                           title: DeploymentTargets.HistoryItem
-                          type: object
+                          type:
+                          - object
+                          - 'null'
                         name:
                           description: 'DeploymentTargets name must be unique on project level, must match the name regex: `^[A-Za-z0-9_.-]+$`'
                           example: production
@@ -2208,7 +2229,6 @@ paths:
                         type: string
                       last_deployment:
                         description: A deployment history item contains relevant details about deployments triggered for a deployment target.
-                        nullable: true
                         properties:
                           env_vars:
                             description: Environment variables of the deployment target
@@ -2241,16 +2261,18 @@ paths:
                             description: ID of a Pipeline
                             example: 97ba55d1-90d7-40b9-a2dd-bdbd02389b58
                             format: uuid
-                            nullable: true
                             title: Pipeline.ID
-                            type: string
+                            type:
+                            - string
+                            - 'null'
                           pipeline_id:
                             description: ID of a Pipeline
                             example: adc5a26f-4077-47bc-8d4f-cb4467f2c103
                             format: uuid
-                            nullable: true
                             title: Pipeline.ID
-                            type: string
+                            type:
+                            - string
+                            - 'null'
                           state:
                             description: The state of the last deployment of the deployment target
                             enum:
@@ -2286,7 +2308,9 @@ paths:
                             title: User
                             type: object
                         title: DeploymentTargets.HistoryItem
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                       name:
                         description: 'DeploymentTargets name must be unique on project level, must match the name regex: `^[A-Za-z0-9_.-]+$`'
                         example: production
@@ -2562,6 +2586,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Deployment targets update
+      x-summary-source: derived
   /projects/{project_id_or_name}/deployment_targets/{id_or_name}/activate:
     patch:
       operationId: DeploymentTargets.Activate
@@ -2696,6 +2722,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Deployment targets activate
+      x-summary-source: derived
   /projects/{project_id_or_name}/deployment_targets/{id_or_name}/deactivate:
     patch:
       operationId: DeploymentTargets.Deactivate
@@ -2830,6 +2858,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Deployment targets deactivate
+      x-summary-source: derived
   /projects/{project_id_or_name}/deployment_targets/{id_or_name}/history:
     get:
       operationId: DeploymentTargets.History
@@ -2938,7 +2968,6 @@ paths:
               schema:
                 items:
                   description: A deployment history item contains relevant details about deployments triggered for a deployment target.
-                  nullable: true
                   properties:
                     env_vars:
                       description: Environment variables of the deployment target
@@ -2971,16 +3000,18 @@ paths:
                       description: ID of a Pipeline
                       example: 97ba55d1-90d7-40b9-a2dd-bdbd02389b58
                       format: uuid
-                      nullable: true
                       title: Pipeline.ID
-                      type: string
+                      type:
+                      - string
+                      - 'null'
                     pipeline_id:
                       description: ID of a Pipeline
                       example: adc5a26f-4077-47bc-8d4f-cb4467f2c103
                       format: uuid
-                      nullable: true
                       title: Pipeline.ID
-                      type: string
+                      type:
+                      - string
+                      - 'null'
                     state:
                       description: The state of the last deployment of the deployment target
                       enum:
@@ -3016,7 +3047,9 @@ paths:
                       title: User
                       type: object
                   title: DeploymentTargets.HistoryItem
-                  type: object
+                  type:
+                  - object
+                  - 'null'
                 title: DeploymentTargets.HistoryResponse
                 type: array
           description: History of deployment target
@@ -3102,6 +3135,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Deployment targets history
+      x-summary-source: derived
 components:
   securitySchemes:
     authorization:

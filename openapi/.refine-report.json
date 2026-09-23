@@ -1,34 +1,40 @@
 {
   "provider": "semaphore",
   "sources": [
-    "semaphore-dashboards-api-openapi.yml",
-    "semaphore-deploymenttargets-api-openapi.yml",
-    "semaphore-notifications-api-openapi.yml",
-    "semaphore-pipelines-api-openapi.yml",
-    "semaphore-projects-api-openapi.yml",
-    "semaphore-projectsecrets-api-openapi.yml",
-    "semaphore-secrets-api-openapi.yml",
-    "semaphore-selfhostedagents-api-openapi.yml",
-    "semaphore-selfhostedagenttypes-api-openapi.yml",
-    "semaphore-tasks-api-openapi.yml",
-    "semaphore-workflows-api-openapi.yml"
+    "_original/semaphore-semaphore-api-openapi.yml"
   ],
   "outputs": [
     "semaphore-dashboards-api-openapi.yml",
     "semaphore-deploymenttargets-api-openapi.yml",
     "semaphore-notifications-api-openapi.yml",
     "semaphore-pipelines-api-openapi.yml",
-    "semaphore-projects-api-openapi.yml",
     "semaphore-projectsecrets-api-openapi.yml",
+    "semaphore-projects-api-openapi.yml",
     "semaphore-secrets-api-openapi.yml",
-    "semaphore-selfhostedagents-api-openapi.yml",
     "semaphore-selfhostedagenttypes-api-openapi.yml",
+    "semaphore-selfhostedagents-api-openapi.yml",
     "semaphore-tasks-api-openapi.yml",
     "semaphore-workflows-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "semaphore-semaphore-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "semaphore-dashboards-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "semaphore-deploymenttargets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "semaphore-notifications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "semaphore-pipelines-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "semaphore-projects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "semaphore-projectsecrets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "semaphore-secrets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "semaphore-selfhostedagents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "semaphore-selfhostedagenttypes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "semaphore-tasks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "semaphore-workflows-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -1,20 +1,18 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Semaphore Public Dashboards SelfHostedAgentTypes API
+  title: Semaphore Public Self Hosted Agent Types API
   description: 'The Semaphore Public API is a RESTful API that allows you to interact with Semaphore CI/CD.
 
     ## Authorization
 
-    Authorization is done via bearer token. You can obtain a token by visiting your [account settings](https://me.semaphoreci.com/account).
+    Authorization is done via bearer token. You can obtain a token by visiting your account settings.
 
 
     ## Pagination with link headers
 
-    Each list request supports pagination. List responses include a [link header](https://datatracker.ietf.org/doc/html/rfc5988#section-5) with the pagination URLs.
+    Each list request supports pagination. List responses include a link header with the pagination URLs.
 
-    Link headers contain next, previous, first relative URLs.
-
-    '
+    Link headers contain next, previous, first relative URLs.'
   version: v2
   contact:
     url: https://semaphore.io/contact
@@ -110,7 +108,6 @@ paths:
                           type: string
                         aws:
                           description: AWS settings, required if `assignment_origin` `ASSIGNMENT_ORIGIN_AWS_STS` is used
-                          nullable: true
                           properties:
                             account_id:
                               description: The AWS account ID
@@ -123,7 +120,9 @@ paths:
                           required:
                           - account_id
                           - role_name_patterns
-                          type: object
+                          type:
+                          - object
+                          - 'null'
                         release_after:
                           default: 0
                           description: How long to hold the agent name after its disconnection, not allowing other agents to register with its name
@@ -307,6 +306,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Self hosted agent types create
+      x-summary-source: derived
     get:
       operationId: SelfHostedAgentTypes.List
       description: List self-hosted agent types
@@ -401,7 +402,6 @@ paths:
                               type: string
                             aws:
                               description: AWS settings, required if `assignment_origin` `ASSIGNMENT_ORIGIN_AWS_STS` is used
-                              nullable: true
                               properties:
                                 account_id:
                                   description: The AWS account ID
@@ -414,7 +414,9 @@ paths:
                               required:
                               - account_id
                               - role_name_patterns
-                              type: object
+                              type:
+                              - object
+                              - 'null'
                             release_after:
                               default: 0
                               description: How long to hold the agent name after its disconnection, not allowing other agents to register with its name
@@ -520,6 +522,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Self hosted agent types list
+      x-summary-source: derived
   /self_hosted_agent_types/{agent_type_name}:
     delete:
       operationId: SelfHostedAgentTypes.Delete
@@ -630,6 +634,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Self hosted agent types delete
+      x-summary-source: derived
     get:
       operationId: SelfHostedAgentTypes.Describe
       description: Describe a self-hosted agent type
@@ -713,7 +719,6 @@ paths:
                             type: string
                           aws:
                             description: AWS settings, required if `assignment_origin` `ASSIGNMENT_ORIGIN_AWS_STS` is used
-                            nullable: true
                             properties:
                               account_id:
                                 description: The AWS account ID
@@ -726,7 +731,9 @@ paths:
                             required:
                             - account_id
                             - role_name_patterns
-                            type: object
+                            type:
+                            - object
+                            - 'null'
                           release_after:
                             default: 0
                             description: How long to hold the agent name after its disconnection, not allowing other agents to register with its name
@@ -830,6 +837,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Self hosted agent types describe
+      x-summary-source: derived
     put:
       operationId: SelfHostedAgentTypes.Update
       description: Update a self-hosted agent type
@@ -912,7 +921,6 @@ paths:
                           type: string
                         aws:
                           description: AWS settings, required if `assignment_origin` `ASSIGNMENT_ORIGIN_AWS_STS` is used
-                          nullable: true
                           properties:
                             account_id:
                               description: The AWS account ID
@@ -925,7 +933,9 @@ paths:
                           required:
                           - account_id
                           - role_name_patterns
-                          type: object
+                          type:
+                          - object
+                          - 'null'
                         release_after:
                           default: 0
                           description: How long to hold the agent name after its disconnection, not allowing other agents to register with its name
@@ -1018,7 +1028,6 @@ paths:
                             type: string
                           aws:
                             description: AWS settings, required if `assignment_origin` `ASSIGNMENT_ORIGIN_AWS_STS` is used
-                            nullable: true
                             properties:
                               account_id:
                                 description: The AWS account ID
@@ -1031,7 +1040,9 @@ paths:
                             required:
                             - account_id
                             - role_name_patterns
-                            type: object
+                            type:
+                            - object
+                            - 'null'
                           release_after:
                             default: 0
                             description: How long to hold the agent name after its disconnection, not allowing other agents to register with its name
@@ -1135,6 +1146,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Self hosted agent types update
+      x-summary-source: derived
   /self_hosted_agent_types/{agent_type_name}/disable_all:
     post:
       operationId: SelfHostedAgentTypes.DisableAll
@@ -1259,6 +1272,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Self hosted agent types disable all
+      x-summary-source: derived
 components:
   securitySchemes:
     authorization:

@@ -1,20 +1,18 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Semaphore Public Dashboards Tasks API
+  title: Semaphore Public Tasks API
   description: 'The Semaphore Public API is a RESTful API that allows you to interact with Semaphore CI/CD.
 
     ## Authorization
 
-    Authorization is done via bearer token. You can obtain a token by visiting your [account settings](https://me.semaphoreci.com/account).
+    Authorization is done via bearer token. You can obtain a token by visiting your account settings.
 
 
     ## Pagination with link headers
 
-    Each list request supports pagination. List responses include a [link header](https://datatracker.ietf.org/doc/html/rfc5988#section-5) with the pagination URLs.
+    Each list request supports pagination. List responses include a link header with the pagination URLs.
 
-    Link headers contain next, previous, first relative URLs.
-
-    '
+    Link headers contain next, previous, first relative URLs.'
   version: v2
   contact:
     url: https://semaphore.io/contact
@@ -181,7 +179,6 @@ paths:
                         title: Timestamp
                         type: string
                       paused_by:
-                        nullable: true
                         properties:
                           id:
                             description: ID of a User
@@ -190,7 +187,9 @@ paths:
                             title: User.ID
                             type: string
                         title: User
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                       project_id:
                         description: ID of a Project
                         example: a3fa7cf5-0fee-4a76-ab75-f1a57f1316c1
@@ -209,7 +208,6 @@ paths:
                         title: Timestamp
                         type: string
                       updated_by:
-                        nullable: true
                         properties:
                           id:
                             description: ID of a User
@@ -218,7 +216,9 @@ paths:
                             title: User.ID
                             type: string
                         title: User
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                     required:
                     - id
                     - project_id
@@ -367,6 +367,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Tasks create
+      x-summary-source: derived
     get:
       operationId: Tasks.List
       description: List tasks for organization and/or project ID
@@ -465,7 +467,6 @@ paths:
                           title: Timestamp
                           type: string
                         paused_by:
-                          nullable: true
                           properties:
                             id:
                               description: ID of a User
@@ -474,7 +475,9 @@ paths:
                               title: User.ID
                               type: string
                           title: User
-                          type: object
+                          type:
+                          - object
+                          - 'null'
                         project_id:
                           description: ID of a Project
                           example: a3fa7cf5-0fee-4a76-ab75-f1a57f1316c1
@@ -493,7 +496,6 @@ paths:
                           title: Timestamp
                           type: string
                         updated_by:
-                          nullable: true
                           properties:
                             id:
                               description: ID of a User
@@ -502,7 +504,9 @@ paths:
                               title: User.ID
                               type: string
                           title: User
-                          type: object
+                          type:
+                          - object
+                          - 'null'
                       required:
                       - id
                       - project_id
@@ -653,6 +657,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Tasks list
+      x-summary-source: derived
   /projects/{project_id_or_name}/tasks/{task_id}:
     delete:
       operationId: Tasks.Delete
@@ -727,7 +733,6 @@ paths:
                         title: Timestamp
                         type: string
                       paused_by:
-                        nullable: true
                         properties:
                           id:
                             description: ID of a User
@@ -736,7 +741,9 @@ paths:
                             title: User.ID
                             type: string
                         title: User
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                       project_id:
                         description: ID of a Project
                         example: a3fa7cf5-0fee-4a76-ab75-f1a57f1316c1
@@ -755,7 +762,6 @@ paths:
                         title: Timestamp
                         type: string
                       updated_by:
-                        nullable: true
                         properties:
                           id:
                             description: ID of a User
@@ -764,7 +770,9 @@ paths:
                             title: User.ID
                             type: string
                         title: User
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                     required:
                     - id
                     - project_id
@@ -913,6 +921,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Tasks delete
+      x-summary-source: derived
     get:
       operationId: Tasks.Describe
       description: Describe a task by given ID
@@ -986,7 +996,6 @@ paths:
                         title: Timestamp
                         type: string
                       paused_by:
-                        nullable: true
                         properties:
                           id:
                             description: ID of a User
@@ -995,7 +1004,9 @@ paths:
                             title: User.ID
                             type: string
                         title: User
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                       project_id:
                         description: ID of a Project
                         example: a3fa7cf5-0fee-4a76-ab75-f1a57f1316c1
@@ -1014,7 +1025,6 @@ paths:
                         title: Timestamp
                         type: string
                       updated_by:
-                        nullable: true
                         properties:
                           id:
                             description: ID of a User
@@ -1023,7 +1033,9 @@ paths:
                             title: User.ID
                             type: string
                         title: User
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                     required:
                     - id
                     - project_id
@@ -1172,6 +1184,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Tasks describe
+      x-summary-source: derived
     put:
       operationId: Tasks.Replace
       description: Replace tasks with new data
@@ -1327,7 +1341,6 @@ paths:
                         title: Timestamp
                         type: string
                       paused_by:
-                        nullable: true
                         properties:
                           id:
                             description: ID of a User
@@ -1336,7 +1349,9 @@ paths:
                             title: User.ID
                             type: string
                         title: User
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                       project_id:
                         description: ID of a Project
                         example: a3fa7cf5-0fee-4a76-ab75-f1a57f1316c1
@@ -1355,7 +1370,6 @@ paths:
                         title: Timestamp
                         type: string
                       updated_by:
-                        nullable: true
                         properties:
                           id:
                             description: ID of a User
@@ -1364,7 +1378,9 @@ paths:
                             title: User.ID
                             type: string
                         title: User
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                     required:
                     - id
                     - project_id
@@ -1513,6 +1529,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Tasks replace
+      x-summary-source: derived
     patch:
       operationId: Tasks.Update
       description: Update (patch) task with given params
@@ -1663,7 +1681,6 @@ paths:
                         title: Timestamp
                         type: string
                       paused_by:
-                        nullable: true
                         properties:
                           id:
                             description: ID of a User
@@ -1672,7 +1689,9 @@ paths:
                             title: User.ID
                             type: string
                         title: User
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                       project_id:
                         description: ID of a Project
                         example: a3fa7cf5-0fee-4a76-ab75-f1a57f1316c1
@@ -1691,7 +1710,6 @@ paths:
                         title: Timestamp
                         type: string
                       updated_by:
-                        nullable: true
                         properties:
                           id:
                             description: ID of a User
@@ -1700,7 +1718,9 @@ paths:
                             title: User.ID
                             type: string
                         title: User
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                     required:
                     - id
                     - project_id
@@ -1849,6 +1869,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Tasks update
+      x-summary-source: derived
   /projects/{project_id_or_name}/tasks/{task_id}/triggers:
     post:
       operationId: Tasks.Trigger
@@ -2109,6 +2131,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Tasks trigger
+      x-summary-source: derived
 components:
   securitySchemes:
     authorization:

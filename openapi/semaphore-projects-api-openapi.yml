@@ -1,20 +1,18 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Semaphore Public Dashboards Projects API
+  title: Semaphore Public Projects API
   description: 'The Semaphore Public API is a RESTful API that allows you to interact with Semaphore CI/CD.
 
     ## Authorization
 
-    Authorization is done via bearer token. You can obtain a token by visiting your [account settings](https://me.semaphoreci.com/account).
+    Authorization is done via bearer token. You can obtain a token by visiting your account settings.
 
 
     ## Pagination with link headers
 
-    Each list request supports pagination. List responses include a [link header](https://datatracker.ietf.org/doc/html/rfc5988#section-5) with the pagination URLs.
+    Each list request supports pagination. List responses include a link header with the pagination URLs.
 
-    Link headers contain next, previous, first relative URLs.
-
-    '
+    Link headers contain next, previous, first relative URLs.'
   version: v2
   contact:
     url: https://semaphore.io/contact
@@ -513,6 +511,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Projects create
+      x-summary-source: derived
     get:
       operationId: Projects.List
       description: List projects in organization.
@@ -841,6 +841,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Projects list
+      x-summary-source: derived
   /projects/{project_id_or_name}:
     delete:
       operationId: Projects.Delete
@@ -963,6 +965,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Projects delete
+      x-summary-source: derived
     get:
       operationId: Projects.Describe
       description: Describe project.
@@ -1263,6 +1267,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Projects describe
+      x-summary-source: derived
     put:
       operationId: Projects.Update
       description: Update a project.
@@ -1758,6 +1764,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Projects update
+      x-summary-source: derived
 components:
   securitySchemes:
     authorization:

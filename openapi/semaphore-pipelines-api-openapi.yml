@@ -1,20 +1,18 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Semaphore Public Dashboards Pipelines API
+  title: Semaphore Public Pipelines API
   description: 'The Semaphore Public API is a RESTful API that allows you to interact with Semaphore CI/CD.
 
     ## Authorization
 
-    Authorization is done via bearer token. You can obtain a token by visiting your [account settings](https://me.semaphoreci.com/account).
+    Authorization is done via bearer token. You can obtain a token by visiting your account settings.
 
 
     ## Pagination with link headers
 
-    Each list request supports pagination. List responses include a [link header](https://datatracker.ietf.org/doc/html/rfc5988#section-5) with the pagination URLs.
+    Each list request supports pagination. List responses include a link header with the pagination URLs.
 
-    Link headers contain next, previous, first relative URLs.
-
-    '
+    Link headers contain next, previous, first relative URLs.'
   version: v2
   contact:
     url: https://semaphore.io/contact
@@ -281,7 +279,6 @@ paths:
                       example: stop
                       type: string
                     terminated_by:
-                      nullable: true
                       properties:
                         id:
                           description: ID of a User
@@ -290,7 +287,9 @@ paths:
                           title: User.ID
                           type: string
                       title: User
-                      type: object
+                      type:
+                      - object
+                      - 'null'
                     wf_id:
                       description: ID of a Workflow
                       example: 52f2847c-1817-48f2-95a8-b7e6b98c65e0
@@ -390,6 +389,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Pipelines list
+      x-summary-source: derived
   /pipelines/{pipeline_id}:
     get:
       operationId: Pipelines.Describe
@@ -598,7 +599,6 @@ paths:
                         example: stop
                         type: string
                       terminated_by:
-                        nullable: true
                         properties:
                           id:
                             description: ID of a User
@@ -607,7 +607,9 @@ paths:
                             title: User.ID
                             type: string
                         title: User
-                        type: object
+                        type:
+                        - object
+                        - 'null'
                       wf_id:
                         description: ID of a Workflow
                         example: 52f2847c-1817-48f2-95a8-b7e6b98c65e0
@@ -707,6 +709,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Pipelines describe
+      x-summary-source: derived
   /pipelines/{pipeline_id}/describe_topology:
     get:
       operationId: Pipelines.DescribeTopology
@@ -839,10 +843,14 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Pipelines describe topology
+      x-summary-source: derived
   /pipelines/{pipeline_id}/partial_rebuild:
     post:
       operationId: Pipelines.PartialRebuild
-      description: "Schedule a new pipeline based on given one which will only run blocks which\n      execution failed in original pipeline."
+      description: 'Schedule a new pipeline based on given one which will only run blocks which
+
+        execution failed in original pipeline.'
       tags:
       - Pipelines
       parameters:
@@ -962,6 +970,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Pipelines partial rebuild
+      x-summary-source: derived
   /pipelines/{pipeline_id}/terminate:
     post:
       operationId: Pipelines.Terminate
@@ -1083,6 +1093,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Pipelines terminate
+      x-summary-source: derived
   /yaml:
     post:
       operationId: Pipelines.ValidateYaml
@@ -1189,6 +1201,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Pipelines validate yaml
+      x-summary-source: derived
 components:
   securitySchemes:
     authorization:

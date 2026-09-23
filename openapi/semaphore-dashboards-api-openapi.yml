@@ -1,20 +1,18 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Semaphore Public Dashboards API
   description: 'The Semaphore Public API is a RESTful API that allows you to interact with Semaphore CI/CD.
 
     ## Authorization
 
-    Authorization is done via bearer token. You can obtain a token by visiting your [account settings](https://me.semaphoreci.com/account).
+    Authorization is done via bearer token. You can obtain a token by visiting your account settings.
 
 
     ## Pagination with link headers
 
-    Each list request supports pagination. List responses include a [link header](https://datatracker.ietf.org/doc/html/rfc5988#section-5) with the pagination URLs.
+    Each list request supports pagination. List responses include a link header with the pagination URLs.
 
-    Link headers contain next, previous, first relative URLs.
-
-    '
+    Link headers contain next, previous, first relative URLs.'
   version: v2
   contact:
     url: https://semaphore.io/contact
@@ -337,9 +335,13 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Dashboards create
+      x-summary-source: derived
     get:
       operationId: Dashboards.List
-      description: "List all organization level dashboards.\n      If the response does not fit all the dashboards refer to the link header to get next page url."
+      description: 'List all organization level dashboards.
+
+        If the response does not fit all the dashboards refer to the link header to get next page url.'
       tags:
       - Dashboards
       parameters:
@@ -562,6 +564,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Dashboards list
+      x-summary-source: derived
   /dashboards/{id_or_name}:
     delete:
       operationId: Dashboards.Delete
@@ -684,6 +688,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Dashboards delete
+      x-summary-source: derived
     get:
       operationId: Dashboards.Describe
       description: Describe a dashboard by its id or name.
@@ -896,6 +902,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Dashboards describe
+      x-summary-source: derived
     put:
       operationId: Dashboards.Update
       description: Update a dashboard by its id or name.
@@ -1215,6 +1223,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Dashboards update
+      x-summary-source: derived
 components:
   securitySchemes:
     authorization:

@@ -1,20 +1,18 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Semaphore Public Dashboards Workflows API
+  title: Semaphore Public Workflows API
   description: 'The Semaphore Public API is a RESTful API that allows you to interact with Semaphore CI/CD.
 
     ## Authorization
 
-    Authorization is done via bearer token. You can obtain a token by visiting your [account settings](https://me.semaphoreci.com/account).
+    Authorization is done via bearer token. You can obtain a token by visiting your account settings.
 
 
     ## Pagination with link headers
 
-    Each list request supports pagination. List responses include a [link header](https://datatracker.ietf.org/doc/html/rfc5988#section-5) with the pagination URLs.
+    Each list request supports pagination. List responses include a link header with the pagination URLs.
 
-    Link headers contain next, previous, first relative URLs.
-
-    '
+    Link headers contain next, previous, first relative URLs.'
   version: v2
   contact:
     url: https://semaphore.io/contact
@@ -262,6 +260,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Workflows list
+      x-summary-source: derived
     post:
       operationId: Workflows.Schedule
       description: Schedule a workflow for running
@@ -404,6 +404,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Workflows schedule
+      x-summary-source: derived
   /workflows/{wf_id}:
     get:
       operationId: Workflows.Describe
@@ -562,6 +564,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Workflows describe
+      x-summary-source: derived
   /workflows/{wf_id}/reschedule:
     post:
       operationId: Workflows.Reschedule
@@ -693,6 +697,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Workflows reschedule
+      x-summary-source: derived
   /workflows/{wf_id}/terminate:
     post:
       operationId: Workflows.Terminate
@@ -805,6 +811,8 @@ paths:
           description: Internal Server Error
       security:
       - authorization: []
+      summary: Workflows terminate
+      x-summary-source: derived
 components:
   securitySchemes:
     authorization:
