@@ -261,6 +261,9 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/json-ld/semaphore-context.jsonld
 common:
+  - type: CapabilityMap
+    url: capabilities/semaphore-capability-edges.yml
+    name: Semaphore Business Capability Map
   - type: AgenticAccess
     url: agentic-access/semaphore-agentic-access.yml
   - type: TrustCenter

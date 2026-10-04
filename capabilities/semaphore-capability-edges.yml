@@ -1,0 +1,72 @@
+slug: semaphore
+provider: Semaphore
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 6
+edges:
+- tag: Pipelines
+  spec_file: semaphore-pipelines-api-openapi.yml
+  capability_id: BC-4210.10
+  capability_id_l1: BC-4210
+  capability_name: Continuous Integration Management
+  confidence: 0.88
+  evidence: GET /pipelines/{pipeline_id}/describe_topology; POST /pipelines/{pipeline_id}/partial_rebuild;
+    POST /yaml  Pipelines.ValidateYaml
+  reason: Operations list, inspect, rebuild, terminate and validate the YAML definition of CI build pipelines
+    on a CI/CD platform — squarely continuous integration pipeline management.
+- tag: ProjectSecrets
+  spec_file: semaphore-projectsecrets-api-openapi.yml
+  capability_id: BC-4210.60
+  capability_id_l1: BC-4210
+  capability_name: Configuration & Secrets Management
+  confidence: 0.88
+  evidence: POST /projects/{project_id_or_name}/secrets  ProjectSecrets.Create  Project secrets create
+  reason: Lifecycle management of secret values scoped to a project and consumed by pipeline runs — configuration
+    and secrets management for the delivery pipeline.
+- tag: Secrets
+  spec_file: semaphore-secrets-api-openapi.yml
+  capability_id: BC-4210.60
+  capability_id_l1: BC-4210
+  capability_name: Configuration & Secrets Management
+  confidence: 0.85
+  evidence: POST /secrets  Secrets.Create; PUT /secrets/{id_or_name}  Secrets update
+  reason: Organisation-level secret lifecycle for a CI/CD platform, matching configuration and secrets
+    management consumed by pipeline/service runtimes.
+- tag: Workflows
+  spec_file: semaphore-workflows-api-openapi.yml
+  capability_id: BC-4210.10
+  capability_id_l1: BC-4210
+  capability_name: Continuous Integration Management
+  confidence: 0.82
+  evidence: POST /workflows  Workflows.Schedule; POST /workflows/{wf_id}/reschedule; POST /workflows/{wf_id}/terminate
+  reason: Scheduling, rescheduling and terminating CI workflow runs on a CI/CD platform — execution control
+    of the continuous integration build process.
+- tag: DeploymentTargets
+  spec_file: semaphore-deploymenttargets-api-openapi.yml
+  capability_id: BC-4210.40
+  capability_id_l1: BC-4210
+  capability_name: Deployment Orchestration
+  confidence: 0.8
+  evidence: POST /projects/{project_id_or_name}/deployment_targets  DeploymentTargets.Create; PATCH .../activate;
+    GET .../history
+  reason: Deployment targets define where and under what controls a project's changes are promoted to
+    an environment, with activate/deactivate gating and deployment history — i.e. controlled delivery
+    of software changes to production environments on a CI/CD platform.
+- tag: Tasks
+  spec_file: semaphore-tasks-api-openapi.yml
+  capability_id: BC-4210.10
+  capability_id_l1: BC-4210
+  capability_name: Continuous Integration Management
+  confidence: 0.7
+  evidence: POST /projects/{project_id_or_name}/tasks/{task_id}/triggers  Tasks.Trigger
+  reason: Scheduled/triggerable tasks that launch pipeline runs within a CI project — build triggering
+    and pipeline execution control, not generic work-item task management.
