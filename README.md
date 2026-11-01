@@ -1,4 +1,4 @@
-# Semaphore (semaphore)
+# Semaphore
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,59 +66,150 @@
 
 Semaphore is a cloud-based CI/CD platform designed for high-performance engineering teams, providing fast and reliable continuous integration and continuous delivery pipelines. The platform offers a comprehensive REST API that enables programmatic management of pipelines, workflows, jobs, secrets, projects, and deployment targets for software delivery automation. Semaphore supports OAS 3.0-compliant API definitions with Swagger documentation, covering resources such as artifacts, test results, self-hosted agents, and build insights. Teams can use the API to integrate with external tools, build custom interfaces, trigger promotions, and automate their entire software delivery lifecycle.
 
-**APIs.json:** https://raw.githubusercontent.com/api-evangelist/semaphore/refs/heads/main/apis.yml
+**Areas:** CI/CD · Continuous Integration · Continuous Delivery · Pipelines · Workflows · DevOps · Build Automation · Software Delivery · Deployment · Artifacts · Developer Tools
 
-**Naftiko:** https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=semaphore-api-evangelist&utm_content=repo
+## Semaphore on APIs.io
 
-## Tags
+Everything profiled for Semaphore is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/semaphore/](https://apis.io/providers/semaphore/)** — or go straight to one of the APIs or properties below.
 
-- CI/CD
-- Continuous Integration
-- Continuous Delivery
-- Pipelines
-- Workflows
-- DevOps
-- Build Automation
-- Software Delivery
-- Deployment
-- Artifacts
+### APIs (11)
 
-## APIs
+- [Semaphore Dashboards API](https://apis.io/apis/semaphore/semaphore-dashboards-api/) — Dashboard management
+- [Semaphore DeploymentTargets API](https://apis.io/apis/semaphore/semaphore-deploymenttargets-api/) — Deployment target management
+- [Semaphore Notifications API](https://apis.io/apis/semaphore/semaphore-notifications-api/) — Notification management
+- [Semaphore Pipelines API](https://apis.io/apis/semaphore/semaphore-pipelines-api/) — Pipeline management
+- [Semaphore Projects API](https://apis.io/apis/semaphore/semaphore-projects-api/) — Project management
+- [Semaphore ProjectSecrets API](https://apis.io/apis/semaphore/semaphore-projectsecrets-api/) — Project-level secrets
+- [Semaphore Secrets API](https://apis.io/apis/semaphore/semaphore-secrets-api/) — Organization-level secrets
+- [Semaphore SelfHostedAgents API](https://apis.io/apis/semaphore/semaphore-selfhostedagents-api/) — Self-hosted agent management
+- [Semaphore SelfHostedAgentTypes API](https://apis.io/apis/semaphore/semaphore-selfhostedagenttypes-api/) — Self-hosted agent type management
+- [Semaphore Tasks API](https://apis.io/apis/semaphore/semaphore-tasks-api/) — Task management
+- [Semaphore Workflows API](https://apis.io/apis/semaphore/semaphore-workflows-api/) — Workflow management
 
-| Name | Description | Human URL | Base URL |
-|------|-------------|-----------|----------|
-| Semaphore API | REST API for managing CI/CD pipelines, workflows, jobs, deployment targets, artifacts, and test results with OAS 3.0 compliance | https://semaphore.io/product/api | https://{organization}.semaphoreci.com/api/v1alpha |
+### Published properties
 
-## Plans, Rate Limits, and FinOps
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-| Resource | File |
-|----------|------|
-| Plans and Pricing | [plans/semaphore-plans-pricing.yml](plans/semaphore-plans-pricing.yml) |
-| Rate Limits | [rate-limits/semaphore-rate-limits.yml](rate-limits/semaphore-rate-limits.yml) |
-| FinOps | [finops/semaphore-finops.yml](finops/semaphore-finops.yml) |
+#### Agentic access (1)
 
-**Pricing Summary:** Pay-as-you-go compute from $0.003/min (Ubuntu ARM 2vCPU) to $0.09/min (macOS). Free tier includes $15/month credits (~2,000 Ubuntu x64 2-vCPU minutes). Optional support plans from $50–$750/month.
+Which operations an agent can call, which act, and which need a human in the loop.
 
-## Timestamps
+- [Semaphore Agentic Access](https://apis.io/agentic-access/semaphore/semaphore-agentic-access/)
 
-- **Created:** 2026-06-12
-- **Modified:** 2026-06-12
+#### JSON-LD (1)
 
-## Common Properties
+Linked-data contexts for the provider's vocabulary.
 
-| Type | URL |
-|------|-----|
-| Website | https://semaphore.io |
-| Documentation | https://docs.semaphore.io |
-| GitHub Org | https://github.com/semaphoreci |
-| LinkedIn | https://www.linkedin.com/company/semaphore-software |
-| Blog | https://semaphore.io/blog |
-| Pricing | https://semaphore.io/pricing |
-| Status Page | https://status.semaphore.io |
-| X | https://twitter.com/semaphoreci |
+- [Semaphore Context](https://apis.io/jsonld/semaphore/semaphore-context/)
 
-## Maintainers
+#### Vocabulary (1)
 
-| Name | Email |
-|------|-------|
-| Kin Lane | kin@apievangelist.com |
+The provider's domain terms, defined.
+
+- [Semaphore Vocabulary](https://apis.io/vocabularies/semaphore/semaphore-vocabulary/)
+
+#### Collections (11)
+
+Postman and Open Collection request collections.
+
+- [Semaphore Public Dashboards API](https://apis.io/collections/semaphore/open-semaphore-dashboards-api/)
+- [Semaphore Public Dashboards DeploymentTargets API](https://apis.io/collections/semaphore/open-semaphore-deploymenttargets-api/)
+- [Semaphore Public Dashboards Notifications API](https://apis.io/collections/semaphore/open-semaphore-notifications-api/)
+- [Semaphore Public Dashboards Pipelines API](https://apis.io/collections/semaphore/open-semaphore-pipelines-api/)
+- [Semaphore Public Dashboards Projects API](https://apis.io/collections/semaphore/open-semaphore-projects-api/)
+- [Semaphore Public Dashboards ProjectSecrets API](https://apis.io/collections/semaphore/open-semaphore-projectsecrets-api/)
+- [Semaphore Public Dashboards Secrets API](https://apis.io/collections/semaphore/open-semaphore-secrets-api/)
+- [Semaphore Public Dashboards SelfHostedAgents API](https://apis.io/collections/semaphore/open-semaphore-selfhostedagents-api/)
+- [Semaphore Public Dashboards SelfHostedAgentTypes API](https://apis.io/collections/semaphore/open-semaphore-selfhostedagenttypes-api/)
+- [Semaphore Public Dashboards Tasks API](https://apis.io/collections/semaphore/open-semaphore-tasks-api/)
+- [Semaphore Public Dashboards Workflows API](https://apis.io/collections/semaphore/open-semaphore-workflows-api/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Semaphore Authentication](https://apis.io/security/semaphore/semaphore-authentication/)
+- [Semaphore Domain Security](https://apis.io/security/semaphore/semaphore-domain-security/)
+- [Semaphore Trust Center](https://apis.io/security/semaphore/semaphore-trust-center/)
+- [Semaphore Vulnerability Disclosure](https://apis.io/security/semaphore/semaphore-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Semaphore Plans Pricing](https://apis.io/plans/semaphore/semaphore-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Semaphore Rate Limits](https://apis.io/rate-limits/semaphore/semaphore-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Semaphore Finops](https://apis.io/finops/semaphore/semaphore-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://semaphore.io)
+- [Documentation](https://docs.semaphore.io)
+- [Pricing](https://semaphore.io/pricing)
+- [Blog](https://semaphore.io/blog)
+- [Status](https://status.semaphore.io)
+
+## API Evangelist rating
+
+**Kin Score 39.0** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 63.5 |
+| Contract governance | 13.6 |
+| Operational transparency | 28.9 |
+| Developer ergonomics | 23.8 |
+| Access clarity | 26.3 |
+
+**Agent readiness 29.4** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | verified |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 27.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/semaphore/](https://apis.io/providers/semaphore/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Semaphore: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/semaphore/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
